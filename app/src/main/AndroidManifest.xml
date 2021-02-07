@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FishingShop">
         <activity android:name=".view.authorization.SmsCodeActivity"></activity>
-        <activity android:name=".view.authorization.InputNumberActivity" />
+        <activity android:name=".view.authorization.InputPhoneNumberActivity" />
         <activity android:name=".view.authorization.AuthorizationInitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainScreenActivity" />
     </application>
 
 </manifest>
