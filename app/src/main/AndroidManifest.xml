@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.skynet.fishingshop">
+    package="com.skynet.fishingshop" >
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FishingShop">
-        <activity android:name=".view.authorization.SmsCodeActivity"></activity>
+        android:theme="@style/Theme.FishingShop" >
+        <activity android:name=".view.main.FavoritesActivity" />
+        <activity android:name=".view.main.ProfileActivity" />
+        <activity android:name=".view.main.PurchaseProductActivity" />
+        <activity android:name=".view.main.ProductActivity" />
+        <activity android:name=".view.authorization.SmsCodeActivity" />
         <activity android:name=".view.authorization.InputPhoneNumberActivity" />
-        <activity android:name=".view.authorization.AuthorizationInitActivity">
+        <activity android:name=".view.authorization.AuthorizationInitActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
