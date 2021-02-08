@@ -1,0 +1,61 @@
+package com.skynet.fishingshop.view.main;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.view.main.fragments.CartFragment;
+import com.skynet.fishingshop.view.main.fragments.CatalogFragment;
+import com.skynet.fishingshop.view.main.fragments.HomeFragment;
+
+public class MainScreenActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        createHomeFragment();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_main:
+                    createHomeFragment();
+                    break;
+                case R.id.action_catalog:
+                    createCatalogFragment();
+                    break;
+                case R.id.action_cart:
+                    createCartFragment();
+                    break;
+            }
+            return true;
+        });
+    }
+
+    private void createHomeFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        HomeFragment homeFragment = HomeFragment.newInstance("Что-то", "Что-то");
+        ft.replace(R.id.main_relative_layout, homeFragment);
+        ft.commit();
+    }
+
+    private void createCatalogFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        CatalogFragment catalogFragment = CatalogFragment.newInstance(10);
+        ft.replace(R.id.main_relative_layout, catalogFragment);
+        ft.commit();
+    }
+
+    private void createCartFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        CartFragment cartFragment = CartFragment.newInstance(3);
+        ft.replace(R.id.main_relative_layout, cartFragment);
+        ft.commit();
+    }
+
+}
