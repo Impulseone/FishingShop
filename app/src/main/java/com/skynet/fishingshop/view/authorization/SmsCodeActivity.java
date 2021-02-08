@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.skynet.fishingshop.MainScreenActivity;
+import com.skynet.fishingshop.view.MainScreenActivity;
 import com.skynet.fishingshop.R;
 
 public class SmsCodeActivity extends AppCompatActivity {
