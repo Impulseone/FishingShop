@@ -13,9 +13,9 @@
         <activity android:name=".view.main.ProfileActivity" />
         <activity android:name=".view.main.PurchaseProductActivity" />
         <activity android:name=".view.main.ProductActivity" />
-        <activity android:name=".view.authorization.SmsCodeActivity" />
-        <activity android:name=".view.authorization.InputPhoneNumberActivity" />
-        <activity android:name=".view.authorization.AuthorizationInitActivity" >
+        <activity android:name=".view.authorization.FishingShopConfirmationActivity" />
+        <activity android:name=".view.authorization.FishingShopAuthorizationActivity" />
+        <activity android:name=".view.authorization.FishingShopSplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

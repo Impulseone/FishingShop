@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_confirmation"
+    tools:context=".view.authorization.FishingShopConfirmationActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp"
+        android:fontFamily="@font/avenir_next_bold"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:text="Подтвердить \nномер телефона" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/avenir_next_light"
+        android:gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:textSize="23sp"
+        android:textStyle="normal"
+        android:text="Введите полученный код \nиз sms-сообщения" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="387dp"
+        android:fontFamily="@font/avenir_next_light"
+        android:lineSpacingExtra="5sp"
+        android:paddingStart="64dp"
+        android:paddingEnd="229dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:text="Ваш смс код" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="412dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/tel_number_input_bg"
+        android:fontFamily="@font/avenir_next_medium"
+        android:gravity="center_horizontal"
+        android:inputType="numberPassword"
+        android:lineSpacingExtra="9sp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        android:hint="4" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="533dp"
+        android:layout_marginEnd="95dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/repeat_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_light"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="5sp"
+            android:text="Выслать код снова"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="562dp"
+        android:fontFamily="@font/avenir_next_light"
+        android:textStyle="normal"
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        android:text="35с"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="654dp"
+        android:layout_marginEnd="32dp">
+        <LinearLayout
+            android:id="@+id/back_button"
+            android:layout_width="71dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@drawable/auth_button_bg_brown"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/back_icon"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/get_code_button"
+            android:layout_width="210dp"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@drawable/auth_button_bg_green"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_next_bold"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="7sp"
+                android:text="Получить код"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.view.main.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
