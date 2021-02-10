@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="84dp"
         android:fontFamily="@font/avenir_next_bold"
         android:textColor="#ffffff"
         android:textSize="35sp"
@@ -22,39 +22,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="132dp"
         android:fontFamily="@font/avenir_next_light"
         android:lineSpacingExtra="8sp"
         android:textColor="#ffffff"
         android:textSize="23sp"
         android:text="по номеру телефона" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="387dp"
-        android:layout_marginEnd="144dp"
-        android:fontFamily="@font/avenir_next_light"
-        android:lineSpacingExtra="5sp"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:text="Введите номер телефона" />
+        android:layout_marginTop="367dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_light"
+            android:lineSpacingExtra="5sp"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:text="Введите номер телефона" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="412dp"
-        android:layout_marginEnd="69dp"
-        android:fontFamily="@font/avenir_next_medium"
-        android:lineSpacingExtra="9sp"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:hint="+7  (999)  000  13  15" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_medium"
+            android:lineSpacingExtra="9sp"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textColorHint="@color/white"
+            android:hint="+7  (999)  000  13  15" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/get_code_button"
@@ -62,7 +63,7 @@
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="73dp"
         android:gravity="center"
         android:textStyle="bold"
         android:background="@drawable/auth_button_bg_green"

@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="54dp"
         android:fontFamily="@font/avenir_next_bold"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="35sp"
+        android:textSize="33sp"
         android:textStyle="bold"
         android:text="Подтвердить \nномер телефона" />
 
@@ -24,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:fontFamily="@font/avenir_next_light"
         android:gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:textSize="23sp"
+        android:textSize="22sp"
         android:textStyle="normal"
         android:text="Введите полученный код \nиз sms-сообщения" />
 
@@ -36,22 +36,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="387dp"
+        android:layout_marginTop="310dp"
         android:fontFamily="@font/avenir_next_light"
         android:lineSpacingExtra="5sp"
         android:paddingStart="64dp"
-        android:paddingEnd="229dp"
         android:textColor="#ffffff"
         android:textSize="14sp"
         android:textStyle="normal"
         android:text="Ваш смс код" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="412dp"
+        android:layout_marginTop="342dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/tel_number_input_bg"
         android:fontFamily="@font/avenir_next_medium"
@@ -60,9 +59,8 @@
         android:lineSpacingExtra="9sp"
         android:textColor="#ffffff"
         android:textColorHint="@color/white"
-        android:textSize="24sp"
-        android:textStyle="normal"
-        android:hint="4" />
+        android:textSize="32sp"
+        android:textStyle="normal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -70,7 +68,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="533dp"
+        android:layout_marginTop="413dp"
         android:layout_marginEnd="95dp">
 
         <ImageView
@@ -95,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="562dp"
+        android:layout_marginTop="462dp"
         android:fontFamily="@font/avenir_next_light"
         android:textStyle="normal"
         android:textSize="14sp"
@@ -110,8 +108,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="654dp"
-        android:layout_marginEnd="32dp">
+        android:layout_marginTop="524dp">
         <LinearLayout
             android:id="@+id/back_button"
             android:layout_width="71dp"
