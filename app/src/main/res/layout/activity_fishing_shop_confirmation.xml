@@ -14,10 +14,10 @@
         android:layout_marginTop="54dp"
         android:fontFamily="@font/avenir_next_bold"
         android:gravity="center"
+        android:text="Подтвердить \nномер телефона"
         android:textColor="#ffffff"
         android:textSize="33sp"
-        android:textStyle="bold"
-        android:text="Подтвердить \nномер телефона" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,10 +27,10 @@
         android:layout_marginTop="150dp"
         android:fontFamily="@font/avenir_next_light"
         android:gravity="center_horizontal"
+        android:text="Введите полученный код \nиз sms-сообщения"
         android:textColor="#ffffff"
         android:textSize="22sp"
-        android:textStyle="normal"
-        android:text="Введите полученный код \nиз sms-сообщения" />
+        android:textStyle="normal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,27 +40,85 @@
         android:fontFamily="@font/avenir_next_light"
         android:lineSpacingExtra="5sp"
         android:paddingStart="64dp"
+        android:text="Ваш смс код"
         android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="normal"
-        android:text="Ваш смс код" />
+        android:textStyle="normal" />
 
-    <EditText
-        android:layout_width="200dp"
+    <LinearLayout
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="342dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/tel_number_input_bg"
-        android:fontFamily="@font/avenir_next_medium"
-        android:gravity="center_horizontal"
-        android:inputType="numberPassword"
-        android:lineSpacingExtra="9sp"
-        android:textColor="#ffffff"
-        android:textColorHint="@color/white"
-        android:textSize="32sp"
-        android:textStyle="normal" />
+        android:layout_marginEnd="30dp">
+
+        <EditText
+            android:id="@+id/et1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/avenir_next_medium"
+            android:gravity="center_horizontal"
+            android:inputType="numberPassword"
+            android:maxLength="1"
+            android:textColor="#ffffff"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:textSize="32sp"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/et2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/avenir_next_medium"
+            android:gravity="center_horizontal"
+            android:inputType="numberPassword"
+            android:lineSpacingExtra="9sp"
+            android:maxLength="1"
+            android:textColor="#ffffff"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:textSize="32sp"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/et3"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/avenir_next_medium"
+            android:gravity="center_horizontal"
+            android:inputType="numberPassword"
+            android:lineSpacingExtra="9sp"
+            android:maxLength="1"
+            android:textColor="#ffffff"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:textSize="32sp"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/et4"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/avenir_next_medium"
+            android:gravity="center_horizontal"
+            android:inputType="numberPassword"
+            android:lineSpacingExtra="9sp"
+            android:maxLength="1"
+            android:textColor="#ffffff"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:textSize="32sp"
+            android:textStyle="normal" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -74,18 +132,17 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/repeat_icon"/>
+            android:src="@mipmap/repeat_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_light"
-            android:textStyle="normal"
-            android:textSize="14sp"
-            android:textColor="#ffffff"
             android:lineSpacingExtra="5sp"
             android:text="Выслать код снова"
-            />
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal" />
     </LinearLayout>
 
     <TextView
@@ -95,12 +152,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="462dp"
         android:fontFamily="@font/avenir_next_light"
-        android:textStyle="normal"
-        android:textSize="14sp"
-        android:textColor="#ffffff"
         android:lineSpacingExtra="5sp"
         android:text="35с"
-        />
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="normal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -109,38 +165,40 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="524dp">
+
         <LinearLayout
             android:id="@+id/back_button"
             android:layout_width="71dp"
             android:layout_height="65dp"
             android:layout_marginEnd="30dp"
-            android:gravity="center"
-            android:textStyle="bold"
             android:background="@drawable/auth_button_bg_brown"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textStyle="bold">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/back_icon"/>
+                android:src="@mipmap/back_icon" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/get_code_button"
             android:layout_width="210dp"
             android:layout_height="65dp"
-            android:gravity="center"
-            android:textStyle="bold"
             android:background="@drawable/auth_button_bg_green"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textStyle="bold">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
-                android:textSize="20sp"
-                android:textColor="#ffffff"
                 android:lineSpacingExtra="7sp"
                 android:text="Получить код"
-                />
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>
