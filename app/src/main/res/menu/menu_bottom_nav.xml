@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_main"
-        android:icon="@android:drawable/ic_dialog_dialer"
+        android:icon="@mipmap/icon_metro_home"
         android:title="Главная"/>
     <item
         android:id="@+id/action_catalog"
-        android:icon="@android:drawable/sym_action_chat"
+        android:icon="@mipmap/fishing"
         android:title="Каталог" />
     <item
         android:id="@+id/action_cart"
-        android:icon="@android:drawable/ic_dialog_email"
+        android:icon="@mipmap/basket"
         android:title="Корзина" />
 </menu>
