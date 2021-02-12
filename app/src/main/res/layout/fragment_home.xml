@@ -3,99 +3,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg_main"
     tools:context=".view.main.fragments.HomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="600dp"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:gravity="center"
         tools:context=".view.main.MainScreenActivity">
 
         <TextView
             android:id="@+id/main_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="Главная"/>
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/avenir_next_bold"
+            android:lineSpacingExtra="10sp"
+            android:text="Главная"
+            android:textColor="#ffffff"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/search_product"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/main_tv"
-            android:hint="Катушка для карпа"/>
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Катушка для карпа" />
 
         <LinearLayout
             android:id="@+id/promotions"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="360dp"
+            android:layout_height="100dp"
             android:layout_below="@+id/search_product"
-            android:background="@color/purple_200"
-            android:orientation="vertical">
-            <TextView
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shares_bg"
+            android:orientation="horizontal">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Акции и предложения"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Все самые выгодные акции для вас"/>
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/avenir_next_bold"
+                    android:text="Акции \nи предложения"
+                    android:textColor="#aedef0"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/avenir_next_medium"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Все самые выгодные акции для вас"
+                    android:textColor="#c8dde5"
+                    android:textSize="11sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_resource_float" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/actual_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_below="@+id/promotions"
-            android:text="Актуальное"/>
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/avenir_next_bold"
+            android:lineSpacingExtra="8sp"
+            android:text="Актуальное"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_below="@+id/actual_tv">
+
             <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="10dp"
-                android:background="@color/purple_200"
+                android:layout_width="165dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shares_bg"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New"/>
+                    android:shadowColor="#29000000"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:fontFamily="@font/avenir_next_bold"
+                    android:textStyle="normal"
+                    android:textSize="13sp"
+                    android:textColor="#f0edae"
+                    android:lineSpacingExtra="5sp"
+                    android:layout_margin="10dp"
+                    android:text="NEW"
+                    />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_hook_2" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:text="Новинки"/>
+                    android:fontFamily="@font/avenir_next_bold"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="#f0edae"
+                    android:lineSpacingExtra="5sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="НОВИНКИ"
+                    />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Актуальное в этом сезоне"/>
+                    android:fontFamily="@font/avenir_next_medium"
+                    android:textStyle="normal"
+                    android:layout_marginStart="10dp"
+                    android:textSize="12sp"
+                    android:textColor="#e2e5d0"
+                    android:text="Актуальное в этом сезоне"
+                    />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="10dp"
-                android:background="@color/purple_200"
+                android:layout_width="165dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shares_bg"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sale"/>
+                    android:shadowColor="#29000000"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:fontFamily="@font/avenir_next_bold"
+                    android:textStyle="normal"
+                    android:textSize="13sp"
+                    android:textColor="#f0c0ae"
+                    android:lineSpacingExtra="5sp"
+                    android:layout_margin="10dp"
+                    android:text="SALE"
+                    />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chair" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:text="Распродажи"/>
+                    android:fontFamily="@font/avenir_next_bold"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="#f0c0ae"
+                    android:lineSpacingExtra="5sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="РАСПРОДАЖИ"
+                    />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Только выгодные предложения"/>
+                    android:fontFamily="@font/avenir_next_medium"
+                    android:textStyle="normal"
+                    android:layout_marginStart="10dp"
+                    android:textSize="12sp"
+                    android:textColor="#e2cfc8"
+                    android:text="Только выгодные предложения"
+                    />
             </LinearLayout>
         </LinearLayout>
 
