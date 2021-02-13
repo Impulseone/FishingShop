@@ -42,14 +42,14 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void createHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = HomeFragment.newInstance("Что-то", "Что-то");
+        HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
 
     private void createCatalogFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        CatalogFragment catalogFragment = CatalogFragment.newInstance(10);
+        CatalogFragment catalogFragment = new CatalogFragment();
         ft.replace(R.id.main_relative_layout, catalogFragment);
         ft.commit();
     }

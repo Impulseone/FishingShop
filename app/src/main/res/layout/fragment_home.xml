@@ -2,12 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="460dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="90dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="130dp"
     tools:context=".view.main.fragments.HomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical"
         tools:context=".view.main.MainScreenActivity">
@@ -16,20 +20,18 @@
             android:id="@+id/main_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="10sp"
             android:text="Главная"
             android:textColor="#ffffff"
-            android:textSize="28sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/search_product"
             android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/main_tv"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_bg"
             android:hint="Катушка для карпа" />
@@ -37,9 +39,8 @@
         <LinearLayout
             android:id="@+id/promotions"
             android:layout_width="320dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_below="@+id/search_product"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/shares_bg"
             android:orientation="horizontal">
@@ -86,20 +87,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/promotions"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="8sp"
             android:text="Актуальное"
             android:textColor="#ffffff"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/actual_tv"
-            android:layout_marginStart="25dp">
+            android:layout_below="@+id/actual_tv">
 
             <LinearLayout
                 android:layout_width="145dp"
@@ -125,8 +124,8 @@
                     android:textStyle="normal" />
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_hook_2" />
 
@@ -134,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/avenir_next_bold"
                     android:lineSpacingExtra="5sp"
                     android:text="НОВИНКИ"
@@ -176,15 +175,15 @@
                     android:textStyle="normal" />
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_chair" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/avenir_next_bold"
                     android:lineSpacingExtra="5sp"
@@ -204,7 +203,5 @@
                     android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
-
     </RelativeLayout>
-
 </FrameLayout>
