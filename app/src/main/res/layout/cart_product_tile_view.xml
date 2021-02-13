@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/category_tile_view_bg"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/jpg_q_50"/>
+
+    <LinearLayout
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_bold"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="5sp"
+            android:text="12.90 €"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_bold"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="4sp"
+            android:text="Леска цветная для карпа"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_next_light"
+            android:textStyle="normal"
+            android:textSize="11sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="4sp"
+            android:text="Краткие характеристики"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:src="@drawable/plus_icon"
+                app:tint="@color/white" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:src="@drawable/minus_icon"
+                app:tint="@color/white" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/avenir_next_bold"
+            android:gravity="center"
+            android:background="@drawable/auth_button_bg_brown"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="2 шт"
+            />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:paddingBottom="5dp"
+        android:src="@drawable/trash"
+        app:tint="@color/red" />
+
+</LinearLayout>

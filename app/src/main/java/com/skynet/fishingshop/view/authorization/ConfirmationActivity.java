@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.skynet.fishingshop.view.main.MainScreenActivity;
@@ -14,7 +13,7 @@ import com.skynet.fishingshop.R;
 
 import java.util.ArrayList;
 
-public class FishingShopConfirmationActivity extends AppCompatActivity implements TextWatcher {
+public class ConfirmationActivity extends AppCompatActivity implements TextWatcher {
 
     private int current;
     private ArrayList<EditText> array;
@@ -22,10 +21,10 @@ public class FishingShopConfirmationActivity extends AppCompatActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fishing_shop_confirmation);
+        setContentView(R.layout.activity_confirmation);
 
         findViewById(R.id.get_code_button).setOnClickListener((v) -> openMainScreenActivity());
-        findViewById(R.id.back_button).setOnClickListener(view -> FishingShopConfirmationActivity.this.finish());
+        findViewById(R.id.back_button).setOnClickListener(view -> ConfirmationActivity.this.finish());
 
         current = 0;
         array = new ArrayList<>(4);
@@ -63,7 +62,6 @@ public class FishingShopConfirmationActivity extends AppCompatActivity implement
 
     @Override
     public void afterTextChanged(Editable editable) {
-        //TODO: check request code
         if (editable.length() == 1) {
             current++;
             if (current < 4) {

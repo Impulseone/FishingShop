@@ -12,36 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
 
-/**
- * A fragment representing a list of Items.
- */
 public class CartFragment extends Fragment {
-
-    private static final String ARG_COLUMN_COUNT = "column-count";
-
-    public CartFragment() {
-    }
-
-    public static CartFragment newInstance(int columnCount) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
-
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter2());
-        }
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        Context context = view.getContext();
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new CartProductsAdapter());
         return view;
     }
 }

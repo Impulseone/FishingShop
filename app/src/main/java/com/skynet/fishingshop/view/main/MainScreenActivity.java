@@ -56,8 +56,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void createCartFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        CartFragment cartFragment = CartFragment.newInstance(3);
-        ft.replace(R.id.main_relative_layout, cartFragment);
+        ft.replace(R.id.main_relative_layout, new CartFragment());
         ft.commit();
     }
 

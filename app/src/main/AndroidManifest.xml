@@ -14,13 +14,13 @@
         <activity android:name=".view.main.PurchaseProductActivity" />
         <activity android:name=".view.main.ProductActivity" />
         <activity
-            android:name=".view.authorization.FishingShopConfirmationActivity"
+            android:name=".view.authorization.ConfirmationActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".view.authorization.FishingShopAuthorizationActivity"
+            android:name=".view.authorization.AuthorizationActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".view.authorization.FishingShopSplashScreenActivity"
+            android:name=".view.authorization.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
         <activity
