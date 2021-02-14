@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main.categoryProducts;
+package com.skynet.fishingshop.view.main.productsList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,15 +8,15 @@ import android.os.Bundle;
 
 import com.skynet.fishingshop.R;
 
-public class ProductsOfCategoryActivity extends AppCompatActivity {
+public class ProductsListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_of_category);
+        setContentView(R.layout.activity_products_list);
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.products_rv);
-        ProductsOfCategoryAdapter adapter = new ProductsOfCategoryAdapter();
+        ProductsListAdapter adapter = new ProductsListAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }

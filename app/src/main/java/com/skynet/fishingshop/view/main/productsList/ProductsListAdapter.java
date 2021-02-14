@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main.categoryProducts;
+package com.skynet.fishingshop.view.main.productsList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
 
-public class ProductsOfCategoryAdapter extends RecyclerView.Adapter<ProductsOfCategoryAdapter.ProductTilesRow> {
+public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ProductTilesRow> {
 
     @NonNull
     @Override
