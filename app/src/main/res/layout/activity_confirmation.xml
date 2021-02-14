@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
                 android:lineSpacingExtra="7sp"
-                android:text="Получить код"
+                android:text="Подтвердить"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </LinearLayout>

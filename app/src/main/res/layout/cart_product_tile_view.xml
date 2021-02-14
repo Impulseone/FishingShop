@@ -81,6 +81,7 @@
             android:background="@drawable/auth_button_bg_brown"
             android:textSize="14sp"
             android:textColor="#ffffff"
+            android:backgroundTint="@color/brown"
             android:text="2 шт"
             />
     </LinearLayout>
