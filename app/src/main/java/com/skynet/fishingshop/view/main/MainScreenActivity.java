@@ -39,9 +39,16 @@ public class MainScreenActivity extends AppCompatActivity {
         });
     }
 
+//    private void createHomeFragment() {
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        HomeFragment homeFragment = new HomeFragment();
+//        ft.replace(R.id.main_relative_layout, homeFragment);
+//        ft.commit();
+//    }
+
     private void createHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
+        ProfileFragment homeFragment = new ProfileFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
