@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
+import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void createHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ProfileFragment homeFragment = new ProfileFragment();
+        FavoritesFragment homeFragment = new FavoritesFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
