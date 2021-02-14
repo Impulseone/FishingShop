@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main.fragments;
+package com.skynet.fishingshop.view.main.cart;
 
 import android.content.Context;
 import android.os.Bundle;

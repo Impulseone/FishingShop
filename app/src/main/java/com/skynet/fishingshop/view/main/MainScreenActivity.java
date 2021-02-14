@@ -8,9 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.fragments.CartFragment;
-import com.skynet.fishingshop.view.main.fragments.CatalogFragment;
-import com.skynet.fishingshop.view.main.fragments.HomeFragment;
+import com.skynet.fishingshop.view.main.cart.CartFragment;
+import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 
 public class MainScreenActivity extends AppCompatActivity {
 
