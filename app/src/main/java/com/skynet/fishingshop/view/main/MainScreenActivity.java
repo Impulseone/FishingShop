@@ -1,12 +1,15 @@
 package com.skynet.fishingshop.view.main;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.view.authorization.SplashScreenActivity;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
@@ -28,6 +32,7 @@ public class MainScreenActivity extends AppCompatActivity {
     private String[] mScreenTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+    private LinearLayout DrawerLinear;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -35,6 +40,8 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DrawerLinear = (LinearLayout) findViewById(R.id.DrawerLinear);
 
         mScreenTitles = getResources().getStringArray(R.array.screen_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
@@ -112,7 +119,9 @@ public class MainScreenActivity extends AppCompatActivity {
         }
     }
 
-    /** Swaps fragments in the main content view */
+    /**
+     * Swaps fragments in the main content view
+     */
     private void selectItem(int position) {
         Fragment fragment = null;
         switch (position) {
@@ -121,6 +130,9 @@ public class MainScreenActivity extends AppCompatActivity {
                 break;
             case 1:
                 fragment = new FavoritesFragment();
+                break;
+            case 2:
+                openSplashScreenActivity();
                 break;
             default:
                 break;
@@ -131,10 +143,16 @@ public class MainScreenActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.main_relative_layout, fragment).commit();
             mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(mDrawerList);
+            mDrawerLayout.closeDrawer(DrawerLinear);
         } else {
             Log.e(this.getClass().getName(), "Error. Fragment is not created");
         }
+    }
+
+    void openSplashScreenActivity() {
+        Intent intent = new Intent(this, SplashScreenActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override

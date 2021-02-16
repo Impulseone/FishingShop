@@ -13,6 +13,7 @@
     <string-array name="screen_array">
         <item>Профиль</item>
         <item>Избранное</item>
+        <item>Выход</item>
     </string-array>
 
     <string name="menu_home">Home</string>
