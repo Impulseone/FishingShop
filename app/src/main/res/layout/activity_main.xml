@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <include
-                android:id="@+id/tool_bar"
+                style="@style/Toolbar"
                 layout="@layout/tool_bar" />
 
             <FrameLayout
@@ -48,51 +48,55 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/DrawerLinear"
-        android:orientation="vertical"
+        android:id="@+id/left_menu_linear_layout"
         android:layout_width="240dp"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@drawable/ic_bg_menu"
-        android:layout_gravity="start">
+        android:orientation="vertical">
+
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@mipmap/group_15"/>
+            android:src="@mipmap/group_15" />
+
         <ListView
             android:id="@+id/left_drawer"
             android:layout_width="240dp"
             android:layout_height="400dp"
-            android:paddingTop="100dp"
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
+            android:dividerHeight="0dp"
+            android:paddingTop="100dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_light"
-                android:textStyle="normal"
-                android:textSize="18sp"
-                android:textColor="#ffffff"
                 android:lineSpacingExtra="7sp"
                 android:text="интернет-магазин"
-                />
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:fontFamily="@font/avenir_next_bold"
-                android:textStyle="bold"
-                android:textSize="19sp"
-                android:textColor="#ffffff"
                 android:lineSpacingExtra="7sp"
                 android:text="“Fishing Shop”"
-                />
+                android:textColor="#ffffff"
+                android:textSize="19sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

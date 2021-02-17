@@ -10,7 +10,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string-array name="screen_array">
+    <string-array name="left_menu_titles">
         <item>Профиль</item>
         <item>Избранное</item>
         <item>Выход</item>

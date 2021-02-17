@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +14,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -29,45 +29,46 @@ import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
 
 public class MainScreenActivity extends AppCompatActivity {
 
-    private String[] mScreenTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private LinearLayout DrawerLinear;
+    private String[] leftMenuTitlesArray;
+    private DrawerLayout mainDrawerLayout;
+    private ListView leftMenuTitlesListView;
+    private LinearLayout leftMenuLinearLayout;
 
     private ActionBarDrawerToggle mDrawerToggle;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DrawerLinear = (LinearLayout) findViewById(R.id.DrawerLinear);
+        leftMenuLinearLayout = (LinearLayout) findViewById(R.id.left_menu_linear_layout);
+        mainDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        leftMenuTitlesListView = (ListView) findViewById(R.id.left_drawer);
 
-        mScreenTitles = getResources().getStringArray(R.array.screen_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        leftMenuTitlesArray = getResources().getStringArray(R.array.left_menu_titles);
 
-        mDrawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, mScreenTitles));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        leftMenuTitlesListView.setAdapter(new ArrayAdapter<>(this,
+                R.layout.drawer_list_item, leftMenuTitlesArray));
+        leftMenuTitlesListView.setOnItemClickListener(new DrawerItemClickListener());
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
-                mDrawerLayout,
+                mainDrawerLayout,
                 R.string.drawer_open,
                 R.string.drawer_close
         );
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mainDrawerLayout.setDrawerListener(mDrawerToggle);
 
         createHomeFragment();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_main:
@@ -112,16 +113,6 @@ public class MainScreenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-    /**
-     * Swaps fragments in the main content view
-     */
     private void selectItem(int position) {
         Fragment fragment = null;
         switch (position) {
@@ -142,8 +133,8 @@ public class MainScreenActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.main_relative_layout, fragment).commit();
-            mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(DrawerLinear);
+            leftMenuTitlesListView.setItemChecked(position, true);
+            mainDrawerLayout.closeDrawer(leftMenuLinearLayout);
         } else {
             Log.e(this.getClass().getName(), "Error. Fragment is not created");
         }
@@ -165,6 +156,13 @@ public class MainScreenActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
     }
 
 }
