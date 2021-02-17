@@ -52,7 +52,6 @@ public class MainScreenActivity extends AppCompatActivity {
         leftMenuLinearLayout = (LinearLayout) findViewById(R.id.left_menu_linear_layout);
         mainDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         leftMenuTitlesListView = (ListView) findViewById(R.id.left_drawer);
-
         leftMenuTitlesArray = getResources().getStringArray(R.array.left_menu_titles);
 
         leftMenuTitlesListView.setAdapter(new ArrayAdapter<>(this,
@@ -76,6 +75,8 @@ public class MainScreenActivity extends AppCompatActivity {
     private void createBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
+            leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(),false);
             switch (item.getItemId()) {
                 case R.id.action_main:
                     createHomeFragment();
@@ -140,6 +141,7 @@ public class MainScreenActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
             selectItem(position);
         }
     }
