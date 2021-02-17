@@ -19,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
@@ -42,6 +43,12 @@ public class MainScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createLeftNavigationMenu();
+        createHomeFragment();
+        createBottomNavigationView();
+    }
+
+    private void createLeftNavigationMenu() {
         leftMenuLinearLayout = (LinearLayout) findViewById(R.id.left_menu_linear_layout);
         mainDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         leftMenuTitlesListView = (ListView) findViewById(R.id.left_drawer);
@@ -54,7 +61,6 @@ public class MainScreenActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -65,9 +71,9 @@ public class MainScreenActivity extends AppCompatActivity {
                 R.string.drawer_close
         );
         mainDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
 
-        createHomeFragment();
-
+    private void createBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -113,33 +119,6 @@ public class MainScreenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void selectItem(int position) {
-        Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new ProfileFragment();
-                break;
-            case 1:
-                fragment = new FavoritesFragment();
-                break;
-            case 2:
-                openSplashScreenActivity();
-                break;
-            default:
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_relative_layout, fragment).commit();
-            leftMenuTitlesListView.setItemChecked(position, true);
-            mainDrawerLayout.closeDrawer(leftMenuLinearLayout);
-        } else {
-            Log.e(this.getClass().getName(), "Error. Fragment is not created");
-        }
-    }
-
     void openSplashScreenActivity() {
         Intent intent = new Intent(this, SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -162,6 +141,35 @@ public class MainScreenActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
+        }
+    }
+    private void selectItem(int position) {
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new ProfileFragment();
+                break;
+            case 1:
+                fragment = new FavoritesFragment();
+                break;
+            case 2:
+                openSplashScreenActivity();
+                break;
+            default:
+                break;
+        }
+        changeFragment(fragment,position);
+    }
+
+    private void changeFragment(Fragment fragment, int position){
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_relative_layout, fragment).commit();
+            leftMenuTitlesListView.setItemChecked(position, true);
+            mainDrawerLayout.closeDrawer(leftMenuLinearLayout);
+        } else {
+            Log.e(this.getClass().getName(), "Error. Fragment is not created");
         }
     }
 
