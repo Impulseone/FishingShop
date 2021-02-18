@@ -22,7 +22,7 @@ public class CatalogFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.categories_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new CategoriesAdapter());
+        recyclerView.setAdapter(new CategoriesAdapter(this));
         return view;
     }
 }
