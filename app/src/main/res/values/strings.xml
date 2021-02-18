@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">FishingShop</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -13,7 +12,6 @@
     <string-array name="left_menu_titles">
         <item>Профиль</item>
         <item>Избранное</item>
-        <item>Выход</item>
     </string-array>
 
     <string name="menu_home">Home</string>

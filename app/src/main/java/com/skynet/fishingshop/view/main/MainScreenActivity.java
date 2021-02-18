@@ -54,8 +54,7 @@ public class MainScreenActivity extends AppCompatActivity {
         leftMenuTitlesListView = (ListView) findViewById(R.id.left_drawer);
         leftMenuTitlesArray = getResources().getStringArray(R.array.left_menu_titles);
 
-        leftMenuTitlesListView.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, leftMenuTitlesArray));
+        leftMenuTitlesListView.setAdapter(new CustomArrayAdapter(this, leftMenuTitlesArray));
         leftMenuTitlesListView.setOnItemClickListener(new DrawerItemClickListener());
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
@@ -70,6 +69,8 @@ public class MainScreenActivity extends AppCompatActivity {
                 R.string.drawer_close
         );
         mainDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        findViewById(R.id.logout_button).setOnClickListener((view -> openSplashScreenActivity()));
     }
 
     private void createBottomNavigationView() {
@@ -153,9 +154,6 @@ public class MainScreenActivity extends AppCompatActivity {
                 break;
             case 1:
                 fragment = new FavoritesFragment();
-                break;
-            case 2:
-                openSplashScreenActivity();
                 break;
             default:
                 break;
