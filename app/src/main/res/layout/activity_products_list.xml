@@ -7,7 +7,7 @@
     android:background="@mipmap/bg_main"
     tools:context=".view.main.productsList.ProductsListActivity">
 
-    <include layout="@layout/tool_bar_without_menu_button"/>
+    <include layout="@layout/tool_bar_with_menu_button"/>
 
     <LinearLayout
         android:id="@+id/back_button"
