@@ -20,7 +20,7 @@
 
             <include
                 style="@style/Toolbar"
-                layout="@layout/tool_bar" />
+                layout="@layout/tool_bar_with_menu_button" />
 
             <FrameLayout
                 android:id="@+id/frame_layout"

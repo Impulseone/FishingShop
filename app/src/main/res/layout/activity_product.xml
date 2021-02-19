@@ -6,7 +6,7 @@
     android:background="@mipmap/bg_main"
     android:orientation="vertical">
 
-    <include layout="@layout/tool_bar" />
+    <include layout="@layout/tool_bar_without_menu_button" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -90,7 +90,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="25dp">
 
             <LinearLayout
                 android:id="@+id/back_button"
