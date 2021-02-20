@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
         bottomNavigationView.setSelectedItemId(R.id.action_main);
         leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(),false);
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
             bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
             selectItem(position);
         }

@@ -48,14 +48,12 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         public ProductTilesRow(@NonNull View itemView, Fragment fragment) {
             super(itemView);
             itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
-                fragment.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
                 ProductFragment productFragment = new ProductFragment();
                 ft.replace(R.id.main_relative_layout, productFragment);
                 ft.commit();
             });
             itemView.findViewById(R.id.second).setOnClickListener(view1 -> {
-                fragment.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
                 ProductFragment productFragment = new ProductFragment();
                 ft.replace(R.id.main_relative_layout, productFragment);

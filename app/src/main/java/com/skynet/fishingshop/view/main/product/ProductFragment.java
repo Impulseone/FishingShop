@@ -21,10 +21,12 @@ public class ProductFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
         View v = view.findViewById(R.id.back_button);
         v.setOnClickListener(view1 -> back());
+        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
         return view;
     }
 
     private void back() {
+        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
         ProductsListFragment productsListFragment = new ProductsListFragment();
         ft.replace(R.id.main_relative_layout, productsListFragment);
