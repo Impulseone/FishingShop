@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FishingShop">
         <activity
-            android:name=".view.main.DeliveryDataActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        </activity>
-        <activity android:name=".view.main.PurchaseProductActivity" />
-        <activity
             android:name=".view.authorization.ConfirmationActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity

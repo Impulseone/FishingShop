@@ -21,7 +21,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
+        setContentView(R.layout.activity_phone_confirmation);
 
         findViewById(R.id.get_code_button).setOnClickListener((v) -> openMainScreenActivity());
         findViewById(R.id.back_button).setOnClickListener(view -> ConfirmationActivity.this.finish());

@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.view.authorization.SplashScreenActivity;
+import com.skynet.fishingshop.view.extension.LeftNavigationArrayAdapter;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;

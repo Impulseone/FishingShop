@@ -50,7 +50,7 @@
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/get_code_button"
+            android:id="@+id/confirm_button"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"

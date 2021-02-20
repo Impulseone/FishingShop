@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main;
+package com.skynet.fishingshop.view.extension;
 
 import android.content.Context;
 import android.view.LayoutInflater;
