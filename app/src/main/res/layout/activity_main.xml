@@ -42,6 +42,7 @@
                 android:paddingEnd="20dp"
                 app:itemIconTint="@color/bottom_nav_colors"
                 app:itemTextColor="@color/bottom_nav_colors"
+                app:itemBackground="@drawable/bottom_icon_bg"
                 app:menu="@menu/menu_bottom_nav" />
 
         </RelativeLayout>
