@@ -8,7 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import com.skynet.fishingshop.view.main.MainScreenActivity;
+import com.skynet.fishingshop.view.main.MainActivity;
 import com.skynet.fishingshop.R;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     }
 
     private void openMainScreenActivity() {
-        Intent intent = new Intent(this, MainScreenActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -67,7 +67,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
             if (current < 4) {
                 array.get(current).requestFocus();
             } else {
-                Intent intent = new Intent(this, MainScreenActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

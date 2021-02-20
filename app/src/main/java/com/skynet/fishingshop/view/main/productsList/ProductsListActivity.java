@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.MainScreenActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +26,10 @@ public class ProductsListActivity extends AppCompatActivity {
 
         findViewById(R.id.back_button).setOnClickListener(view -> back());
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.products_rv);
-        ProductsListAdapter adapter = new ProductsListAdapter(products, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.products_rv);
+//        ProductsListAdapter adapter = new ProductsListAdapter(products, this);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(adapter);
     }
 
     private void back(){

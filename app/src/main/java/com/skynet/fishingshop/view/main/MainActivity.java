@@ -28,7 +28,7 @@ import com.skynet.fishingshop.view.main.cart.CartFragment;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
 
-public class MainScreenActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private String[] leftMenuTitlesArray;
     private DrawerLayout mainDrawerLayout;
@@ -137,6 +137,17 @@ public class MainScreenActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
+        bottomNavigationView.setSelectedItemId(R.id.action_main);
+        leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(),false);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        HomeFragment homeFragment = new HomeFragment();
+        ft.replace(R.id.main_relative_layout, homeFragment);
+        ft.commit();
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

@@ -1,15 +1,15 @@
 package com.skynet.fishingshop.view.main.catalog;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.productsList.ProductsListActivity;
+import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +42,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         public CategoryTileView(View view, Fragment fragment) {
             super(view);
-            view.setOnClickListener(view1 -> fragment.startActivity(new Intent(fragment.getContext(), ProductsListActivity.class)));
+            view.setOnClickListener(view1 -> {
+//                fragment.startActivity(new Intent(fragment.getContext(), ProductsListActivity.class));
+                FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
+                ProductsListFragment productsListFragment = new ProductsListFragment();
+                ft.replace(R.id.main_relative_layout, productsListFragment);
+                ft.commit();
+            });
         }
     }
 }
