@@ -3,7 +3,6 @@ package com.skynet.fishingshop.view.main.productsList;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +32,7 @@ public class ProductsListFragment extends Fragment {
         view.findViewById(R.id.back_button).setOnClickListener(view1 -> back());
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        ProductsListAdapter adapter = new ProductsListAdapter(products, view);
+        ProductsListAdapter adapter = new ProductsListAdapter(products, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
         return view;

@@ -7,19 +7,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         leftMenuTitlesListView = (ListView) findViewById(R.id.left_drawer);
         leftMenuTitlesArray = getResources().getStringArray(R.array.left_menu_titles);
 
-        leftMenuTitlesListView.setAdapter(new CustomArrayAdapter(this, leftMenuTitlesArray));
+        leftMenuTitlesListView.setAdapter(new LeftNavigationArrayAdapter(this, leftMenuTitlesArray));
         leftMenuTitlesListView.setOnItemClickListener(new DrawerItemClickListener());
 
         Toolbar toolbar = findViewById(R.id.tool_bar);

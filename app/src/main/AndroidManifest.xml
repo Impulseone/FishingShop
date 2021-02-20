@@ -13,9 +13,6 @@
             android:name=".view.main.DeliveryDataActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
-        <activity
-            android:name=".view.main.ProductActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".view.main.PurchaseProductActivity" />
         <activity
             android:name=".view.authorization.ConfirmationActivity"

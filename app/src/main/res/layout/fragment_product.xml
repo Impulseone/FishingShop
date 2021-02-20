@@ -2,29 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/bg_main"
+    android:layout_height="640dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="60dp"
+    android:layout_marginEnd="20dp"
     android:orientation="vertical">
-
-    <include layout="@layout/tool_bar_with_menu_button" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:layout_marginBottom="10dp"
-            android:paddingStart="30dp"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="3sp"
-            android:layout_gravity="start"
             android:text="Катушка карповая \n“New Brand”"
             android:textColor="#ffffff"
             android:textSize="18sp"
@@ -38,9 +37,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="35dp"
-            android:paddingEnd="35dp"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/avenir_next_medium"
             android:text="Cotton is a soft, fluffy staple fiber that grows in a boll, or protective cas exporter for many years."
             android:textColor="#ffffff"
@@ -50,41 +48,40 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
                 android:layout_gravity="center"
-                android:backgroundTint="#584434"
                 android:background="@drawable/auth_button_bg_brown"
-                android:src="@drawable/ic_diamond"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_next_bold"
-                android:layout_marginStart="100dp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#ffffff"
-                android:lineSpacingExtra="7sp"
-                android:text="Price:"/>
+                android:backgroundTint="#584434"
+                android:paddingTop="5dp"
+                android:src="@drawable/ic_diamond" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir_next_bold"
                 android:layout_gravity="center"
-                android:textStyle="bold"
-                android:paddingStart="10dp"
-                android:textSize="16sp"
+                android:layout_marginStart="120dp"
+                android:fontFamily="@font/avenir_next_bold"
+                android:text="Цена:"
                 android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/avenir_next_bold"
                 android:lineSpacingExtra="7sp"
+                android:paddingStart="10dp"
                 android:text="54.24 €"
-                />
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,6 +109,7 @@
                 android:id="@+id/get_code_button"
                 android:layout_width="180dp"
                 android:layout_height="55dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/auth_button_bg_green"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -125,6 +123,7 @@
                     android:text="В корзину"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

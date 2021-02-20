@@ -1,7 +1,5 @@
 package com.skynet.fishingshop.view.main.productsList;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,29 +7,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.ProductActivity;
+import com.skynet.fishingshop.view.main.product.ProductFragment;
 
 import java.util.List;
 
 public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ProductTilesRow> {
 
     private final List<Pair<String, String>> data;
-    private final View view;
+    private final Fragment fragment;
 
-    public ProductsListAdapter(List<Pair<String, String>> data, View view) {
+    public ProductsListAdapter(List<Pair<String, String>> data, Fragment fragment) {
         this.data = data;
-        this.view = view;
+        this.fragment = fragment;
     }
-
 
     @NonNull
     @Override
     public ProductTilesRow onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ProductTilesRow(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.products_tile_row, parent, false), view);
+                .inflate(R.layout.products_tile_row, parent, false), fragment);
     }
 
     @Override
@@ -46,9 +45,22 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     public static class ProductTilesRow extends RecyclerView.ViewHolder {
 
-        public ProductTilesRow(@NonNull View itemView, View view) {
+        public ProductTilesRow(@NonNull View itemView, Fragment fragment) {
             super(itemView);
-            itemView.setOnClickListener(view1 -> view.getContext().startActivity(new Intent(view.getContext(), ProductActivity.class)));
+            itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
+                fragment.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+                FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
+                ProductFragment productFragment = new ProductFragment();
+                ft.replace(R.id.main_relative_layout, productFragment);
+                ft.commit();
+            });
+            itemView.findViewById(R.id.second).setOnClickListener(view1 -> {
+                fragment.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+                FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
+                ProductFragment productFragment = new ProductFragment();
+                ft.replace(R.id.main_relative_layout, productFragment);
+                ft.commit();
+            });
         }
 
         public void setText(Pair<String, String> text) {

@@ -12,13 +12,13 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import com.skynet.fishingshop.R;
 
-public class CustomArrayAdapter extends BaseAdapter {
+public class LeftNavigationArrayAdapter extends BaseAdapter {
 
     private final String[] data;
     private final LayoutInflater inflater;
     private final Context context;
 
-    public CustomArrayAdapter(Context context, String[] data) {
+    public LeftNavigationArrayAdapter(Context context, String[] data) {
         this.data = data;
         this.context = context;
         inflater = (LayoutInflater) context
