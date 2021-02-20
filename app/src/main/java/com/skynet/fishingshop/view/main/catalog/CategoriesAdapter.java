@@ -43,7 +43,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         public CategoryTileView(View view, Fragment fragment) {
             super(view);
             view.setOnClickListener(view1 -> {
-//                fragment.startActivity(new Intent(fragment.getContext(), ProductsListActivity.class));
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
                 ProductsListFragment productsListFragment = new ProductsListFragment();
                 ft.replace(R.id.main_relative_layout, productsListFragment);

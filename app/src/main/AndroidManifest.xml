@@ -18,9 +18,6 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".view.main.PurchaseProductActivity" />
         <activity
-            android:name=".view.main.productsList.ProductsListActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
             android:name=".view.authorization.ConfirmationActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
