@@ -25,6 +25,8 @@ import com.skynet.fishingshop.view.extension.LeftNavigationArrayAdapter;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
+import com.skynet.fishingshop.view.main.home.HomeFragment;
+import com.skynet.fishingshop.view.main.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,9 +43,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createToolbar();
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
+    }
+
+    private void createToolbar() {
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        toolbar.findViewById(R.id.action_cart).setOnClickListener(view -> {
+            createFavoritesFragment();
+            leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(), false);
+            bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void createFavoritesFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        FavoritesFragment favoritesFragment = new FavoritesFragment();
+        ft.replace(R.id.main_relative_layout, favoritesFragment);
+        ft.commit();
     }
 
     private void createLeftNavigationMenu() {
@@ -54,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         leftMenuTitlesListView.setAdapter(new LeftNavigationArrayAdapter(this, leftMenuTitlesArray));
         leftMenuTitlesListView.setOnItemClickListener(new DrawerItemClickListener());
-
-        Toolbar toolbar = findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -75,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
-            leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(),false);
+            leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(), false);
             switch (item.getItemId()) {
                 case R.id.action_main:
                     createHomeFragment();
@@ -139,10 +156,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        adjustBottomNavigationView();
+        checkoutToHomeFragment();
+        leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(), false);
+    }
+
+    private void adjustBottomNavigationView() {
         findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
         bottomNavigationView.setSelectedItemId(R.id.action_main);
-        leftMenuTitlesListView.setItemChecked(leftMenuTitlesListView.getCheckedItemPosition(),false);
+    }
+
+    private void checkoutToHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
@@ -154,10 +179,11 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
             bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-            selectItem(position);
+            checkoutToSelectedFragment(position);
         }
     }
-    private void selectItem(int position) {
+
+    private void checkoutToSelectedFragment(int position) {
         Fragment fragment = null;
         switch (position) {
             case 0:
@@ -169,10 +195,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-        changeFragment(fragment,position);
+        changeFragment(fragment, position);
     }
 
-    private void changeFragment(Fragment fragment, int position){
+    private void changeFragment(Fragment fragment, int position) {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()

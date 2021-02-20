@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.HomeFragment;
-import com.skynet.fishingshop.view.main.ProfileFragment;
+import com.skynet.fishingshop.view.main.home.HomeFragment;
+import com.skynet.fishingshop.view.main.profile.ProfileFragment;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
 
 public class OrderConfirmationFragment extends Fragment {

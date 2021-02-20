@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main;
+package com.skynet.fishingshop.view.main.profile;
 
 import android.os.Bundle;
 
@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import com.skynet.fishingshop.R;
 
-public class HomeFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 }
