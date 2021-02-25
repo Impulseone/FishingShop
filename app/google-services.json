@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "160485588606",
+    "project_id": "fishing-shop-9182b",
+    "storage_bucket": "fishing-shop-9182b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160485588606:android:b98b524c8e8a3a1238a22f",
+        "android_client_info": {
+          "package_name": "com.skynet.fishingshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160485588606-js0pdvmouho8mckjh7g88dq04j63cacb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8wED0Kq0tSrPFae-8-3Yt6NPIkkraZfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160485588606-js0pdvmouho8mckjh7g88dq04j63cacb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
