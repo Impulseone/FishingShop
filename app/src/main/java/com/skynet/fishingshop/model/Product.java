@@ -2,8 +2,6 @@ package com.skynet.fishingshop.model;
 
 import com.google.firebase.database.PropertyName;
 
-import java.util.Map;
-
 public class Product {
 
     @PropertyName("Название")

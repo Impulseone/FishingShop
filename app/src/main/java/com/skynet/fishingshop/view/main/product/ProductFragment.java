@@ -5,14 +5,24 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
 
+import java.util.List;
+
 public class ProductFragment extends Fragment {
+
+   private final List<Product> products;
+
+    public ProductFragment(List<Product> products) {
+        this.products = products;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +38,7 @@ public class ProductFragment extends Fragment {
     private void back() {
         this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        ProductsListFragment productsListFragment = new ProductsListFragment();
+        ProductsListFragment productsListFragment = new ProductsListFragment(products);
         ft.replace(R.id.main_relative_layout, productsListFragment);
         ft.commit();
     }

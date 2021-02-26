@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 
 import java.util.ArrayList;
@@ -20,14 +21,18 @@ import java.util.List;
 
 public class ProductsListFragment extends Fragment {
 
-    private List<Pair<String,String>> products;
+    private List<Product> products;
+
+    public ProductsListFragment(List<Product> productsList) {
+        this.products = productsList;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_products_list, container, false);
-        createProducts();
+//        createProducts();
 
         view.findViewById(R.id.back_button).setOnClickListener(view1 -> back());
 
@@ -43,15 +48,5 @@ public class ProductsListFragment extends Fragment {
         CatalogFragment catalogFragment = new CatalogFragment();
         ft.replace(R.id.main_relative_layout, catalogFragment);
         ft.commit();
-    }
-
-
-
-    private void createProducts() {
-        products = new ArrayList<>();
-        products.add(new Pair<>("Катушка New Brand 1", "Катушка New Brand 2"));
-        products.add(new Pair<>("Катушка New Brand 3", "Катушка New Brand 4"));
-        products.add(new Pair<>("Катушка Old Brand 1", "Катушка Old Brand 2"));
-        products.add(new Pair<>("Катушка Old Brand 3", "Катушка Old Brand 4"));
     }
 }
