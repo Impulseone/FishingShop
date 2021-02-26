@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +19,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.extension.CategoriesKeeper;
+import com.skynet.fishingshop.model.Category;
+import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.MainActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public class ConfirmationActivity extends AppCompatActivity implements TextWatcher {
 
@@ -44,8 +46,15 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
             mDatabaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String value = dataSnapshot.getValue(String.class);
-                    System.out.println(value);
+                    List<Category> categories = new ArrayList<>();
+                    for (DataSnapshot category : dataSnapshot.getChildren()) {
+                        List<Product> productList = new ArrayList<>();
+                        for (DataSnapshot product : category.getChildren()) {
+                            productList.add(product.getValue(Product.class));
+                        }
+                        categories.add(new Category(category.getKey(), productList));
+                    }
+                    CategoriesKeeper.getInstance().setCategories(categories);
                 }
 
                 @Override
