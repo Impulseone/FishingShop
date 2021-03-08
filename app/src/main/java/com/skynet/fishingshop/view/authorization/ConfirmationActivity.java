@@ -32,16 +32,26 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     private final ArrayList<EditText> editTextArray = new ArrayList<>(4);
     private String numTemp;
     private DatabaseReference mDatabaseReference;
-    private final String TAG = "Firebase";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_confirmation);
 
+        initFirebase();
+        initApplyButton();
+        initBackButton();
+        initPinCodeField();
+
+        editTextArray.get(0).requestFocus();
+    }
+
+    private void initFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabaseReference = database.getReference("Категории");
+    }
 
+    private void initApplyButton() {
         findViewById(R.id.apply_button).setOnClickListener((v) -> {
             mDatabaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -59,14 +69,16 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.w(TAG, "Failed to read value.", error.toException());
+                    System.out.println(error.getMessage());
+                    System.out.println(error.getDetails());
                 }
             });
             openMainScreenActivity();
         });
-        findViewById(R.id.back_button).setOnClickListener(view -> ConfirmationActivity.this.finish());
+    }
 
-        LinearLayout layout = findViewById(R.id.codeLayout);
+    private void initPinCodeField() {
+        LinearLayout layout = findViewById(R.id.pin_code_layout);
         for (int i = 0; i < layout.getChildCount(); i++) {
             View view = layout.getChildAt(i);
             if (view instanceof EditText) {
@@ -75,7 +87,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
                 int finalI = i;
                 editTextArray.get(i).setOnKeyListener((view1, i1, keyEvent) -> {
                     if (i1 == KeyEvent.KEYCODE_DEL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                        if (finalI != 0) { //Don't implement for first digit
+                        if (finalI != 0) {
                             editTextArray.get(finalI - 1).requestFocus();
                             editTextArray.get(finalI - 1).setSelection(editTextArray.get(finalI - 1).length());
                         }
@@ -84,7 +96,10 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
                 });
             }
         }
-        editTextArray.get(0).requestFocus();
+    }
+
+    private void initBackButton() {
+        findViewById(R.id.back_button).setOnClickListener(view -> ConfirmationActivity.this.finish());
     }
 
     @Override
