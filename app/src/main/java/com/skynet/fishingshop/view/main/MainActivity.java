@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.view.authorization.SplashScreenActivity;
 import com.skynet.fishingshop.view.extension.LeftNavigationArrayAdapter;
@@ -137,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void openSplashScreenActivity() {
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
