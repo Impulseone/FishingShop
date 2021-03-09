@@ -9,10 +9,14 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +36,15 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     private final ArrayList<EditText> editTextArray = new ArrayList<>(4);
     private String numTemp;
     private DatabaseReference mDatabaseReference;
+    private FirebaseAuth firebaseAuth;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_confirmation);
+
+        id = getIntent().getStringExtra("id");
 
         initFirebase();
         initApplyButton();
@@ -47,8 +55,8 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     }
 
     private void initFirebase() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mDatabaseReference = database.getReference("Категории");
+        firebaseAuth = FirebaseAuth.getInstance();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Категории");
     }
 
     private void initApplyButton() {
@@ -73,7 +81,8 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
                     System.out.println(error.getDetails());
                 }
             });
-            openMainScreenActivity();
+            submitCode();
+//            openMainScreenActivity();
         });
     }
 
@@ -133,6 +142,30 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
                 }
             }
         }
+    }
+
+    private String getInputCodeFromTextFields() {
+        StringBuilder code = new StringBuilder();
+        for (EditText editText : editTextArray) {
+            code.append(editText.getText().toString());
+        }
+        return code.toString();
+    }
+
+    private void submitCode() {
+        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(id, getInputCodeFromTextFields());
+        firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Добро пожаловать", Toast.LENGTH_SHORT);
+                toast.show();
+                openMainScreenActivity();
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        task.getException().getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 
     private void openMainScreenActivity() {

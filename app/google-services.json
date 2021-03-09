@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "160485588606",
+    "firebase_url": "https://fishing-shop-9182b-default-rtdb.firebaseio.com",
     "project_id": "fishing-shop-9182b",
     "storage_bucket": "fishing-shop-9182b.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "160485588606-89kc56jl3f0p8mh0dqqk6831cs2hrg55.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skynet.fishingshop",
+            "certificate_hash": "560e5a405c1368589b7fcaed132057a995ca3cab"
+          }
+        },
         {
           "client_id": "160485588606-js0pdvmouho8mckjh7g88dq04j63cacb.apps.googleusercontent.com",
           "client_type": 3
