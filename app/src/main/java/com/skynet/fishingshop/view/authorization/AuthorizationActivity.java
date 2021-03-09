@@ -1,17 +1,14 @@
 package com.skynet.fishingshop.view.authorization;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -52,35 +49,34 @@ public class AuthorizationActivity extends AppCompatActivity {
         }
     }
 
-    private void startMainActivity(){
+    private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    private void initCallback(){
+    private void initCallback() {
         callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
-                   if (task.isSuccessful()){
-                       Toast toast = Toast.makeText(getApplicationContext(),
-                               "Добро пожаловать", Toast.LENGTH_SHORT);
-                       toast.show();
-                       startMainActivity();
-                   }
-                   else {
-                       Toast toast = Toast.makeText(getApplicationContext(),
-                               task.getException().getMessage(), Toast.LENGTH_SHORT);
-                       toast.show();
-                   }
+                    if (task.isSuccessful()) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Добро пожаловать", Toast.LENGTH_SHORT);
+                        toast.show();
+                        startMainActivity();
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                task.getException().getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 });
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        e.getMessage(), Toast.LENGTH_SHORT);
+                        e.getMessage(), Toast.LENGTH_LONG);
                 toast.show();
             }
 
@@ -93,7 +89,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 
     private void openSmsCodeActivity(String id) {
         Intent intent = new Intent(this, ConfirmationActivity.class);
-        intent.putExtra("id",id);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }
