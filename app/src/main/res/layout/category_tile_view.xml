@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_marginBottom="10dp"
-    android:weightSum="3"
+    android:weightSum="5"
     android:background="@drawable/category_tile_view_bg"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="2"
+        android:layout_weight="4"
         android:orientation="vertical">
         <TextView
             android:id="@+id/products_count"
@@ -45,12 +45,18 @@
             />
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_fishing_rod"/>
+        android:gravity="end"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/category_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+    </LinearLayout>
 
 </LinearLayout>

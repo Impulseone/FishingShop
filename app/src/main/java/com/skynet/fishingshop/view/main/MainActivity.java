@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.extension.CategoriesKeeper;
 import com.skynet.fishingshop.model.Category;
+import com.skynet.fishingshop.model.CategoryIcon;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.authorization.SplashScreenActivity;
 import com.skynet.fishingshop.view.extension.LeftNavigationArrayAdapter;
@@ -54,20 +55,23 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private BottomNavigationView bottomNavigationView;
 
-    private DatabaseReference mDatabaseReference;
+    private DatabaseReference categoriesFromDbReference;
+    private DatabaseReference categoriesIconsFromDbReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Категории");
+        categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
+        categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
 
         createToolbar();
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
-        getProducts();
+        getCategories();
+        getCategoriesIcons();
     }
 
     private void createToolbar() {
@@ -196,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    private void getProducts(){
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+    private void getCategories() {
+        categoriesFromDbReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -210,6 +214,25 @@ public class MainActivity extends AppCompatActivity {
                     categories.add(new Category(Objects.requireNonNull(category.getKey()).substring(2), productList));
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error.getMessage());
+                System.out.println(error.getDetails());
+            }
+        });
+    }
+
+    private void getCategoriesIcons() {
+        categoriesIconsFromDbReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<CategoryIcon> categoryIcons = new ArrayList<>();
+                for (DataSnapshot categoryIcon : snapshot.getChildren()) {
+                    categoryIcons.add(new CategoryIcon(categoryIcon.getKey(), (String) categoryIcon.getValue()));
+                }
+                CategoriesKeeper.getInstance().setCategoryIcons(categoryIcons);
             }
 
             @Override
