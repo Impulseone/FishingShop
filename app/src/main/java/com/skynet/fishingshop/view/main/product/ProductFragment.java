@@ -9,6 +9,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.model.Category;
@@ -20,9 +21,11 @@ import java.util.List;
 public class ProductFragment extends Fragment {
 
    private final Category category;
+   private final Product product;
 
-    public ProductFragment(Category category) {
+    public ProductFragment(Category category, Product product) {
         this.category = category;
+        this.product = product;
     }
 
     @Override
@@ -30,10 +33,32 @@ public class ProductFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        View v = view.findViewById(R.id.back_button);
-        v.setOnClickListener(view1 -> back());
-        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+        setBackButton(view);
+        setBottomNavigationVisibility();
+        setTitle(view);
+        setProductDescription(view);
+        setPrice(view);
         return view;
+    }
+
+    private void setTitle(View view){
+        ((TextView)view.findViewById(R.id.product_name)).setText(product.name.substring(2));
+    }
+    private void setProductDescription(View view){
+        ((TextView)view.findViewById(R.id.product_description)).setText(product.description);
+    }
+
+    private void setBackButton(View view){
+        View backButton = view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(view1 -> back());
+    }
+
+    private void setBottomNavigationVisibility(){
+        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+    }
+
+    private void setPrice(View view){
+        ((TextView)view.findViewById(R.id.price)).setText(product.price+" руб.");
     }
 
     private void back() {

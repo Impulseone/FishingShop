@@ -45,7 +45,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productFragment = new ProductFragment(category);
+            ProductFragment productFragment = new ProductFragment(category,product);
             ft.replace(R.id.main_relative_layout, productFragment);
             ft.commit();
         });
