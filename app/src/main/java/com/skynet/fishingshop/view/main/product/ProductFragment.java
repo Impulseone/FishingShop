@@ -5,18 +5,17 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
-
-import java.util.List;
 
 public class ProductFragment extends Fragment {
 
@@ -38,6 +37,7 @@ public class ProductFragment extends Fragment {
         setTitle(view);
         setProductDescription(view);
         setPrice(view);
+        setImage(view);
         return view;
     }
 
@@ -59,6 +59,11 @@ public class ProductFragment extends Fragment {
 
     private void setPrice(View view){
         ((TextView)view.findViewById(R.id.price)).setText(product.price+" руб.");
+    }
+
+    private void setImage(View view){
+        ImageView imageView = view.findViewById(R.id.product_image);
+        Glide.with(this).load(product.imagePath).into(imageView);
     }
 
     private void back() {
