@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.product.ProductFragment;
 
@@ -23,9 +24,11 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     private final List<Pair<Product, Product>> data;
     private final List<Product> productsList;
     private final Fragment fragment;
+    private final Category category;
 
-    public ProductsListAdapter(List<Product> productsList, Fragment fragment) {
-        this.productsList = productsList;
+    public ProductsListAdapter(Category category, Fragment fragment) {
+        this.category = category;
+        this.productsList = category.getProductList();
         data = new ArrayList<>();
         for (int i = 0; i < productsList.size(); i = i + 2) {
             if (i != productsList.size() - 1)
@@ -44,7 +47,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ProductTilesRow holder, int position) {
-        holder.setView(data.get(position), fragment, productsList);
+        holder.setView(data.get(position), fragment,category);
     }
 
     @Override
@@ -54,34 +57,34 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     public static class ProductTilesRow extends RecyclerView.ViewHolder {
 
-        private List<Product> all;
+        private Category category;
 
         public ProductTilesRow(@NonNull View itemView) {
             super(itemView);
         }
 
-        public void setView(Pair<Product, Product> productPair, Fragment fragment, List<Product> all) {
-            this.all = all;
+        public void setView(Pair<Product, Product> productPair, Fragment fragment, Category category) {
+            this.category = category;
             setFirstProduct(productPair, fragment);
             if (productPair.second != null) setSecondProduct(productPair, fragment);
             else itemView.findViewById(R.id.second).setVisibility(View.GONE);
         }
 
         private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            ((TextView) itemView.findViewById(R.id.first).findViewById(R.id.product_name)).setText(productPair.first.name);
+            ((TextView) itemView.findViewById(R.id.first).findViewById(R.id.product_name)).setText(productPair.first.name.substring(2));
             itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductFragment productFragment = new ProductFragment(all);
+                ProductFragment productFragment = new ProductFragment(category);
                 ft.replace(R.id.main_relative_layout, productFragment);
                 ft.commit();
             });
         }
 
         private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            ((TextView) itemView.findViewById(R.id.second).findViewById(R.id.product_name)).setText(productPair.second.name);
+            ((TextView) itemView.findViewById(R.id.second).findViewById(R.id.product_name)).setText(productPair.second.name.substring(2));
             itemView.findViewById(R.id.second).setOnClickListener(view1 -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductFragment productFragment = new ProductFragment(all);
+                ProductFragment productFragment = new ProductFragment(category);
                 ft.replace(R.id.main_relative_layout, productFragment);
                 ft.commit();
             });

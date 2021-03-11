@@ -1,8 +1,13 @@
 package com.skynet.fishingshop.extension;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.skynet.fishingshop.model.Category;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CategoriesKeeper {
@@ -24,6 +29,7 @@ public class CategoriesKeeper {
         return categories;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }

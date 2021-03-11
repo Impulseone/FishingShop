@@ -56,7 +56,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             ((TextView) itemView.findViewById(R.id.category_name)).setText(category.getCategoryName());
             itemView.setOnClickListener(view1 -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductsListFragment productsListFragment = new ProductsListFragment(category.getProductList());
+                ProductsListFragment productsListFragment = new ProductsListFragment(category);
                 ft.replace(R.id.main_relative_layout, productsListFragment);
                 ft.commit();
             });

@@ -11,8 +11,10 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 
@@ -21,10 +23,10 @@ import java.util.List;
 
 public class ProductsListFragment extends Fragment {
 
-    private List<Product> products;
+    private final Category category;
 
-    public ProductsListFragment(List<Product> productsList) {
-        this.products = productsList;
+    public ProductsListFragment(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -32,12 +34,12 @@ public class ProductsListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_products_list, container, false);
-//        createProducts();
 
         view.findViewById(R.id.back_button).setOnClickListener(view1 -> back());
+        ((TextView) view.findViewById(R.id.category_name)).setText(category.getCategoryName());
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        ProductsListAdapter adapter = new ProductsListAdapter(products, this);
+        ProductsListAdapter adapter = new ProductsListAdapter(category, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
         return view;
