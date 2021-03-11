@@ -47,7 +47,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ProductTilesRow holder, int position) {
-        holder.setView(data.get(position), fragment,category);
+        holder.setView(data.get(position), fragment, category);
     }
 
     @Override
@@ -71,23 +71,11 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         }
 
         private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            ((TextView) itemView.findViewById(R.id.first).findViewById(R.id.product_name)).setText(productPair.first.name.substring(2));
-            itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
-                FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductFragment productFragment = new ProductFragment(category);
-                ft.replace(R.id.main_relative_layout, productFragment);
-                ft.commit();
-            });
+            new ProductTileView(itemView, productPair.first, fragment, category).setView();
         }
 
         private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            ((TextView) itemView.findViewById(R.id.second).findViewById(R.id.product_name)).setText(productPair.second.name.substring(2));
-            itemView.findViewById(R.id.second).setOnClickListener(view1 -> {
-                FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductFragment productFragment = new ProductFragment(category);
-                ft.replace(R.id.main_relative_layout, productFragment);
-                ft.commit();
-            });
+            new ProductTileView(itemView, productPair.second, fragment, category).setView();
         }
     }
 }

@@ -16,6 +16,7 @@
         app:tint="@color/white" />
 
     <LinearLayout
+        android:id="@+id/discount_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
@@ -24,6 +25,7 @@
         android:padding="5dp">
 
         <TextView
+            android:id="@+id/discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -39,6 +41,7 @@
             android:textSize="9sp" />
 
         <TextView
+            android:id="@+id/stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -69,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/actual_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
@@ -77,6 +81,7 @@
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
             <TextView
+                android:id="@+id/old_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_medium"
