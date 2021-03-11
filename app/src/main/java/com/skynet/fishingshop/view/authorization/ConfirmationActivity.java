@@ -30,12 +30,12 @@ import com.skynet.fishingshop.view.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfirmationActivity extends AppCompatActivity implements TextWatcher {
 
     private final ArrayList<EditText> editTextArray = new ArrayList<>(4);
     private String numTemp;
-    private DatabaseReference mDatabaseReference;
     private FirebaseAuth firebaseAuth;
     private String id;
 
@@ -56,33 +56,11 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
 
     private void initFirebase() {
         firebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Категории");
     }
 
     private void initApplyButton() {
         findViewById(R.id.apply_button).setOnClickListener((v) -> {
-            mDatabaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    List<Category> categories = new ArrayList<>();
-                    for (DataSnapshot category : dataSnapshot.getChildren()) {
-                        List<Product> productList = new ArrayList<>();
-                        for (DataSnapshot product : category.getChildren()) {
-                            productList.add(product.getValue(Product.class));
-                        }
-                        categories.add(new Category(category.getKey(), productList));
-                    }
-                    CategoriesKeeper.getInstance().setCategories(categories);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    System.out.println(error.getMessage());
-                    System.out.println(error.getDetails());
-                }
-            });
             submitCode();
-//            openMainScreenActivity();
         });
     }
 
@@ -156,14 +134,9 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
         PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(id, getInputCodeFromTextFields());
         firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Добро пожаловать", Toast.LENGTH_SHORT);
-                toast.show();
                 openMainScreenActivity();
             } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        task.getException().getMessage(), Toast.LENGTH_SHORT);
-                toast.show();
+                System.out.println(Objects.requireNonNull(task.getException()).getMessage());
             }
         });
     }

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,7 +21,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.extension.CategoriesKeeper;
+import com.skynet.fishingshop.model.Category;
+import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.authorization.SplashScreenActivity;
 import com.skynet.fishingshop.view.extension.LeftNavigationArrayAdapter;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
@@ -28,6 +37,9 @@ import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.favorites.FavoritesFragment;
 import com.skynet.fishingshop.view.main.home.HomeFragment;
 import com.skynet.fishingshop.view.main.profile.ProfileFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,15 +51,20 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private BottomNavigationView bottomNavigationView;
 
+    private DatabaseReference mDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Категории");
+
         createToolbar();
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
+        getProducts();
     }
 
     private void createToolbar() {
@@ -174,6 +191,29 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
+    }
+
+    private void getProducts(){
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Category> categories = new ArrayList<>();
+                for (DataSnapshot category : dataSnapshot.getChildren()) {
+                    List<Product> productList = new ArrayList<>();
+                    for (DataSnapshot product : category.getChildren()) {
+                        productList.add(product.getValue(Product.class));
+                    }
+                    categories.add(new Category(category.getKey(), productList));
+                }
+                CategoriesKeeper.getInstance().setCategories(categories);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error.getMessage());
+                System.out.println(error.getDetails());
+            }
+        });
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

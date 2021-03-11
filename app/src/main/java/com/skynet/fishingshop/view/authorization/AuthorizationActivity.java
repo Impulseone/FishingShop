@@ -33,7 +33,6 @@ public class AuthorizationActivity extends AppCompatActivity {
         initCallback();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        checkAuthUser();
 
         findViewById(R.id.get_code_button).setOnClickListener((v) -> authUser());
     }
@@ -41,12 +40,6 @@ public class AuthorizationActivity extends AppCompatActivity {
     private void authUser() {
         phoneNumber = phoneInputEditText.getText().toString();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, callback);
-    }
-
-    private void checkAuthUser() {
-        if (firebaseAuth.getCurrentUser() != null) {
-            startMainActivity();
-        }
     }
 
     private void startMainActivity() {
@@ -61,11 +54,9 @@ public class AuthorizationActivity extends AppCompatActivity {
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Добро пожаловать", Toast.LENGTH_SHORT);
-                        toast.show();
                         startMainActivity();
                     } else {
+                        System.out.println(task.getException().getMessage());
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 task.getException().getMessage(), Toast.LENGTH_LONG);
                         toast.show();
@@ -75,6 +66,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
+                System.out.println(e.getMessage());
                 Toast toast = Toast.makeText(getApplicationContext(),
                         e.getMessage(), Toast.LENGTH_LONG);
                 toast.show();
