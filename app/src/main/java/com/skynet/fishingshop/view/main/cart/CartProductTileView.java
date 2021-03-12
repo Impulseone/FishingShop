@@ -19,13 +19,13 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     private CartProduct cartProduct;
     private final CartProductsAdapter adapter;
-    private final List<CartProduct> products;
     private int pos;
+    private final List<CartProduct> cartProductList;
 
-    public CartProductTileView(@NonNull View itemView, List<CartProduct> products, CartProductsAdapter adapter) {
+    public CartProductTileView(@NonNull View itemView, CartProductsAdapter adapter, List<CartProduct> cartProductList) {
         super(itemView);
-        this.products = products;
         this.adapter = adapter;
+        this.cartProductList = cartProductList;
     }
 
     public void setView(CartProduct cartProduct, int pos) {
@@ -63,7 +63,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     private void setDeleteButton() {
         itemView.findViewById(R.id.delete_button).setOnClickListener(view -> {
-            new DeleteTask(adapter, products).execute(cartProduct);
+            new DeleteTask(adapter, pos,cartProductList).execute(cartProduct);
         });
     }
 
@@ -84,23 +84,25 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
     static class DeleteTask extends AsyncTask<CartProduct, Void, Void> {
 
         private final CartProductsAdapter adapter;
-        private final List<CartProduct> products;
+        private final int pos;
+        private List<CartProduct> cartProductList;
 
-        public DeleteTask(CartProductsAdapter adapter, List<CartProduct> products) {
+        public DeleteTask(CartProductsAdapter adapter, int pos, List<CartProduct> cartProductList) {
             this.adapter = adapter;
-            this.products = products;
+            this.pos = pos;
+            this.cartProductList = cartProductList;
         }
 
         @Override
         protected Void doInBackground(CartProduct... cartProducts) {
             App.getInstance().getDatabase().productDao().delete(cartProducts[0]);
-            products.remove(cartProducts[0]);
+            cartProductList.remove(cartProducts[0]);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            adapter.notifyDataSetChanged();
+            adapter.notifyItemRemoved(pos);
         }
     }
 
