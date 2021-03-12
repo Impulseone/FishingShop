@@ -42,10 +42,11 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
             <TextView
-                android:layout_width="100dp"
+                android:id="@+id/all_price"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="75.99 €"
+                android:text="0 руб."
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </LinearLayout>

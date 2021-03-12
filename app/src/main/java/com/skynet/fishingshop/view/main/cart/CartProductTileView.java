@@ -21,11 +21,13 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
     private final CartProductsAdapter adapter;
     private int pos;
     private final List<CartProduct> cartProductList;
+    private final CartFragment.ChangePrice changePrice;
 
-    public CartProductTileView(@NonNull View itemView, CartProductsAdapter adapter, List<CartProduct> cartProductList) {
+    public CartProductTileView(@NonNull View itemView, CartProductsAdapter adapter, List<CartProduct> cartProductList, CartFragment.ChangePrice changePrice) {
         super(itemView);
         this.adapter = adapter;
         this.cartProductList = cartProductList;
+        this.changePrice = changePrice;
     }
 
     public void setView(CartProduct cartProduct, int pos) {
@@ -63,7 +65,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     private void setDeleteButton() {
         itemView.findViewById(R.id.delete_button).setOnClickListener(view -> {
-            new DeleteTask(adapter, pos,cartProductList).execute(cartProduct);
+            new DeleteTask(adapter, pos,cartProductList,changePrice).execute(cartProduct);
         });
     }
 
@@ -72,12 +74,12 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
         itemView.findViewById(R.id.increase_count).setOnClickListener(view -> {
             count[0] = 1;
-            new ChangeCountTask(count[0], adapter, cartProduct, pos).execute(cartProduct);
+            new ChangeCountTask(count[0], adapter, cartProduct, pos, changePrice).execute(cartProduct);
         });
 
         itemView.findViewById(R.id.decrease_count).setOnClickListener(view -> {
             count[0] = -1;
-            new ChangeCountTask(count[0], adapter, cartProduct, pos).execute(cartProduct);
+            new ChangeCountTask(count[0], adapter, cartProduct, pos, changePrice).execute(cartProduct);
         });
     }
 
@@ -86,11 +88,13 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         private final CartProductsAdapter adapter;
         private final int pos;
         private List<CartProduct> cartProductList;
+        private final CartFragment.ChangePrice changePrice;
 
-        public DeleteTask(CartProductsAdapter adapter, int pos, List<CartProduct> cartProductList) {
+        public DeleteTask(CartProductsAdapter adapter, int pos, List<CartProduct> cartProductList, CartFragment.ChangePrice changePrice) {
             this.adapter = adapter;
             this.pos = pos;
             this.cartProductList = cartProductList;
+            this.changePrice = changePrice;
         }
 
         @Override
@@ -103,6 +107,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         @Override
         protected void onPostExecute(Void aVoid) {
             adapter.notifyItemRemoved(pos);
+            changePrice.changePrice();
         }
     }
 
@@ -112,12 +117,14 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         private int pos;
         private final CartProductsAdapter adapter;
         private final CartProduct cartProduct;
+        private final CartFragment.ChangePrice changePrice;
 
-        public ChangeCountTask(int count, CartProductsAdapter adapter, CartProduct cartProduct, int pos) {
+        public ChangeCountTask(int count, CartProductsAdapter adapter, CartProduct cartProduct, int pos, CartFragment.ChangePrice changePrice) {
             this.count = count;
             this.adapter = adapter;
             this.pos = pos;
             this.cartProduct = cartProduct;
+            this.changePrice = changePrice;
         }
 
         @Override
@@ -130,6 +137,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         @Override
         protected void onPostExecute(Void aVoid) {
             adapter.notifyItemChanged(pos, cartProduct);
+            changePrice.changePrice();
         }
     }
 }

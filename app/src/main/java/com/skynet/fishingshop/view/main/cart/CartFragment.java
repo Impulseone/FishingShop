@@ -1,11 +1,11 @@
 package com.skynet.fishingshop.view.main.cart;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,6 +40,10 @@ public class CartFragment extends Fragment {
         });
     }
 
+    interface ChangePrice {
+        void changePrice();
+    }
+
     static class GetAllProductsTask extends AsyncTask<Void, Void, Void> {
 
         private final View view;
@@ -59,7 +63,13 @@ public class CartFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            recyclerView.setAdapter(new CartProductsAdapter(products));
+            recyclerView.setAdapter(new CartProductsAdapter(products, () -> new GetAllProductsTask(view).execute()));
+
+            int allPrice = 0;
+            for (CartProduct cartProduct : products) {
+                allPrice += cartProduct.price * cartProduct.count;
+            }
+            ((TextView) view.findViewById(R.id.all_price)).setText(allPrice + " руб.");
         }
     }
 }

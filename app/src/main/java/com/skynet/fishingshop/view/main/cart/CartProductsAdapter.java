@@ -21,9 +21,11 @@ import java.util.List;
 public class CartProductsAdapter extends RecyclerView.Adapter<CartProductTileView> {
 
     private List<CartProduct> products;
+    private CartFragment.ChangePrice changePrice;
 
-    public CartProductsAdapter(List<CartProduct> products) {
+    public CartProductsAdapter(List<CartProduct> products, CartFragment.ChangePrice changePrice) {
         this.products = products;
+        this.changePrice = changePrice;
     }
 
     @NotNull
@@ -31,7 +33,7 @@ public class CartProductsAdapter extends RecyclerView.Adapter<CartProductTileVie
     public CartProductTileView onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cart_product_tile_view, parent, false);
-        return new CartProductTileView(view,this, products);
+        return new CartProductTileView(view,this, products, changePrice);
     }
 
     @Override

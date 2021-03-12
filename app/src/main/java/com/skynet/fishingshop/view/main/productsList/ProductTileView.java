@@ -30,6 +30,7 @@ public class ProductTileView {
         setProductName();
         setListener();
         setImage();
+        setPrice();
         if (discountExists()) {
             itemView.findViewById(R.id.discount_row).setVisibility(View.VISIBLE);
             itemView.findViewById(R.id.old_price).setVisibility(View.VISIBLE);
@@ -41,7 +42,11 @@ public class ProductTileView {
         }
     }
 
-    private void setImage(){
+    private void setPrice() {
+        ((TextView) itemView.findViewById(R.id.actual_price)).setText(product.price + " руб.");
+    }
+
+    private void setImage() {
         ImageView imageView = itemView.findViewById(R.id.product_image);
         Glide.with(itemView.getContext()).load(product.imagePath).into(imageView);
     }
@@ -53,7 +58,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(R.id.first).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productFragment = new ProductFragment(category,product);
+            ProductFragment productFragment = new ProductFragment(category, product);
             ft.replace(R.id.main_relative_layout, productFragment);
             ft.commit();
         });
