@@ -20,6 +20,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
     private CartProduct cartProduct;
     private final CartProductsAdapter adapter;
     private final List<CartProduct> products;
+    private int pos;
 
     public CartProductTileView(@NonNull View itemView, List<CartProduct> products, CartProductsAdapter adapter) {
         super(itemView);
@@ -27,14 +28,16 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         this.adapter = adapter;
     }
 
-    public void setView(CartProduct cartProduct) {
+    public void setView(CartProduct cartProduct, int pos) {
         this.cartProduct = cartProduct;
+        this.pos = pos;
         setImage();
         setPrice();
         setProductName();
         setProductDescription();
         setProductCount();
         setDeleteButton();
+        setChangeCountButtons();
     }
 
     private void setImage() {
@@ -60,7 +63,21 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     private void setDeleteButton() {
         itemView.findViewById(R.id.delete_button).setOnClickListener(view -> {
-            new DeleteTask(adapter,products).execute(cartProduct);
+            new DeleteTask(adapter, products).execute(cartProduct);
+        });
+    }
+
+    private void setChangeCountButtons() {
+        final int[] count = new int[1];
+
+        itemView.findViewById(R.id.increase_count).setOnClickListener(view -> {
+            count[0] = 1;
+            new ChangeCountTask(count[0], adapter, cartProduct, pos).execute(cartProduct);
+        });
+
+        itemView.findViewById(R.id.decrease_count).setOnClickListener(view -> {
+            count[0] = -1;
+            new ChangeCountTask(count[0], adapter, cartProduct, pos).execute(cartProduct);
         });
     }
 
@@ -84,6 +101,33 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         @Override
         protected void onPostExecute(Void aVoid) {
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    static class ChangeCountTask extends AsyncTask<CartProduct, Void, Void> {
+
+        private int count;
+        private int pos;
+        private final CartProductsAdapter adapter;
+        private final CartProduct cartProduct;
+
+        public ChangeCountTask(int count, CartProductsAdapter adapter, CartProduct cartProduct, int pos) {
+            this.count = count;
+            this.adapter = adapter;
+            this.pos = pos;
+            this.cartProduct = cartProduct;
+        }
+
+        @Override
+        protected Void doInBackground(CartProduct... cartProducts) {
+            cartProduct.count = cartProduct.count + count;
+            App.getInstance().getDatabase().productDao().update(cartProduct);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            adapter.notifyItemChanged(pos, cartProduct);
         }
     }
 }

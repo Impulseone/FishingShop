@@ -36,7 +36,7 @@ public class CartProductsAdapter extends RecyclerView.Adapter<CartProductTileVie
 
     @Override
     public void onBindViewHolder(final CartProductTileView holder, int position) {
-        holder.setView(products.get(position));
+        holder.setView(products.get(position),position);
     }
 
     @Override
