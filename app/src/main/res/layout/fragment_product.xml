@@ -107,7 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/get_code_button"
+                android:id="@+id/add_to_cart_button"
                 android:layout_width="180dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
