@@ -31,7 +31,7 @@ public class CartProductsAdapter extends RecyclerView.Adapter<CartProductTileVie
     public CartProductTileView onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cart_product_tile_view, parent, false);
-        return new CartProductTileView(view);
+        return new CartProductTileView(view, products, this);
     }
 
     @Override

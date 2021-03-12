@@ -22,8 +22,8 @@ public interface ProductDao {
     void insert(CartProduct cartProduct);
 
     @Update
-    void update(CartProduct employee);
+    void update(CartProduct cartProduct);
 
     @Delete
-    void delete(CartProduct employee);
+    void delete(CartProduct cartProduct);
 }
