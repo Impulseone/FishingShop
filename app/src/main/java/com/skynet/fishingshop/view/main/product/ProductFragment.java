@@ -15,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.snackbar.Snackbar;
 import com.skynet.fishingshop.App;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.db.AppDatabase;
 import com.skynet.fishingshop.db.CartProduct;
+import com.skynet.fishingshop.db.FavoritesProduct;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
@@ -46,6 +46,7 @@ public class ProductFragment extends Fragment {
         setPrice(view);
         setImage(view);
         setAddToCartButton(view);
+        setAddToFavoritesButton(view);
         return view;
     }
 
@@ -77,12 +78,12 @@ public class ProductFragment extends Fragment {
 
     private void setAddToCartButton(View view) {
         View addToCartButton = view.findViewById(R.id.add_to_cart_button);
-        addToCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AddProductToCartTask(product, view.getContext()).execute();
-            }
-        });
+        addToCartButton.setOnClickListener(view1 -> new AddProductToCartTask(product, view1.getContext()).execute());
+    }
+
+    private void setAddToFavoritesButton(View view) {
+        View addToCartButton = view.findViewById(R.id.add_to_favorites_button);
+        addToCartButton.setOnClickListener(view1 -> new AddProductToFavoritesTask(product, view1.getContext()).execute());
     }
 
     private void back() {
@@ -107,18 +108,42 @@ public class ProductFragment extends Fragment {
         protected Void doInBackground(Void... voids) {
             AppDatabase appDatabase = App.getInstance().getDatabase();
             CartProduct cartProduct = new CartProduct(product);
-            CartProduct existing = appDatabase.productDao().getById(cartProduct.id);
+            CartProduct existing = appDatabase.cartProductDao().getById(cartProduct.id);
             if (existing != null) {
                 cartProduct.count = cartProduct.count + 1;
-                appDatabase.productDao().update(cartProduct);
+                appDatabase.cartProductDao().update(cartProduct);
             } else
-                appDatabase.productDao().insert(cartProduct);
+                appDatabase.cartProductDao().insert(cartProduct);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             Toast.makeText(context, "Товар добавлен в корзину", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    static class AddProductToFavoritesTask extends AsyncTask<Void, Void, Void> {
+
+        private final Context context;
+        private final Product product;
+
+        public AddProductToFavoritesTask(Product product, Context context) {
+            this.product = product;
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            AppDatabase appDatabase = App.getInstance().getDatabase();
+            FavoritesProduct favoritesProduct = new FavoritesProduct(product);
+            appDatabase.favoritesProductDao().insert(favoritesProduct);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Toast.makeText(context, "Товар добавлен в избранное", Toast.LENGTH_SHORT).show();
         }
     }
 }

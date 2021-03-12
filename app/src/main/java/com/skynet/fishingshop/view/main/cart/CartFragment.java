@@ -55,7 +55,7 @@ public class CartFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            products = App.getInstance().getDatabase().productDao().getAll();
+            products = App.getInstance().getDatabase().cartProductDao().getAll();
             return null;
         }
 

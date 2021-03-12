@@ -99,7 +99,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
         @Override
         protected Void doInBackground(CartProduct... cartProducts) {
-            App.getInstance().getDatabase().productDao().delete(cartProducts[0]);
+            App.getInstance().getDatabase().cartProductDao().delete(cartProducts[0]);
             cartProductList.remove(cartProducts[0]);
             return null;
         }
@@ -130,7 +130,7 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
         @Override
         protected Void doInBackground(CartProduct... cartProducts) {
             cartProduct.count = cartProduct.count + count;
-            App.getInstance().getDatabase().productDao().update(cartProduct);
+            App.getInstance().getDatabase().cartProductDao().update(cartProduct);
             return null;
         }
 

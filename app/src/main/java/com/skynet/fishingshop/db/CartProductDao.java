@@ -10,7 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ProductDao {
+public interface CartProductDao {
 
     @Query("SELECT * FROM CartProduct")
     List<CartProduct> getAll();

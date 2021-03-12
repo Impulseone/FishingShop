@@ -3,7 +3,8 @@ package com.skynet.fishingshop.db;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {CartProduct.class},version = 1)
+@Database(entities = {CartProduct.class, FavoritesProduct.class},version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract ProductDao productDao();
+    public abstract CartProductDao cartProductDao();
+    public abstract FavoritesProductDao favoritesProductDao();
 }
