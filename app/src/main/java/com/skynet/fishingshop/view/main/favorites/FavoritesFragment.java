@@ -1,18 +1,20 @@
 package com.skynet.fishingshop.view.main.favorites;
 
-import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.skynet.fishingshop.App;
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.catalog.CategoriesAdapter;
+import com.skynet.fishingshop.db.FavoritesProduct;
+
+import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
@@ -20,10 +22,30 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
-        Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new FavoriteProductsAdapter());
+        new GetFavoritesProductsTask(view).execute();
         return view;
+    }
+
+    static class GetFavoritesProductsTask extends AsyncTask<Void, Void, Void> {
+
+        private final View view;
+        private List<FavoritesProduct> products;
+
+        public GetFavoritesProductsTask(View view) {
+            this.view = view;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            products = App.getInstance().getDatabase().favoritesProductDao().getAll();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            recyclerView.setAdapter(new FavoriteProductsAdapter(products));
+        }
     }
 }

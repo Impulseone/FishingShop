@@ -8,29 +8,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.db.FavoritesProduct;
 
-public class FavoriteProductsAdapter extends RecyclerView.Adapter<FavoriteProductsAdapter.FavoriteProductView>{
+import java.util.List;
+
+public class FavoriteProductsAdapter extends RecyclerView.Adapter<FavoriteProductTileView> {
+
+    private final List<FavoritesProduct> products;
+
+    public FavoriteProductsAdapter(List<FavoritesProduct> products) {
+        this.products = products;
+    }
+
     @NonNull
     @Override
-    public FavoriteProductView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoriteProductTileView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.favorite_product_tile_view, parent, false);
-        return new FavoriteProductView(view);
+        return new FavoriteProductTileView(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteProductView holder, int position) {
-
+    public void onBindViewHolder(@NonNull FavoriteProductTileView holder, int position) {
+        holder.setView(products.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 5;
-    }
-
-    public static class FavoriteProductView extends RecyclerView.ViewHolder {
-        public FavoriteProductView(@NonNull View itemView) {
-            super(itemView);
-        }
+        return products.size();
     }
 }

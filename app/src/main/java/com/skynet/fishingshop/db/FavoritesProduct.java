@@ -14,6 +14,7 @@ public class FavoritesProduct {
     public String name;
     public String description;
     public int price;
+    public int discount;
     public String imagePath;
 
     public FavoritesProduct(@NonNull String id) {
@@ -25,6 +26,7 @@ public class FavoritesProduct {
         this.name = product.name;
         this.description = product.description;
         this.price = product.price;
+        this.discount = product.discount;
         this.imagePath = product.imagePath;
     }
 }

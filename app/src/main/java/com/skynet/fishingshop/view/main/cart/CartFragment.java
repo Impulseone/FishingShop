@@ -25,7 +25,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        new GetAllProductsTask(view).execute();
+        new GetCartProductsTask(view).execute();
         setConfirmButton(view);
 
         return view;
@@ -44,12 +44,12 @@ public class CartFragment extends Fragment {
         void changePrice();
     }
 
-    static class GetAllProductsTask extends AsyncTask<Void, Void, Void> {
+    static class GetCartProductsTask extends AsyncTask<Void, Void, Void> {
 
         private final View view;
         private List<CartProduct> products;
 
-        public GetAllProductsTask(View view) {
+        public GetCartProductsTask(View view) {
             this.view = view;
         }
 
@@ -63,7 +63,7 @@ public class CartFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            recyclerView.setAdapter(new CartProductsAdapter(products, () -> new GetAllProductsTask(view).execute()));
+            recyclerView.setAdapter(new CartProductsAdapter(products, () -> new GetCartProductsTask(view).execute()));
 
             int allPrice = 0;
             for (CartProduct cartProduct : products) {

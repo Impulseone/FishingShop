@@ -24,7 +24,17 @@ public class CartProduct {
     }
 
     public CartProduct(Product product) {
-        this.id = product.name.substring(0,3);
+        this.id = product.id;
+        this.name = product.name;
+        this.description = product.description;
+        this.price = product.price;
+        this.discount = product.discount;
+        this.imagePath = product.imagePath;
+        this.count = 1;
+    }
+
+    public CartProduct(FavoritesProduct product) {
+        this.id = product.id;
         this.name = product.name;
         this.description = product.description;
         this.price = product.price;
