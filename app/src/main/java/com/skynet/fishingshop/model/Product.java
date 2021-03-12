@@ -4,6 +4,8 @@ import com.google.firebase.database.PropertyName;
 
 public class Product {
 
+    @PropertyName("id")
+    public String id;
     @PropertyName("Название")
     public String name;
     @PropertyName("Описание")
@@ -18,7 +20,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, int price, int discount, String imagePath) {
+    public Product(String id, String name, String description, int price, int discount, String imagePath) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;

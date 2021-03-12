@@ -16,7 +16,7 @@ public interface ProductDao {
     List<CartProduct> getAll();
 
     @Query("SELECT * FROM cartproduct WHERE id = :id")
-    CartProduct getById(int id);
+    CartProduct getById(String id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(CartProduct cartProduct);

@@ -50,7 +50,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void setTitle(View view) {
-        ((TextView) view.findViewById(R.id.product_name)).setText(product.name.substring(2));
+        ((TextView) view.findViewById(R.id.product_name)).setText(product.name);
     }
 
     private void setProductDescription(View view) {

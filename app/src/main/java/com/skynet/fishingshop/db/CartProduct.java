@@ -1,5 +1,6 @@
 package com.skynet.fishingshop.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,7 +10,8 @@ import com.skynet.fishingshop.model.Product;
 @Entity
 public class CartProduct {
     @PrimaryKey
-    public int id;
+    @NonNull
+    public String id;
     public String name;
     public String description;
     public int price;
@@ -17,11 +19,12 @@ public class CartProduct {
     public String imagePath;
     public int count;
 
-    public CartProduct() {
+    public CartProduct(@NonNull String id) {
+        this.id = id;
     }
 
     public CartProduct(Product product) {
-        this.id = Integer.parseInt(product.name.substring(0,1));
+        this.id = product.name.substring(0,3);
         this.name = product.name;
         this.description = product.description;
         this.price = product.price;

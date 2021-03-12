@@ -47,7 +47,7 @@ public class ProductTileView {
     }
 
     private void setProductName() {
-        ((TextView) itemView.findViewById(R.id.first).findViewById(R.id.product_name)).setText(product.name.substring(2));
+        ((TextView) itemView.findViewById(R.id.first).findViewById(R.id.product_name)).setText(product.name);
     }
 
     private void setListener() {
