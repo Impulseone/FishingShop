@@ -1,4 +1,4 @@
-package com.skynet.fishingshop.view.main.product;
+package com.skynet.fishingshop.view.main.unique_offers;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -20,17 +20,19 @@ import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.db.AppDatabase;
 import com.skynet.fishingshop.db.CartProduct;
 import com.skynet.fishingshop.db.FavoritesProduct;
-import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
-import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
+
+import java.util.List;
 
 public class ProductFragment extends Fragment {
 
-    private final Category category;
+    private final List<Product> productList;
+    private final String categoryName;
     private final Product product;
 
-    public ProductFragment(Category category, Product product) {
-        this.category = category;
+    public ProductFragment(List<Product> productList, String categoryName, Product product) {
+        this.productList = productList;
+        this.categoryName = categoryName;
         this.product = product;
     }
 
@@ -38,7 +40,7 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_product_for_category, container, false);
         setBackButton(view);
         setBottomNavigationVisibility();
         setTitle(view);
@@ -78,19 +80,19 @@ public class ProductFragment extends Fragment {
 
     private void setAddToCartButton(View view) {
         View addToCartButton = view.findViewById(R.id.add_to_cart_button);
-        addToCartButton.setOnClickListener(view1 -> new AddProductToCartTask(product, view1.getContext()).execute());
+        addToCartButton.setOnClickListener(view1 -> new ProductFragment.AddProductToCartTask(product, view1.getContext()).execute());
     }
 
     private void setAddToFavoritesButton(View view) {
         View addToCartButton = view.findViewById(R.id.add_to_favorites_button);
-        addToCartButton.setOnClickListener(view1 -> new AddProductToFavoritesTask(product, view1.getContext()).execute());
+        addToCartButton.setOnClickListener(view1 -> new ProductFragment.AddProductToFavoritesTask(product, view1.getContext()).execute());
     }
 
     private void back() {
         this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        ProductsListFragment productsListFragment = new ProductsListFragment(category);
-        ft.replace(R.id.main_relative_layout, productsListFragment);
+        UniqueOfferFragment productsListForCategoryFragment = new UniqueOfferFragment(productList, categoryName);
+        ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
         ft.commit();
     }
 

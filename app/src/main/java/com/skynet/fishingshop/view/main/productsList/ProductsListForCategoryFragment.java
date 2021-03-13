@@ -16,11 +16,11 @@ import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 
-public class ProductsListFragment extends Fragment {
+public class ProductsListForCategoryFragment extends Fragment {
 
     private final Category category;
 
-    public ProductsListFragment(Category category) {
+    public ProductsListForCategoryFragment(Category category) {
         this.category = category;
     }
 

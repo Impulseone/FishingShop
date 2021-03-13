@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -65,13 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
-
+        setCategoriesListener();
+        setCategoriesIconsListener();
         createToolbar();
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
-        getCategories();
-        getCategoriesIcons();
     }
 
     private void createToolbar() {
@@ -200,7 +201,15 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    private void getCategories() {
+    private void getCategories(){
+        categoriesFromDbReference.get();
+    }
+
+    private void getCategoriesIcons(){
+        categoriesIconsFromDbReference.get();
+    }
+
+    private void setCategoriesListener() {
         categoriesFromDbReference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -224,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getCategoriesIcons() {
+    private void setCategoriesIconsListener() {
         categoriesIconsFromDbReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

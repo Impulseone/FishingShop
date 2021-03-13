@@ -15,7 +15,7 @@ import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.extension.CategoriesKeeper;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.CategoryIcon;
-import com.skynet.fishingshop.view.main.productsList.ProductsListFragment;
+import com.skynet.fishingshop.view.main.productsList.ProductsListForCategoryFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,8 +60,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             ((TextView) itemView.findViewById(R.id.category_name)).setText(category.getCategoryName());
             itemView.setOnClickListener(view1 -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                ProductsListFragment productsListFragment = new ProductsListFragment(category);
-                ft.replace(R.id.main_relative_layout, productsListFragment);
+                ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);
+                ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
                 ft.commit();
             });
         }

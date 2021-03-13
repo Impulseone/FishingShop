@@ -16,9 +16,6 @@ import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.db.AppDatabase;
 import com.skynet.fishingshop.db.CartProduct;
 import com.skynet.fishingshop.db.FavoritesProduct;
-import com.skynet.fishingshop.model.Product;
-import com.skynet.fishingshop.view.main.cart.CartProductTileView;
-import com.skynet.fishingshop.view.main.product.ProductFragment;
 
 public class FavoriteProductTileView extends RecyclerView.ViewHolder{
 

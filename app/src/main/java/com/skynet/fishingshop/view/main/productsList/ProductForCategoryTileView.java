@@ -11,16 +11,16 @@ import com.bumptech.glide.Glide;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
-import com.skynet.fishingshop.view.main.product.ProductFragment;
+import com.skynet.fishingshop.view.main.product.ProductForCategoryFragment;
 
-public class ProductTileView {
-    private View itemView;
-    private Product product;
-    private Fragment fragment;
-    private Category category;
+public class ProductForCategoryTileView {
+    private final View itemView;
+    private final Product product;
+    private final Fragment fragment;
+    private final Category category;
     private int resId;
 
-    public ProductTileView(View itemView, Product product, Fragment fragment, Category category) {
+    public ProductForCategoryTileView(View itemView, Product product, Fragment fragment, Category category) {
         this.itemView = itemView;
         this.product = product;
         this.fragment = fragment;
@@ -60,8 +60,8 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productFragment = new ProductFragment(category, product);
-            ft.replace(R.id.main_relative_layout, productFragment);
+            ProductForCategoryFragment productForCategoryFragment = new ProductForCategoryFragment(category, product);
+            ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });
     }

@@ -71,11 +71,11 @@ public class ProductsListForCategoryAdapter extends RecyclerView.Adapter<Product
         }
 
         private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            new ProductTileView(itemView, productPair.first, fragment, category).setView(R.id.first);
+            new ProductForCategoryTileView(itemView, productPair.first, fragment, category).setView(R.id.first);
         }
 
         private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            new ProductTileView(itemView, productPair.second, fragment, category).setView(R.id.second);
+            new ProductForCategoryTileView(itemView, productPair.second, fragment, category).setView(R.id.second);
         }
     }
 }
