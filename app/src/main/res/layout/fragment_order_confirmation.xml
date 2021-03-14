@@ -114,6 +114,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/get_from_shop_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

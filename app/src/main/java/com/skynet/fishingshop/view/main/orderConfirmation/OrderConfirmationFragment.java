@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.App;
@@ -23,6 +24,7 @@ import java.util.List;
 public class OrderConfirmationFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,33 +33,44 @@ public class OrderConfirmationFragment extends Fragment {
         bottomNavigationView = this.getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.GONE);
 
-        View view = inflater.inflate(R.layout.fragment_order_confirmation, container, false);
-        setButtons(view);
+        view = inflater.inflate(R.layout.fragment_order_confirmation, container, false);
+        setButtons();
 
         new CheckUserData(view).execute();
 
         return view;
     }
 
-    private void setButtons(View view){
-        setBackToCartButton(view);
-        setBackToProfileButton(view);
-        setBackToHomeButton(view);
+    private void setButtons(){
+        setBackToCartButton();
+        setBackToProfileButton();
+        setConfirmButton();
+        setGetFromShopButton();
     }
 
-    private void setBackToCartButton(View view){
+    private void setBackToCartButton(){
         View backToCart = view.findViewById(R.id.back_button);
         backToCart.setOnClickListener(view1 -> backToCart());
     }
 
-    private void setBackToProfileButton(View view){
+    private void setBackToProfileButton(){
         View backToProfile = view.findViewById(R.id.profile_button);
         backToProfile.setOnClickListener(view1 -> backToProfile());
     }
 
-    private void setBackToHomeButton(View view){
-        View backToHome = view.findViewById(R.id.confirm_button);
-        backToHome.setOnClickListener(view1 -> backToHome());
+    private void setGetFromShopButton(){
+        view.findViewById(R.id.get_from_shop_button).setOnClickListener(view -> {
+            Toast.makeText(view.getContext(),"Заказ оформлен",Toast.LENGTH_SHORT).show();
+            backToHome();
+        });
+    }
+
+    private void setConfirmButton(){
+        View confirmButton = view.findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(view1 -> {
+            Toast.makeText(view.getContext(),"Заказ оформлен",Toast.LENGTH_SHORT).show();
+            backToHome();
+        });
     }
 
     private void backToCart() {
