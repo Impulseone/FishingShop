@@ -20,16 +20,23 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    private View view;
+    private UniqueOfferFragment uniqueOfferFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        setUniqueOffersButtons(view);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        setUniqueOffersButtons();
         return view;
     }
 
+    public void update() {
+        setUniqueOffersButtons();
+        updateUniqueOfferFragment();
+    }
 
-    private void setUniqueOffersButtons(View view) {
+    private void setUniqueOffersButtons() {
         List<Category> categories = CategoriesKeeper.getInstance().getCategories();
         List<Product> promotionProducts = new ArrayList<>();
         List<Product> salesProducts = new ArrayList<>();
@@ -38,26 +45,31 @@ public class HomeFragment extends Fragment {
             for (Product product :
                     category.getProductList()) {
                 switch (product.status) {
-                    case "Акция":
+                    case "Акции и предложения":
                         promotionProducts.add(product);
                         break;
-                    case "Распродажа":
+                    case "Распродажи":
                         salesProducts.add(product);
                         break;
-                    case "Новый":
+                    case "Новинки":
                         newProducts.add(product);
                         break;
                 }
             }
         }
-        view.findViewById(R.id.promotions).setOnClickListener(view1 -> createUniqueOfferFragment(promotionProducts,"Акции и предложения"));
+        view.findViewById(R.id.promotions).setOnClickListener(view1 -> createUniqueOfferFragment(promotionProducts, "Акции и предложения"));
         view.findViewById(R.id.new_products).setOnClickListener(view1 -> createUniqueOfferFragment(newProducts, "Новинки"));
-        view.findViewById(R.id.sales_products).setOnClickListener(view1-> createUniqueOfferFragment(salesProducts, "Распродажи"));
+        view.findViewById(R.id.sales_products).setOnClickListener(view1 -> createUniqueOfferFragment(salesProducts, "Распродажи"));
     }
 
     private void createUniqueOfferFragment(List<Product> products, String categoryName) {
+        uniqueOfferFragment = new UniqueOfferFragment(products, categoryName);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
-        ft.replace(R.id.main_relative_layout, new UniqueOfferFragment(products, categoryName));
+        ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
         ft.commit();
+    }
+
+    private void updateUniqueOfferFragment() {
+        if (uniqueOfferFragment != null) uniqueOfferFragment.update();
     }
 }

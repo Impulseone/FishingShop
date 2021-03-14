@@ -13,17 +13,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.extension.CategoriesKeeper;
+import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
 import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.home.HomeFragment;
 import com.skynet.fishingshop.view.main.productsList.ProductsListForCategoryAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UniqueOfferFragment extends Fragment {
 
-    final List<Product> products;
-    final String categoryName;
+    private List<Product> products;
+    private final String categoryName;
+    private View view;
 
     public UniqueOfferFragment(List<Product> products, String categoryName) {
         this.products = products;
@@ -33,22 +37,22 @@ public class UniqueOfferFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_unique_offer, container, false);
-        setBackButton(view);
-        setCategoryName(view);
-        setAdapter(view);
+        view = inflater.inflate(R.layout.fragment_unique_offer, container, false);
+        setBackButton();
+        setCategoryName();
+        setAdapter();
         return view;
     }
 
-    private void setBackButton(View view) {
+    private void setBackButton() {
         view.findViewById(R.id.back_button).setOnClickListener(view1 -> back());
     }
 
-    private void setCategoryName(View view) {
+    private void setCategoryName() {
         ((TextView) view.findViewById(R.id.category_name)).setText(categoryName);
     }
 
-    private void setAdapter(View view) {
+    private void setAdapter() {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
         ProductsAdapter adapter = new ProductsAdapter(this, products, categoryName);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -60,5 +64,17 @@ public class UniqueOfferFragment extends Fragment {
         HomeFragment catalogFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, catalogFragment);
         ft.commit();
+    }
+
+    public void update() {
+        List<Category> categories = CategoriesKeeper.getInstance().getCategories();
+        products = new ArrayList<>();
+        for (Category category : categories) {
+            for (Product product :
+                    category.getProductList()) {
+                if (product.status.equals(categoryName)) products.add(product);
+            }
+        }
+        setAdapter();
     }
 }

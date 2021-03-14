@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference categoriesFromDbReference;
     private DatabaseReference categoriesIconsFromDbReference;
 
+    private HomeFragment homeFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
+
+        homeFragment = new HomeFragment();
+
         setCategoriesListener();
         setCategoriesIconsListener();
         createToolbar();
@@ -136,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void createHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
@@ -196,17 +200,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkoutToHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
-    }
-
-    private void getCategories(){
-        categoriesFromDbReference.get();
-    }
-
-    private void getCategoriesIcons(){
-        categoriesIconsFromDbReference.get();
     }
 
     private void setCategoriesListener() {
@@ -223,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
                     categories.add(new Category(Objects.requireNonNull(category.getKey()).substring(2), productList));
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
+                homeFragment.update();
             }
 
             @Override
