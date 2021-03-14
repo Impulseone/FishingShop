@@ -17,6 +17,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.skynet.fishingshop.R;
 
 public class CatalogFragment extends Fragment {
+
+    private final CategoriesAdapter categoriesAdapter;
+
+    public CatalogFragment() {
+        categoriesAdapter = new CategoriesAdapter(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,7 +31,11 @@ public class CatalogFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.categories_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new CategoriesAdapter(this));
+        recyclerView.setAdapter(categoriesAdapter);
         return view;
+    }
+
+    public void update(){
+        categoriesAdapter.update();
     }
 }

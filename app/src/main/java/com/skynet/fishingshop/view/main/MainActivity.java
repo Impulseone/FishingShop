@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference categoriesIconsFromDbReference;
 
     private HomeFragment homeFragment;
+    private CatalogFragment catalogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
 
         homeFragment = new HomeFragment();
+        catalogFragment = new CatalogFragment();
 
         setCategoriesListener();
         setCategoriesIconsListener();
@@ -147,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void createCatalogFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        CatalogFragment catalogFragment = new CatalogFragment();
         ft.replace(R.id.main_relative_layout, catalogFragment);
         ft.commit();
     }
@@ -219,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
                 homeFragment.update();
+                catalogFragment.update();
             }
 
             @Override

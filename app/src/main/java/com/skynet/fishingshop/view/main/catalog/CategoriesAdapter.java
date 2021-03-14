@@ -24,10 +24,16 @@ import java.util.List;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryTileView> {
 
     private final Fragment fragment;
-    private final List<Category> categoriesData = CategoriesKeeper.getInstance().getCategories();
+    private List<Category> categoriesData;
 
     public CategoriesAdapter(Fragment fragment) {
         this.fragment = fragment;
+        categoriesData = CategoriesKeeper.getInstance().getCategories();
+    }
+
+    public void update(){
+        categoriesData = CategoriesKeeper.getInstance().getCategories();
+        notifyDataSetChanged();
     }
 
     @NotNull
