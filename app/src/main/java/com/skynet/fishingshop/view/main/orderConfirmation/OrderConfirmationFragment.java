@@ -1,5 +1,6 @@
 package com.skynet.fishingshop.view.main.orderConfirmation;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,10 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.skynet.fishingshop.App;
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.db.User;
 import com.skynet.fishingshop.view.main.home.HomeFragment;
 import com.skynet.fishingshop.view.main.profile.ProfileFragment;
 import com.skynet.fishingshop.view.main.cart.CartFragment;
+
+import java.util.List;
 
 public class OrderConfirmationFragment extends Fragment {
 
@@ -28,6 +33,8 @@ public class OrderConfirmationFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_order_confirmation, container, false);
         setButtons(view);
+
+        new CheckUserData(view).execute();
 
         return view;
     }
@@ -78,5 +85,34 @@ public class OrderConfirmationFragment extends Fragment {
         HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
+    }
+
+    private static class CheckUserData extends AsyncTask<Void, Void, Void> {
+
+        private User user;
+        private View view;
+
+        private CheckUserData(View view) {
+            this.view = view;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            List<User> userList = App.getInstance().getDatabase().userDao().getAll();
+            if (userList.size() != 0) {
+                user = userList.get(0);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (user == null) {
+                view.findViewById(R.id.profile_button).setVisibility(View.VISIBLE);
+            }
+            else {
+                view.findViewById(R.id.profile_button).setVisibility(View.GONE);
+            }
+        }
     }
 }
