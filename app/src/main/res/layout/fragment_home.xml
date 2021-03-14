@@ -35,6 +35,7 @@
             android:layout_below="@+id/main_tv"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_bg"
+            android:visibility="gone"
             android:hint="Катушка для карпа" />
 
         <LinearLayout
