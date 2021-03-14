@@ -1,7 +1,9 @@
 package com.skynet.fishingshop.view.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -30,7 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.skynet.fishingshop.App;
 import com.skynet.fishingshop.R;
+import com.skynet.fishingshop.db.AppDatabase;
+import com.skynet.fishingshop.db.FavoritesProduct;
 import com.skynet.fishingshop.extension.CategoriesKeeper;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.CategoryIcon;
@@ -169,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     void openSplashScreenActivity() {
         FirebaseAuth.getInstance().signOut();
+        new ClearTablesTask().execute();
         Intent intent = new Intent(this, SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -283,6 +290,17 @@ public class MainActivity extends AppCompatActivity {
             mainDrawerLayout.closeDrawer(leftMenuLinearLayout);
         } else {
             Log.e(this.getClass().getName(), "Error. Fragment is not created");
+        }
+    }
+
+    static class ClearTablesTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            App.getInstance().getDatabase().userDao().clearTable();
+            App.getInstance().getDatabase().cartProductDao().clearTable();
+            App.getInstance().getDatabase().favoritesProductDao().clearTable();
+            return null;
         }
     }
 

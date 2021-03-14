@@ -25,4 +25,7 @@ public interface FavoritesProductDao {
 
     @Delete
     void delete(FavoritesProduct favoritesProduct);
+
+    @Query("DELETE FROM FavoritesProduct")
+    void clearTable();
 }

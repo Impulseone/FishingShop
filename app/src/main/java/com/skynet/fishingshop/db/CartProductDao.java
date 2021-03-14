@@ -26,4 +26,7 @@ public interface CartProductDao {
 
     @Delete
     void delete(CartProduct cartProduct);
+
+    @Query("DELETE FROM CartProduct")
+    void clearTable();
 }
