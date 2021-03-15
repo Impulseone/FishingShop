@@ -73,6 +73,6 @@ public class ProductTileView {
     }
 
     private int calculateOldPrice() {
-        return (100 * product.price) / product.discount;
+        return (product.price * 100) / (100 - product.discount);
     }
 }
