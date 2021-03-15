@@ -3,6 +3,7 @@ package com.skynet.fishingshop.view.authorization;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,12 +11,14 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -33,6 +36,7 @@ import com.skynet.fishingshop.view.main.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ConfirmationActivity extends AppCompatActivity implements TextWatcher {
 
@@ -40,6 +44,8 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     private String numTemp;
     private FirebaseAuth firebaseAuth;
     private String id;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks callback;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,14 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
         setContentView(R.layout.activity_phone_confirmation);
 
         id = getIntent().getStringExtra("id");
+        phoneNumber = getIntent().getStringExtra("phone_number");
 
         initFirebase();
         initApplyButton();
         initBackButton();
         initPinCodeField();
+        initCallback();
+        setResendCodeButton();
 
         editTextArray.get(0).requestFocus();
     }
@@ -144,6 +153,67 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     }
 
     private void openMainScreenActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void setResendCodeButton() {
+        findViewById(R.id.resend_code_button).setOnClickListener(view -> resendCode());
+        setTimer();
+    }
+
+    private void setTimer() {
+        new CountDownTimer(60_000, 1000) {
+            @Override
+            public void onTick(long millis) {
+                ((TextView) findViewById(R.id.time_counter)).setText((int) millis / 1000 + "с");
+            }
+
+            @Override
+            public void onFinish() {}
+        }.start();
+    }
+
+    private void resendCode() {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, callback);
+    }
+
+    private void initCallback() {
+        callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        startMainActivity();
+                    } else {
+                        System.out.println(task.getException().getMessage());
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                task.getException().getMessage(), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                System.out.println(e.getMessage());
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        e.getMessage(), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String id, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Код отправлен повторно", Toast.LENGTH_SHORT);
+                toast.show();
+                setTimer();
+            }
+        };
+    }
+
+    private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
