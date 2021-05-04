@@ -8,18 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:160485588606:android:b98b524c8e8a3a1238a22f",
+        "mobilesdk_app_id": "1:160485588606:android:f03c050c9c53853e38a22f",
         "android_client_info": {
-          "package_name": "com.skynet.fishingshop"
+          "package_name": "com.skynet.fish_shop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "160485588606-89kc56jl3f0p8mh0dqqk6831cs2hrg55.apps.googleusercontent.com",
+          "client_id": "160485588606-a08bfcuu9r5o5di6n6r89ivnj1ljols0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.skynet.fishingshop",
+            "package_name": "com.skynet.fish_shop",
             "certificate_hash": "560e5a405c1368589b7fcaed132057a995ca3cab"
+          }
+        },
+        {
+          "client_id": "160485588606-nglebbe37637bql59q3ptihhl4b0209b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skynet.fish_shop",
+            "certificate_hash": "3763c31445781b1411a0326fe9b77c2ae812de25"
           }
         },
         {
