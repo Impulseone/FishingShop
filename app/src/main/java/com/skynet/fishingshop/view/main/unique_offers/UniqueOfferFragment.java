@@ -16,9 +16,7 @@ import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.extension.CategoriesKeeper;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
-import com.skynet.fishingshop.view.main.catalog.CatalogFragment;
 import com.skynet.fishingshop.view.main.home.HomeFragment;
-import com.skynet.fishingshop.view.main.productsList.ProductsListForCategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +52,7 @@ public class UniqueOfferFragment extends Fragment {
 
     private void setAdapter() {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        ProductsAdapter adapter = new ProductsAdapter(this, products, categoryName);
+        ProductsAdapter adapter = new ProductsAdapter(this, products, null);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
     }

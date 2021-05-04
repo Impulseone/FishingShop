@@ -47,6 +47,7 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/region"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -64,6 +65,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/index"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -77,6 +79,7 @@
             android:textColorHint="@color/white_transparent" />
 
         <EditText
+            android:id="@+id/city"
             android:layout_width="210dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -91,6 +94,7 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/street"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -121,7 +125,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/edit_text_bg"
-        android:backgroundTint="#209bd5c5"
+        android:backgroundTint="@color/yellow_transparent"
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">

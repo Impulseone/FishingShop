@@ -3,6 +3,8 @@
     package="com.skynet.fishingshop">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,17 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".view.main.SubscriptionActivity"></activity>
         <activity
             android:name=".view.authorization.ConfirmationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.authorization.AuthorizationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.authorization.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

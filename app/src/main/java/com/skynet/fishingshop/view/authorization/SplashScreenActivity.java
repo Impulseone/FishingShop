@@ -27,7 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void checkAuthUser() {
-        if ( FirebaseAuth.getInstance().getCurrentUser() != null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             startMainActivity();
         }
     }

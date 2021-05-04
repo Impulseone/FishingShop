@@ -1,18 +1,27 @@
 package com.skynet.fishingshop.view.main.home;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.extension.CategoriesKeeper;
 import com.skynet.fishingshop.model.Category;
 import com.skynet.fishingshop.model.Product;
+import com.skynet.fishingshop.view.main.productsList.SearchedProductsListFragment;
 import com.skynet.fishingshop.view.main.unique_offers.UniqueOfferFragment;
 
 import java.util.ArrayList;
@@ -22,11 +31,14 @@ public class HomeFragment extends Fragment {
 
     private View view;
     private UniqueOfferFragment uniqueOfferFragment;
+    private SearchedProductsListFragment searchedProductsListFragment;
+    private EditText searchField;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        setSearchField();
         setUniqueOffersButtons();
         return view;
     }
@@ -34,6 +46,17 @@ public class HomeFragment extends Fragment {
     public void update() {
         setUniqueOffersButtons();
         updateUniqueOfferFragment();
+    }
+
+    private void setSearchField(){
+        searchField = view.findViewById(R.id.search_product);
+        searchField.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                createSearchProductFragment(searchField.getText().toString());
+            }
+            return true;
+        }
+        );
     }
 
     private void setUniqueOffersButtons() {
@@ -68,6 +91,26 @@ public class HomeFragment extends Fragment {
         ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
         ft.commit();
     }
+
+    private void createSearchProductFragment(String search){
+        searchedProductsListFragment = new SearchedProductsListFragment(search);
+        FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
+        ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
+        ft.commit();
+        hideKeyboard(getActivity());
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
     private void updateUniqueOfferFragment() {
         if (uniqueOfferFragment != null) uniqueOfferFragment.update();

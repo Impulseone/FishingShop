@@ -1,28 +1,32 @@
 package com.skynet.fishingshop.view.authorization;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.skynet.fishingshop.R;
-import com.skynet.fishingshop.view.main.MainActivity;
+import com.skynet.fishingshop.view.extension.WarningDialogView;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 public class AuthorizationActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
     private String phoneNumber;
     private EditText phoneInputEditText;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callback;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,50 +34,45 @@ public class AuthorizationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_authorization);
 
         phoneInputEditText = findViewById(R.id.phone_input);
+        phoneInputEditText.setText("+7");
+        setProgressBar();
         initCallback();
-
-        firebaseAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.get_code_button).setOnClickListener((v) -> authUser());
     }
 
-    private void authUser() {
-        phoneNumber = phoneInputEditText.getText().toString();
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, callback);
+    private void setProgressBar() {
+        progressBar = findViewById(R.id.progress_indicator);
+        progressBar.getIndeterminateDrawable().setColorFilter(
+                Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+    private void authUser() {
+        phoneNumber = phoneInputEditText.getText().toString();
+        if (phoneNumber == null || phoneNumber.equals("") || !phoneNumber.contains("+7") || phoneNumber.length() != 12) {
+            new WarningDialogView("Ошибка", "Введите действительный номер телефона").show(getSupportFragmentManager(), "");
+        } else {
+            findViewById(R.id.get_code_button_loading).setVisibility(View.VISIBLE);
+            findViewById(R.id.get_code_button).setVisibility(View.GONE);
+            PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, callback);
+        }
     }
 
     private void initCallback() {
         callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        startMainActivity();
-                    } else {
-                        System.out.println(task.getException().getMessage());
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                task.getException().getMessage(), Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                });
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 System.out.println(e.getMessage());
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        e.getMessage(), Toast.LENGTH_LONG);
-                toast.show();
             }
 
             @Override
             public void onCodeSent(@NonNull String id, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                findViewById(R.id.get_code_button_loading).setVisibility(View.GONE);
+                findViewById(R.id.get_code_button).setVisibility(View.VISIBLE);
                 openSmsCodeActivity(id);
             }
         };

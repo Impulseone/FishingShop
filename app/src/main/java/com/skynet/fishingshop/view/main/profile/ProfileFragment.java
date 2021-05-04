@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fishingshop.App;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.db.User;
+import com.skynet.fishingshop.view.extension.WarningDialogView;
 import com.skynet.fishingshop.view.main.home.HomeFragment;
 
 import java.util.List;
@@ -44,9 +45,20 @@ public class ProfileFragment extends Fragment {
             String thirdName = ((EditText) view.findViewById(R.id.third_name)).getText().toString();
             String phoneNumber = ((EditText) view.findViewById(R.id.phone_input)).getText().toString();
             String email = ((EditText) view.findViewById(R.id.email)).getText().toString();
-            User user = new User(1, firstName, lastName, thirdName, phoneNumber, email);
-            new SaveUserToDbTask(() -> openHomeFragment()).execute(user);
+            if (!checkUserData(new String[]{firstName, lastName, thirdName, phoneNumber, email})) {
+                new WarningDialogView("Ошибка", "Заполните все поля").show(getActivity().getSupportFragmentManager(), "");
+            } else {
+                User user = new User(1, firstName, lastName, thirdName, phoneNumber, email);
+                new SaveUserToDbTask(() -> openHomeFragment()).execute(user);
+            }
         });
+    }
+
+    private boolean checkUserData(String[] parameters) {
+        for (String parameter : parameters) {
+            if (parameter == null || parameter.equals("")) return false;
+        }
+        return true;
     }
 
     private void openHomeFragment() {

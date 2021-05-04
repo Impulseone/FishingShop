@@ -31,12 +31,16 @@
             android:id="@+id/search_product"
             android:layout_width="320dp"
             android:layout_height="40dp"
-            android:padding="5dp"
             android:layout_below="@+id/main_tv"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_bg"
-            android:visibility="gone"
-            android:hint="Катушка для карпа" />
+            android:hint="Поиск..."
+            android:imeOptions="actionDone"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColorHint="@color/grey"
+            android:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/promotions"

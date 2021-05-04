@@ -19,4 +19,8 @@
     <color name="pink">#f0c0ae</color>
     <color name="purple">#f0aede</color>
     <color name="yellow_transparent">#25FFF700</color>
+    <color name="yellow_transparent_2">#75FFF700</color>
+    <color name="dark_grey">#232323</color>
+    <color name="accent">#CC3333</color>
+    <color name="black_green">#218359</color>
 </resources>

@@ -11,22 +11,18 @@ import com.bumptech.glide.Glide;
 import com.skynet.fishingshop.R;
 import com.skynet.fishingshop.model.Product;
 
-import java.util.List;
-
 public class ProductTileView {
     private final View itemView;
     private final Product product;
     private final Fragment fragment;
-    private final List<Product> productList;
-    private final String categoryName;
     private int resId;
+    private final String searchPhrase;
 
-    public ProductTileView(View itemView, Product product, Fragment fragment, List<Product> productList, String categoryName) {
+    public ProductTileView(View itemView, Product product, Fragment fragment, String searchPhrase) {
         this.itemView = itemView;
         this.product = product;
         this.fragment = fragment;
-        this.productList = productList;
-        this.categoryName = categoryName;
+        this.searchPhrase = searchPhrase;
     }
 
     public void setView(int resId) {
@@ -62,7 +58,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productForCategoryFragment = new ProductFragment(productList, categoryName, product);
+            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, null);
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });

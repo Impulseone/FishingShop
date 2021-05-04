@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg_authorization">
 
     <TextView
@@ -77,6 +78,7 @@
         android:background="@drawable/auth_button_bg_green"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/get_code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_bold"
@@ -85,5 +87,23 @@
             android:lineSpacingExtra="7sp"
             android:text="Получить код"
             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/get_code_button_loading"
+        android:visibility="gone"
+        android:layout_width="246dp"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="73dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@drawable/auth_button_bg_green"
+        android:orientation="horizontal">
+        <ProgressBar
+            android:id="@+id/progress_indicator"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
     </LinearLayout>
 </RelativeLayout>
