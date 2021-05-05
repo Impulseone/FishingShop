@@ -43,7 +43,7 @@
             android:lineSpacingExtra="7sp"
             android:text="Оформить подписку"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </RelativeLayout>

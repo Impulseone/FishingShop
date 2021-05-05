@@ -83,18 +83,13 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     OrderKeeper orderKeeper = OrderKeeper.getInstance();
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!bp.isSubscribed("sub_1")) startSubscriptionActivity();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bp = new BillingProcessor(this, null, this);
         bp.initialize();
+        if (!bp.isSubscribed("sub_1")) startSubscriptionActivity();
 
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");

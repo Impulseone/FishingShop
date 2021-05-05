@@ -13,7 +13,7 @@ import com.skynet.fish_shop.R;
 public class SubscriptionActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
     private BillingProcessor bp;
-    View subscriptionButton;
+    private View subscriptionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {
-
+        startMainActivity();
     }
 
     @Override
