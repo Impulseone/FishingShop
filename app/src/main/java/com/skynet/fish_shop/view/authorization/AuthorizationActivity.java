@@ -76,7 +76,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     }
 
     private void openSmsCodeActivity(String id) {
-        Intent intent = new Intent(this, ConfirmationActivity.class);
+        Intent intent = new Intent(this, PhoneConfirmationActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("phone_number", phoneNumber);
         startActivity(intent);

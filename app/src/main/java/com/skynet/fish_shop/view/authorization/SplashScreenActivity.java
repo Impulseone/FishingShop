@@ -2,8 +2,13 @@ package com.skynet.fish_shop.view.authorization;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -12,71 +17,87 @@ import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.view.main.MainActivity;
 import com.skynet.fish_shop.view.main.SubscriptionActivity;
 
-public class SplashScreenActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
-
-    private BillingProcessor bp;
+public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        bp = new BillingProcessor(this, null, this);
-        bp.initialize();
-
-        checkAuthUserAndSubscription();
-
-        findViewById(R.id.auth_button).setOnClickListener((v) -> openInputPhoneNumberActivity());
+        new CheckAuthAndSubscription(this).execute();
     }
 
-    private void openInputPhoneNumberActivity() {
-        Intent intent = new Intent(this, AuthorizationActivity.class);
-        startActivity(intent);
-    }
+    private static class CheckAuthAndSubscription extends AsyncTask<Void, Void, Void> implements BillingProcessor.IBillingHandler {
 
-    private void checkAuthUserAndSubscription() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null && bp.isSubscribed("sub_1")) {
-            startMainActivity();
-        } else if (!bp.isSubscribed("sub_1")) {
-            startSubscriptionActivity();
-        } else startAuthActivity();
-    }
+        private final Activity activity;
+        private BillingProcessor bp;
 
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+        private CheckAuthAndSubscription(Activity activity) {
+            this.activity = activity;
+        }
 
-    private void startSubscriptionActivity() {
-        Intent intent = new Intent(this, SubscriptionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+        @Override
+        protected void onPreExecute() {
+        }
 
-    private void startAuthActivity() {
-        Intent intent = new Intent(this, AuthorizationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            bp = new BillingProcessor(activity, null, this);
+            bp.initialize();
+            (new Handler(Looper.getMainLooper())).postDelayed(this::checkAuthUserAndSubscription, 3000);
+            return null;
+        }
 
-    @Override
-    public void onProductPurchased(String productId, TransactionDetails details) {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+        }
 
-    }
+        private void checkAuthUserAndSubscription() {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                if (bp.isSubscribed("sub_1")) {
+                    startMainActivity();
+                } else startSubscriptionActivity();
+            } else {
+                startAuthActivity();
+            }
+        }
 
-    @Override
-    public void onPurchaseHistoryRestored() {
+        private void startMainActivity() {
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            activity.startActivity(intent);
+        }
 
-    }
+        private void startSubscriptionActivity() {
+            Intent intent = new Intent(activity, SubscriptionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            activity.startActivity(intent);
+        }
 
-    @Override
-    public void onBillingError(int errorCode, Throwable error) {
+        private void startAuthActivity() {
+            Intent intent = new Intent(activity, AuthorizationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            activity.startActivity(intent);
+        }
 
-    }
+        @Override
+        public void onProductPurchased(String productId, TransactionDetails details) {
 
-    @Override
-    public void onBillingInitialized() {
+        }
 
+        @Override
+        public void onPurchaseHistoryRestored() {
+
+        }
+
+        @Override
+        public void onBillingError(int errorCode, Throwable error) {
+
+        }
+
+        @Override
+        public void onBillingInitialized() {
+
+        }
     }
 }

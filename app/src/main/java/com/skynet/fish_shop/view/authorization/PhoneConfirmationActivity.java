@@ -1,6 +1,8 @@
 package com.skynet.fish_shop.view.authorization;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ConfirmationActivity extends AppCompatActivity implements TextWatcher, BillingProcessor.IBillingHandler {
+public class PhoneConfirmationActivity extends AppCompatActivity implements TextWatcher, BillingProcessor.IBillingHandler {
 
     private final ArrayList<EditText> editTextArray = new ArrayList<>(4);
     private String numTemp;
@@ -97,7 +99,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     }
 
     private void initBackButton() {
-        findViewById(R.id.back_button).setOnClickListener(view -> ConfirmationActivity.this.finish());
+        findViewById(R.id.back_button).setOnClickListener(view -> PhoneConfirmationActivity.this.finish());
     }
 
     @Override
@@ -146,15 +148,7 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
         if (code == null || code.equals("") || code.length() < 6) {
             new WarningDialogView("Ошибка", "Введите 6-значный код").show(getSupportFragmentManager(), "");
         } else {
-            PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(id, code);
-            firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    if (bp.isSubscribed("sub_1")) startMainActivity();
-                    else startSubscriptionActivity();
-                } else {
-                    System.out.println(Objects.requireNonNull(task.getException()).getMessage());
-                }
-            });
+            new SubmitCodeTask(this).execute();
         }
     }
 
@@ -247,5 +241,40 @@ public class ConfirmationActivity extends AppCompatActivity implements TextWatch
     @Override
     public void onBillingInitialized() {
 
+    }
+
+    private class SubmitCodeTask extends AsyncTask<Void,Void,Void> {
+
+        private final Activity activity;
+
+        private SubmitCodeTask(Activity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            activity.findViewById(R.id.apply_button).setVisibility(View.GONE);
+            activity.findViewById(R.id.apply_button_progress).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(id, getInputCodeFromTextFields());
+            firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    if (bp.isSubscribed("sub_1")) startMainActivity();
+                    else startSubscriptionActivity();
+                } else {
+                    System.out.println(Objects.requireNonNull(task.getException()).getMessage());
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            activity.findViewById(R.id.apply_button).setVisibility(View.VISIBLE);
+            activity.findViewById(R.id.apply_button_progress).setVisibility(View.GONE);
+        }
     }
 }
