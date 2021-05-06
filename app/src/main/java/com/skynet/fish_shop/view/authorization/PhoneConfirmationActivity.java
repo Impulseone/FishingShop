@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -148,7 +150,10 @@ public class PhoneConfirmationActivity extends AppCompatActivity implements Text
         if (code == null || code.equals("") || code.length() < 6) {
             new WarningDialogView("Ошибка", "Введите 6-значный код").show(getSupportFragmentManager(), "");
         } else {
-            new SubmitCodeTask(this).execute();
+           if(bp.isInitialized()) {
+               new SubmitCodeTask(this).execute();
+           }
+           else submitCode();
         }
     }
 
@@ -265,6 +270,7 @@ public class PhoneConfirmationActivity extends AppCompatActivity implements Text
                     if (bp.isSubscribed("sub_1")) startMainActivity();
                     else startSubscriptionActivity();
                 } else {
+                    Snackbar.make(activity.findViewById(R.id.apply_button), Objects.requireNonNull(task.getException()).getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                     System.out.println(Objects.requireNonNull(task.getException()).getMessage());
                 }
             });

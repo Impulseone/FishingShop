@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         bp = new BillingProcessor(this, null, this);
         bp.initialize();
-        if (!bp.isSubscribed("sub_1")) startSubscriptionActivity();
+
+        checkSubscription();
 
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
@@ -104,6 +105,12 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
+    }
+
+    private void checkSubscription() {
+        if (bp.isInitialized()) {
+            if (!bp.isSubscribed("sub_1")) startSubscriptionActivity();
+        } else checkSubscription();
     }
 
     private void startSubscriptionActivity() {
