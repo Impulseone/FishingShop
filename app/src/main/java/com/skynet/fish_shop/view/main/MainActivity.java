@@ -345,8 +345,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     public void purchase(List<CartProduct> products) {
         this.cartProducts = checkProductsCount(products);
         CartProduct cartProduct = this.cartProducts.get(0);
-        String productId = cartProduct.id + '.';
-        bp.purchase(this, productId);
+        String productId = cartProduct.id;
+        bp.purchase(this, "2_1");
     }
 
     private Map<String, Object> createOrder() {
