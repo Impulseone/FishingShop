@@ -8,7 +8,10 @@ import android.view.View;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.skynet.fish_shop.R;
+import com.skynet.fish_shop.extension.SubscriptionName;
 
 public class SubscriptionActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
@@ -25,14 +28,15 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
         subscriptionButton = findViewById(R.id.subscription_button);
         subscriptionButton.setOnClickListener((view) -> {
-            if (!bp.isSubscribed("sub_1"))
-                bp.subscribe(this, "sub_1");
+            if (!bp.isSubscribed(SubscriptionName.subName))
+                bp.subscribe(this, SubscriptionName.subName);
             else startMainActivity();
         });
     }
 
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {
+        Snackbar.make(subscriptionButton, productId + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
         startMainActivity();
     }
 
@@ -48,7 +52,7 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
     @Override
     public void onBillingInitialized() {
-
+        if (bp.isSubscribed(SubscriptionName.subName)) startMainActivity();
     }
 
     private void startMainActivity() {

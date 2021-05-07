@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.skynet.fish_shop.R;
+import com.skynet.fish_shop.extension.SubscriptionName;
 import com.skynet.fish_shop.view.extension.WarningDialogView;
 import com.skynet.fish_shop.view.main.MainActivity;
 import com.skynet.fish_shop.view.main.SubscriptionActivity;
@@ -251,6 +252,7 @@ public class PhoneConfirmationActivity extends AppCompatActivity implements Text
     private class SubmitCodeTask extends AsyncTask<Void,Void,Void> {
 
         private final Activity activity;
+        private boolean isSubscribed;
 
         private SubmitCodeTask(Activity activity) {
             this.activity = activity;
@@ -267,8 +269,7 @@ public class PhoneConfirmationActivity extends AppCompatActivity implements Text
             PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(id, getInputCodeFromTextFields());
             firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    if (bp.isSubscribed("sub_1")) startMainActivity();
-                    else startSubscriptionActivity();
+                    isSubscribed = bp.isSubscribed(SubscriptionName.subName);
                 } else {
                     Snackbar.make(activity.findViewById(R.id.apply_button), Objects.requireNonNull(task.getException()).getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                     System.out.println(Objects.requireNonNull(task.getException()).getMessage());
@@ -279,6 +280,8 @@ public class PhoneConfirmationActivity extends AppCompatActivity implements Text
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            if (isSubscribed) startMainActivity();
+            else startSubscriptionActivity();
             activity.findViewById(R.id.apply_button).setVisibility(View.VISIBLE);
             activity.findViewById(R.id.apply_button_progress).setVisibility(View.GONE);
         }

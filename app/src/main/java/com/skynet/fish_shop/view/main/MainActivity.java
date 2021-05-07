@@ -37,6 +37,7 @@ import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.User;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
+import com.skynet.fish_shop.extension.SubscriptionName;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.CategoryIcon;
 import com.skynet.fish_shop.model.DeliveryData;
@@ -90,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         bp = new BillingProcessor(this, null, this);
         bp.initialize();
 
-        checkSubscription();
-
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
         ordersReference = FirebaseDatabase.getInstance().getReference("Заказы");
@@ -105,12 +104,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
-    }
-
-    private void checkSubscription() {
-        if (bp.isInitialized()) {
-            if (!bp.isSubscribed("sub_1")) startSubscriptionActivity();
-        } else checkSubscription();
     }
 
     private void startSubscriptionActivity() {
@@ -331,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     @Override
     public void onBillingInitialized() {
-
+        if (!bp.isSubscribed(SubscriptionName.subName)) startSubscriptionActivity();
     }
 
     @Override
