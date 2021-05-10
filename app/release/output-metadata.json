@@ -4,14 +4,14 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.skynet.fishingshop",
+  "applicationId": "com.skynet.fish_shop",
   "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 2,
-      "versionName": "2.0",
+      "versionCode": 53,
+      "versionName": "4.1.24",
       "outputFile": "app-release.apk"
     }
   ]

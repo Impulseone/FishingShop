@@ -76,6 +76,7 @@
             android:backgroundTint="#209bd5c5"
             android:hint="Индекс"
             android:padding="5dp"
+            android:inputType="number"
             android:textColorHint="@color/white_transparent" />
 
         <EditText

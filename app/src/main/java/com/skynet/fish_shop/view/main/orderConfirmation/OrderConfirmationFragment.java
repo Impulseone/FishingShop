@@ -29,7 +29,7 @@ import java.util.List;
 
 public class OrderConfirmationFragment extends Fragment {
 
-    private OrderKeeper orderKeeper = OrderKeeper.getInstance();
+    private final OrderKeeper orderKeeper = OrderKeeper.getInstance();
 
     private BottomNavigationView bottomNavigationView;
     private View view;
