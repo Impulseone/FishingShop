@@ -25,29 +25,26 @@ import com.skynet.fish_shop.view.main.SubscriptionActivity;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class SplashScreenActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
+public class SplashScreenActivity extends AppCompatActivity {
 
-//    private BillingProcessor bp;
-
-    private FirebaseAuth auth;
     private static final int REQUEST_CODE = 101;
+    private View getCodeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        auth = FirebaseAuth.getInstance();
+        initGetCodeButton();
+        checkAuthUserAndSubscription();
+    }
 
-//        bp = new BillingProcessor(this, null, this);
-//        bp.initialize();
-
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        } else {
+    private void initGetCodeButton() {
+        getCodeButton = findViewById(R.id.get_code_button);
+        getCodeButton.setVisibility(View.GONE);
+        getCodeButton.setOnClickListener((view) -> {
             authenticateUser();
-        }
+        });
     }
 
     private void authenticateUser() {
@@ -60,96 +57,42 @@ public class SplashScreenActivity extends AppCompatActivity implements BillingPr
                 REQUEST_CODE);
     }
 
+    private void checkAuthUserAndSubscription() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        findViewById(R.id.progress_indicator).setVisibility(View.VISIBLE);
+        if (auth.getCurrentUser() != null) {
+            findViewById(R.id.progress_indicator).setVisibility(View.VISIBLE);
+            getCodeButton.setVisibility(View.GONE);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else {
+            getCodeButton.setVisibility(View.VISIBLE);
+            findViewById(R.id.progress_indicator).setVisibility(View.GONE);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
         if (requestCode == REQUEST_CODE) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {
-                // Sign in failed
                 if (response == null) {
-                    // User pressed back button
                     System.out.println("RESPONSE IS NULL");
                     return;
                 }
-
                 if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
                     System.out.println("NO NETWORK");
                     return;
                 }
-
                 System.out.println("UNKNOWN ERROR");
                 Log.e("-1", "Sign-in error: ", response.getError());
             }
         }
     }
-
-//    private void checkAuthUserAndSubscription() {
-//         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//            if (bp.isSubscribed(SubscriptionName.subName)) {
-//                startMainActivity();
-//            } else startSubscriptionActivity();
-//        } else {
-//            startAuthActivity();
-//        }
-//    }
-
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        this.startActivity(intent);
-    }
-
-    private void startSubscriptionActivity() {
-        Intent intent = new Intent(this, SubscriptionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        this.startActivity(intent);
-    }
-
-    private void startAuthActivity() {
-        Intent intent = new Intent(this, AuthorizationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        this.startActivity(intent);
-    }
-
-    @Override
-    public void onProductPurchased(String productId, TransactionDetails details) {
-
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-
-    }
-
-    @Override
-    public void onBillingError(int errorCode, Throwable error) {
-
-    }
-
-    @Override
-    public void onBillingInitialized() {
-//        checkAuthUserAndSubscription();
-    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (!bp.handleActivityResult(requestCode, resultCode, data)) {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-
-//    @Override
-//    public void onDestroy() {
-//        if (bp != null) {
-//            bp.release();
-//        }
-//        super.onDestroy();
-//    }
 }

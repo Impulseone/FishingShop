@@ -25,7 +25,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     private List<CartProduct> cartProducts = new ArrayList<>();
 
     private DatabaseReference ordersReference;
-    OrderKeeper orderKeeper = OrderKeeper.getInstance();
+    private final OrderKeeper orderKeeper = OrderKeeper.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         );
         mainDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        findViewById(R.id.logout_button).setOnClickListener((view -> openSplashScreenActivity()));
+        findViewById(R.id.logout_button).setOnClickListener((view -> signOut()));
     }
 
     private void createBottomNavigationView() {
@@ -207,12 +212,20 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         return super.onOptionsItemSelected(item);
     }
 
-    private void openSplashScreenActivity() {
-        FirebaseAuth.getInstance().signOut();
-        new ClearTablesTask().execute();
-        Intent intent = new Intent(this, SplashScreenActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+    public void signOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        new ClearTablesTask().execute();
+                        Intent intent = new Intent(MainActivity.this, SplashScreenActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Snackbar.make(leftMenuTitlesListView,"Ошибка. Не удалось выйти из аккаунта", BaseTransientBottomBar.LENGTH_LONG);
+                    }
+                });
     }
 
     @Override

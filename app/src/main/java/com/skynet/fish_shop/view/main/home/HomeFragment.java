@@ -44,14 +44,14 @@ public class HomeFragment extends Fragment {
         updateUniqueOfferFragment();
     }
 
-    private void setSearchField(){
+    private void setSearchField() {
         searchField = view.findViewById(R.id.search_product);
         searchField.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                createSearchProductFragment(searchField.getText().toString());
-            }
-            return true;
-        }
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        createSearchProductFragment(searchField.getText().toString());
+                    }
+                    return true;
+                }
         );
     }
 
@@ -61,19 +61,23 @@ public class HomeFragment extends Fragment {
         List<Product> salesProducts = new ArrayList<>();
         List<Product> newProducts = new ArrayList<>();
         for (Category category : categories) {
-            for (Product product :
-                    category.getProductList()) {
-                switch (product.status) {
-                    case "Акции и предложения":
-                        promotionProducts.add(product);
-                        break;
-                    case "Распродажи":
-                        salesProducts.add(product);
-                        break;
-                    case "Новинки":
-                        newProducts.add(product);
-                        break;
+            for (Product product : category.getProductList()) {
+                try {
+                    switch (product.status) {
+                        case "Акции и предложения":
+                            promotionProducts.add(product);
+                            break;
+                        case "Распродажи":
+                            salesProducts.add(product);
+                            break;
+                        case "Новинки":
+                            newProducts.add(product);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Product " + product.id + " has called problem");
                 }
+
             }
         }
         view.findViewById(R.id.promotions).setOnClickListener(view1 -> createUniqueOfferFragment(promotionProducts, "Акции и предложения"));
@@ -88,7 +92,7 @@ public class HomeFragment extends Fragment {
         ft.commit();
     }
 
-    private void createSearchProductFragment(String search){
+    private void createSearchProductFragment(String search) {
         searchedProductsListFragment = new SearchedProductsListFragment(search);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
