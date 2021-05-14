@@ -112,10 +112,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         startActivity(intent);
     }
 
-    public BillingProcessor getBp() {
-        return bp;
-    }
-
     private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.tool_bar);
         toolbar.findViewById(R.id.action_cart).setOnClickListener(view -> {
@@ -324,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     @Override
     public void onBillingInitialized() {
-        if (!bp.isSubscribed(SubscriptionName.subName)) startSubscriptionActivity();
+//        if (!bp.isSubscribed(SubscriptionName.subName)) startSubscriptionActivity();
     }
 
     @Override
