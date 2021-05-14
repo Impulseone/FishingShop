@@ -15,12 +15,6 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name="com.skynet.fish_shop.view.main.SubscriptionActivity"></activity>
         <activity
-            android:name="com.skynet.fish_shop.view.authorization.PhoneConfirmationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.skynet.fish_shop.view.authorization.AuthorizationActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.skynet.fish_shop.view.authorization.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>

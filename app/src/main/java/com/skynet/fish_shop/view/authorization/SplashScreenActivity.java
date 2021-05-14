@@ -42,9 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void initGetCodeButton() {
         getCodeButton = findViewById(R.id.get_code_button);
         getCodeButton.setVisibility(View.GONE);
-        getCodeButton.setOnClickListener((view) -> {
-            authenticateUser();
-        });
+        getCodeButton.setOnClickListener((view) -> authenticateUser());
     }
 
     private void authenticateUser() {
