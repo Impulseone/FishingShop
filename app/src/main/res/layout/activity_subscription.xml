@@ -8,6 +8,8 @@
     tools:context=".view.main.SubscriptionActivity">
 
     <TextView
+        android:id="@+id/sub_message"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -26,6 +28,7 @@
         android:src="@mipmap/logo_fishing_shop" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/subscription_button"
         android:layout_width="246dp"
         android:layout_height="65dp"
@@ -45,5 +48,14 @@
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_indicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"/>
 
 </RelativeLayout>

@@ -2,17 +2,11 @@ package com.skynet.fish_shop.view.authorization;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -22,7 +16,6 @@ import com.skynet.fish_shop.extension.SubscriptionName;
 import com.skynet.fish_shop.view.main.MainActivity;
 import com.skynet.fish_shop.view.main.SubscriptionActivity;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -36,7 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         initGetCodeButton();
-        checkAuthUserAndSubscription();
+        checkAuthUser();
     }
 
     private void initGetCodeButton() {
@@ -55,20 +48,24 @@ public class SplashScreenActivity extends AppCompatActivity {
                 REQUEST_CODE);
     }
 
-    private void checkAuthUserAndSubscription() {
+    private void checkAuthUser() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         findViewById(R.id.progress_indicator).setVisibility(View.VISIBLE);
         if (auth.getCurrentUser() != null) {
             findViewById(R.id.progress_indicator).setVisibility(View.VISIBLE);
             getCodeButton.setVisibility(View.GONE);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            startSubscriptionActivity();
         } else {
             getCodeButton.setVisibility(View.VISIBLE);
             findViewById(R.id.progress_indicator).setVisibility(View.GONE);
         }
+    }
+
+    private void startSubscriptionActivity(){
+        Intent intent = new Intent(this, SubscriptionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -77,7 +74,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(this, MainActivity.class));
+                startSubscriptionActivity();
                 finish();
             } else {
                 if (response == null) {

@@ -49,6 +49,9 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
             } else {
 //                Snackbar.make(subscriptionButton, SubscriptionName.subName + " is not purchased", BaseTransientBottomBar.LENGTH_LONG).show();
                 isSubscribed = false;
+                findViewById(R.id.sub_message).setVisibility(View.VISIBLE);
+                findViewById(R.id.progress_indicator).setVisibility(View.GONE);
+                subscriptionButton.setVisibility(View.VISIBLE);
             }
         } else {
             isSubscribed = false;
@@ -58,6 +61,7 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
     @Override
     public void onProductPurchased(@NotNull String productId, TransactionDetails details) {
 //        Snackbar.make(subscriptionButton, productId + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
+        isSubscribed = true;
         startMainActivity();
     }
 
@@ -88,5 +92,13 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
             super.onActivityResult(requestCode, resultCode, data);
         }
 //        Snackbar.make(subscriptionButton, "On activity result called", BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (bp != null) {
+            bp.release();
+        }
+        super.onDestroy();
     }
 }
