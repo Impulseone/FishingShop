@@ -43,11 +43,9 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
         if (purchaseResult) {
             TransactionDetails subscriptionTransactionDetails = bp.getSubscriptionTransactionDetails(SubscriptionName.subName);
             if (subscriptionTransactionDetails != null) {
-//                Snackbar.make(subscriptionButton, SubscriptionName.subName + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
                 isSubscribed = true;
                 startMainActivity();
             } else {
-//                Snackbar.make(subscriptionButton, SubscriptionName.subName + " is not purchased", BaseTransientBottomBar.LENGTH_LONG).show();
                 isSubscribed = false;
                 findViewById(R.id.sub_message).setVisibility(View.VISIBLE);
                 findViewById(R.id.progress_indicator).setVisibility(View.GONE);
@@ -60,14 +58,12 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
     @Override
     public void onProductPurchased(@NotNull String productId, TransactionDetails details) {
-//        Snackbar.make(subscriptionButton, productId + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
         isSubscribed = true;
         startMainActivity();
     }
 
     @Override
     public void onPurchaseHistoryRestored() {
-//        Snackbar.make(subscriptionButton, "on purchase history restored called", BaseTransientBottomBar.LENGTH_LONG).show();
     }
 
     @Override
@@ -91,7 +87,6 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
         if (!bp.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
-//        Snackbar.make(subscriptionButton, "On activity result called", BaseTransientBottomBar.LENGTH_LONG).show();
     }
 
     @Override
