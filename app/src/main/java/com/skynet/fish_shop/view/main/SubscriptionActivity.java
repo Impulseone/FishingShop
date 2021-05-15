@@ -13,10 +13,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.SubscriptionName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SubscriptionActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
     private BillingProcessor bp;
     private View subscriptionButton;
+    private boolean isSubscribed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +31,39 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
         subscriptionButton = findViewById(R.id.subscription_button);
         subscriptionButton.setOnClickListener((view) -> {
-            if (!bp.isSubscribed(SubscriptionName.subName))
+            if (!isSubscribed) {
                 bp.subscribe(this, SubscriptionName.subName);
+            }
             else startMainActivity();
         });
     }
 
+    private void checkIfUserIsSubscribed() {
+        boolean purchaseResult = bp.loadOwnedPurchasesFromGoogle();
+        if (purchaseResult) {
+            TransactionDetails subscriptionTransactionDetails = bp.getSubscriptionTransactionDetails(SubscriptionName.subName);
+            if (subscriptionTransactionDetails != null) {
+//                Snackbar.make(subscriptionButton, SubscriptionName.subName + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
+                isSubscribed = true;
+                startMainActivity();
+            } else {
+//                Snackbar.make(subscriptionButton, SubscriptionName.subName + " is not purchased", BaseTransientBottomBar.LENGTH_LONG).show();
+                isSubscribed = false;
+            }
+        } else {
+            isSubscribed = false;
+        }
+    }
+
     @Override
-    public void onProductPurchased(String productId, TransactionDetails details) {
-        Snackbar.make(subscriptionButton, productId + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
+    public void onProductPurchased(@NotNull String productId, TransactionDetails details) {
+//        Snackbar.make(subscriptionButton, productId + " purchased", BaseTransientBottomBar.LENGTH_LONG).show();
         startMainActivity();
     }
 
     @Override
     public void onPurchaseHistoryRestored() {
-
+//        Snackbar.make(subscriptionButton, "on purchase history restored called", BaseTransientBottomBar.LENGTH_LONG).show();
     }
 
     @Override
@@ -52,12 +73,20 @@ public class SubscriptionActivity extends AppCompatActivity implements BillingPr
 
     @Override
     public void onBillingInitialized() {
-        if (bp.isSubscribed(SubscriptionName.subName)) startMainActivity();
+        checkIfUserIsSubscribed();
     }
 
     private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+//        Snackbar.make(subscriptionButton, "On activity result called", BaseTransientBottomBar.LENGTH_LONG).show();
     }
 }
