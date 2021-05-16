@@ -1,23 +1,33 @@
 package com.skynet.fish_shop.extension;
 
+import android.os.AsyncTask;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
+import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.User;
 import com.skynet.fish_shop.model.DeliveryData;
 import com.skynet.fish_shop.model.OrderKeeper;
+import com.skynet.fish_shop.view.main.cart.CartFragment;
+import com.skynet.fish_shop.view.main.cart.CartProductsAdapter;
 import com.skynet.fish_shop.view.main.home.HomeFragment;
+import com.skynet.fish_shop.view.main.orderConfirmation.OrderConfirmationFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -39,6 +49,7 @@ public class OrdersHandler {
         orderKeeper.clear();
         createHomeFragmentFromCart();
         Toast.makeText(bottomNavigationView.getContext(), "Заказ оформлен", Toast.LENGTH_SHORT).show();
+        new ClearCartProductsTask().execute();
     }
 
     private Map<String, Object> createOrder() {
@@ -77,5 +88,14 @@ public class OrdersHandler {
         HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
+    }
+
+    static class ClearCartProductsTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            App.getInstance().getDatabase().cartProductDao().clearTable();
+            return null;
+        }
     }
 }
