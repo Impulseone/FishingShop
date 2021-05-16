@@ -65,7 +65,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
+public class MainActivity extends AppCompatActivity {
 
     private String[] leftMenuTitlesArray;
     private DrawerLayout mainDrawerLayout;
@@ -81,24 +81,13 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
     private HomeFragment homeFragment;
     private CatalogFragment catalogFragment;
 
-    private BillingProcessor bp;
-
-    private List<CartProduct> cartProducts = new ArrayList<>();
-
-    private DatabaseReference ordersReference;
-    private final OrderKeeper orderKeeper = OrderKeeper.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bp = new BillingProcessor(this, null, this);
-        bp.initialize();
-
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
-        ordersReference = FirebaseDatabase.getInstance().getReference("Заказы");
 
         homeFragment = new HomeFragment();
         catalogFragment = new CatalogFragment();
@@ -109,12 +98,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         createLeftNavigationMenu();
         createHomeFragment();
         createBottomNavigationView();
-    }
-
-    private void startSubscriptionActivity() {
-        Intent intent = new Intent(this, SubscriptionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     private void createToolbar() {
@@ -178,16 +161,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     private void createHomeFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_relative_layout, homeFragment);
-        ft.commit();
-    }
-
-    private void createHomeFragmentFromCart() {
-        bottomNavigationView.setVisibility(View.VISIBLE);
-        bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-        bottomNavigationView.setSelectedItemId(R.id.action_main);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
@@ -302,96 +275,6 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                 System.out.println(error.getDetails());
             }
         });
-    }
-
-    @Override
-    public void onProductPurchased(String productId, TransactionDetails details) {
-        Toast.makeText(this, "Заказ оформлен", Toast.LENGTH_SHORT).show();
-        bp.consumePurchase(productId);
-        CartProduct cartProduct = cartProducts.get(0);
-        if (cartProduct.count > 1) {
-            cartProduct.count = cartProduct.count - 1;
-        } else this.cartProducts.remove(cartProduct);
-        if (cartProducts.size() > 0) {
-            purchase(cartProducts);
-        } else {
-            ordersReference.updateChildren(createOrder());
-            orderKeeper.clear();
-            createHomeFragmentFromCart();
-        }
-    }
-
-    @Override
-    public void onPurchaseHistoryRestored() {
-
-    }
-
-    @Override
-    public void onBillingError(int errorCode, Throwable error) {
-        Toast.makeText(this, "Ошибка (" + errorCode + ")", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onBillingInitialized() {
-//        if (!bp.isSubscribed(SubscriptionName.subName)) startSubscriptionActivity();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data)) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        if (bp != null) {
-            bp.release();
-        }
-        super.onDestroy();
-    }
-
-    public void purchase(List<CartProduct> products) {
-        this.cartProducts = checkProductsCount(products);
-        CartProduct cartProduct = this.cartProducts.get(0);
-        String productId = cartProduct.id;
-        bp.purchase(this, "2_1");
-    }
-
-    private Map<String, Object> createOrder() {
-        Map<String, Object> order = new HashMap<>();
-        orderKeeper.setOrderId((new SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault()).format(Calendar.getInstance().getTime())));
-        order.put("Заказ " + orderKeeper.getOrderId(), createOrderBody());
-        return order;
-    }
-
-    private Map<String, Object> createOrderBody() {
-        Map<String, Object> orderBody = new HashMap<>();
-        User user = orderKeeper.getUser();
-        orderBody.put("ФИО", user.lastName + " " + user.firstName + " " + user.thirdName);
-        orderBody.put("Телефон", user.phoneNumber);
-        orderBody.put("Почта", user.email);
-        if (orderKeeper.isDeliveryNeed()) {
-            DeliveryData deliveryData = orderKeeper.getDeliveryData();
-            orderBody.put("Доставка", "Да");
-            orderBody.put("Регион", deliveryData.getRegion());
-            orderBody.put("Индекс", deliveryData.getIndex());
-            orderBody.put("Город", deliveryData.getCity());
-            orderBody.put("Улица, Дом, Квартира", deliveryData.getStreet());
-        } else {
-            orderBody.put("Доставка", "Нет");
-        }
-        orderBody.put("Общая сумма заказа", orderKeeper.getPrice() + " руб.");
-        orderBody.put("Товары", orderKeeper.getProducts());
-        return orderBody;
-    }
-
-    private List<CartProduct> checkProductsCount(List<CartProduct> productsAll) {
-        List<CartProduct> products = new ArrayList<>();
-        for (CartProduct cartProduct : productsAll) {
-            if (cartProduct.count > 0) products.add(cartProduct);
-        }
-        return products;
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

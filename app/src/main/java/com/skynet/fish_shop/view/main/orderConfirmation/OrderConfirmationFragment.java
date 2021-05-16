@@ -17,6 +17,7 @@ import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.User;
+import com.skynet.fish_shop.extension.OrdersHandler;
 import com.skynet.fish_shop.model.DeliveryData;
 import com.skynet.fish_shop.model.OrderKeeper;
 import com.skynet.fish_shop.view.extension.WarningDialogView;
@@ -44,6 +45,8 @@ public class OrderConfirmationFragment extends Fragment {
 
     private boolean isDeliveryNeeded = true;
 
+    private OrdersHandler ordersHandler;
+
     public OrderConfirmationFragment(List<CartProduct> products) {
         this.products = products;
     }
@@ -60,6 +63,8 @@ public class OrderConfirmationFragment extends Fragment {
         setViews();
 
         new CheckUserData(view).execute();
+
+        ordersHandler = new OrdersHandler(bottomNavigationView,getActivity().getSupportFragmentManager());
 
         return view;
     }
@@ -115,7 +120,7 @@ public class OrderConfirmationFragment extends Fragment {
                 orderKeeper.setDeliveryNeed(isDeliveryNeeded);
                 orderKeeper.setProductsFromCart(products);
                 orderKeeper.setPrice(calculatePrice());
-                ((MainActivity) getActivity()).purchase(products);
+                ordersHandler.purchase();
             }
         });
     }
@@ -159,16 +164,6 @@ public class OrderConfirmationFragment extends Fragment {
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
         ProfileFragment profileFragment = new ProfileFragment();
         ft.replace(R.id.main_relative_layout, profileFragment);
-        ft.commit();
-    }
-
-    private void backToHome() {
-        bottomNavigationView.setVisibility(View.VISIBLE);
-        bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-        bottomNavigationView.setSelectedItemId(R.id.action_main);
-        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
-        ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
     }
 
