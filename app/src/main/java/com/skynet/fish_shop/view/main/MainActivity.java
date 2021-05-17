@@ -55,6 +55,7 @@ import com.skynet.fish_shop.view.main.catalog.CatalogFragment;
 import com.skynet.fish_shop.view.main.favorites.FavoritesFragment;
 import com.skynet.fish_shop.view.main.home.HomeFragment;
 import com.skynet.fish_shop.view.main.profile.ProfileFragment;
+import com.skynet.fish_shop.view.main.requisites.RequisitesFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -295,6 +296,8 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 fragment = new FavoritesFragment();
                 break;
+            case 2:
+                fragment = new RequisitesFragment();
             default:
                 break;
         }

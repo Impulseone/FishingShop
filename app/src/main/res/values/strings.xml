@@ -12,6 +12,7 @@
     <string-array name="left_menu_titles">
         <item>Профиль</item>
         <item>Избранное</item>
+        <item>Реквизиты</item>
     </string-array>
 
     <string name="menu_home">Home</string>
@@ -20,9 +21,17 @@
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
     <string name="title_activity_confirmation_v2">ConfirmationActivityV2</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="requisites">
+        Индивидуальный предприниматель ГУЛЕНКО ДМИТРИЙ АЛЕКСЕЕВИЧ\n
+        Расчётный счёт: 40802810330000072967\n
+        Банк: КРАСНОДАРСКОЕ ОТДЕЛЕНИЕ N8619 ПАО СБЕРБАНК\n
+        БИК: 040349602\n
+        Кор. Cчёт: 30101810100000000602\n
+        ОГРН: 319237500379634\n
+        ИНН: 781117867809\n
+        КПП: —\n\n
+        Краснодарский край, станица Каневская, ул. Свердликова, дом 116\n\n
+        Телефон: +79676726107, +79528535974
+    </string>
 </resources>
