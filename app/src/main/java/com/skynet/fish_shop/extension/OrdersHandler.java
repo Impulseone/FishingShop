@@ -54,7 +54,7 @@ public class OrdersHandler {
 
     private Map<String, Object> createOrder() {
         Map<String, Object> order = new HashMap<>();
-        orderKeeper.setOrderId((new SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault()).format(Calendar.getInstance().getTime())));
+        orderKeeper.setOrderId((new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime())));
         order.put("Заказ " + orderKeeper.getOrderId(), createOrderBody());
         return order;
     }
