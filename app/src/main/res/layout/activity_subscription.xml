@@ -16,7 +16,7 @@
         android:gravity="center"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="7sp"
-        android:text="Оформите подписку на контент приложения"
+        android:text="@string/get_subscription_for_content"
         android:textColor="#ffffff"
         android:textSize="26sp" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="7sp"
-            android:text="Оформить подписку"
+            android:text="@string/get_subscription"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>

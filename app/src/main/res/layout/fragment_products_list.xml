@@ -29,7 +29,7 @@
             android:textSize="22sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="8sp"
-            android:text="Катушки"
+            android:text="@string/coils"
             />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

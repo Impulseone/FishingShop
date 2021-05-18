@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:longClickable="false"
-                android:text="Да"
+                android:text="@string/yes"
                 android:textColor="@color/black_green"
                 android:textSize="12sp"
                 android:theme="@style/Green"
@@ -62,7 +62,7 @@
                 android:layout_height="44dp"
                 android:layout_marginStart="12dp"
                 android:longClickable="false"
-                android:text="Нет"
+                android:text="@string/no"
                 android:textColor="@color/accent"
                 android:textSize="12sp"
                 app:strokeColor="@color/accent" />

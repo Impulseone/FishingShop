@@ -16,7 +16,7 @@
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="10sp"
-        android:text="Профиль"
+        android:text="@string/profile"
         android:textColor="#ffffff"
         android:textSize="22sp" />
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="8sp"
-        android:text="Ваши данные"
+        android:text="@string/your_data"
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/avenir_next_light"
-        android:text="Эти данные необходимы для оформления заказа в нашем магазине."
+        android:text="@string/your_data_warning"
         android:textColor="#ffffff"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -52,7 +52,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Фамилия"
+            android:hint="@string/last_name"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1"
@@ -68,7 +68,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Имя"
+            android:hint="@string/first_name"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1"
@@ -84,7 +84,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Отчество"
+            android:hint="@string/third_name"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="+7  (999)  000  13  15"
+            android:hint="@string/phone_example"
             android:imeOptions="actionNext"
             android:inputType="phone"
             android:maxLines="1"
@@ -116,7 +116,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Email"
+            android:hint="@string/email"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -142,7 +142,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="15dp"
             android:fontFamily="@font/avenir_next_bold"
-            android:text="Сохранить данные"
+            android:text="@string/save_data"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>

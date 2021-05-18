@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="10sp"
-        android:text="Корзина"
+        android:text="@string/cart"
         android:textColor="#ffffff"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -39,7 +39,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="Сумма:"
+                android:text="@string/amount"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="0 руб."
+                android:text="@string/zero_rub"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="Оформить"
+                android:text="@string/confirm"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </LinearLayout>
