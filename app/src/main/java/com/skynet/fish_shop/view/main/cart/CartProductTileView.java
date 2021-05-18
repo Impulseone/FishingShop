@@ -113,8 +113,8 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     static class ChangeCountTask extends AsyncTask<CartProduct, Void, Void> {
 
-        private int count;
-        private int pos;
+        private final int count;
+        private final int pos;
         private final CartProductsAdapter adapter;
         private final CartProduct cartProduct;
         private final CartFragment.ChangePrice changePrice;

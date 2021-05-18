@@ -16,7 +16,7 @@ import com.skynet.fish_shop.view.main.home.HomeFragment;
 
 public class SearchedProductsListFragment extends Fragment {
 
-    private String search;
+    private final String search;
 
     public SearchedProductsListFragment(String search) {
         this.search = search;

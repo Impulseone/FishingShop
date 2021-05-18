@@ -27,7 +27,6 @@ public class HomeFragment extends Fragment {
 
     private View view;
     private UniqueOfferFragment uniqueOfferFragment;
-    private SearchedProductsListFragment searchedProductsListFragment;
     private EditText searchField;
 
     @Override
@@ -93,7 +92,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void createSearchProductFragment(String search) {
-        searchedProductsListFragment = new SearchedProductsListFragment(search);
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         ft.commit();
@@ -102,9 +101,7 @@ public class HomeFragment extends Fragment {
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
         View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
             view = new View(activity);
         }

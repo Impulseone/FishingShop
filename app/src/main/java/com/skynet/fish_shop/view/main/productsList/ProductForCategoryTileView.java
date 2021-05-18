@@ -36,7 +36,7 @@ public class ProductForCategoryTileView {
         if (discountExists()) {
             itemView.findViewById(resId).findViewById(R.id.discount_row).setVisibility(View.VISIBLE);
             itemView.findViewById(resId).findViewById(R.id.old_price).setVisibility(View.VISIBLE);
-            ((TextView) itemView.findViewById(resId).findViewById(R.id.old_price)).setText(""+calculateOldPrice());
+            ((TextView) itemView.findViewById(resId).findViewById(R.id.old_price)).setText("" + calculateOldPrice());
             ((TextView) itemView.findViewById(resId).findViewById(R.id.discount)).setText("-" + product.discount + "%");
         } else {
             itemView.findViewById(resId).findViewById(R.id.discount_row).setVisibility(View.GONE);

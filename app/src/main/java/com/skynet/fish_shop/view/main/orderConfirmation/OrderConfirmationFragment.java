@@ -170,7 +170,7 @@ public class OrderConfirmationFragment extends Fragment {
     private static class CheckUserData extends AsyncTask<Void, Void, Void> {
 
         private User user;
-        private View view;
+        private final View view;
 
         private CheckUserData(View view) {
             this.view = view;

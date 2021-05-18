@@ -3,8 +3,8 @@ package com.skynet.fish_shop.model;
 import java.util.List;
 
 public class Category {
-    private String categoryName;
-    private List<Product> productList;
+    private final String categoryName;
+    private final List<Product> productList;
 
     public Category(String categoryName, List<Product> productList) {
         this.categoryName = categoryName;
