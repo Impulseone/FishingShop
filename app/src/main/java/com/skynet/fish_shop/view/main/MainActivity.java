@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Snackbar.make(leftMenuTitlesListView,"Ошибка. Не удалось выйти из аккаунта", BaseTransientBottomBar.LENGTH_LONG);
+                        Snackbar.make(leftMenuTitlesListView,"Ошибка. Не удалось выйти из аккаунта", BaseTransientBottomBar.LENGTH_LONG).show();
                     }
                 });
     }
