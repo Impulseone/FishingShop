@@ -53,7 +53,6 @@ public class ProductForCategoryTileView {
         ImageView imageView = itemView.findViewById(resId).findViewById(R.id.product_image);
         String path = product.imagePath;
         if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
-//        Glide.with(itemView.getContext()).load(product.imagePath).into(imageView);
     }
 
     private void setProductName() {

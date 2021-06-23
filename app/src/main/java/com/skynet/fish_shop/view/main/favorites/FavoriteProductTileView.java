@@ -16,6 +16,7 @@ import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.AppDatabase;
 import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.FavoritesProduct;
+import com.squareup.picasso.Picasso;
 
 public class FavoriteProductTileView extends RecyclerView.ViewHolder{
 
@@ -36,7 +37,8 @@ public class FavoriteProductTileView extends RecyclerView.ViewHolder{
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(R.id.product_image);
-        Glide.with(itemView.getContext()).load(favoritesProduct.imagePath).into(imageView);
+        String path = favoritesProduct.imagePath;
+        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 
     private void setPrice() {

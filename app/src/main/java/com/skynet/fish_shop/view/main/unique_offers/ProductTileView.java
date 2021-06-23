@@ -7,9 +7,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.model.Product;
+import com.squareup.picasso.Picasso;
 
 public class ProductTileView {
     private final View itemView;
@@ -48,7 +48,8 @@ public class ProductTileView {
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(resId).findViewById(R.id.product_image);
-        Glide.with(itemView.getContext()).load(product.imagePath).into(imageView);
+        String path = product.imagePath;
+        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 
     private void setProductName() {

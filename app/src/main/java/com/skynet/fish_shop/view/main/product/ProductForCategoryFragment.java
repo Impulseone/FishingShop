@@ -23,6 +23,7 @@ import com.skynet.fish_shop.db.FavoritesProduct;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragment;
+import com.squareup.picasso.Picasso;
 
 public class ProductForCategoryFragment extends Fragment {
 
@@ -73,7 +74,8 @@ public class ProductForCategoryFragment extends Fragment {
 
     private void setImage(View view) {
         ImageView imageView = view.findViewById(R.id.product_image);
-        Glide.with(this).load(product.imagePath).into(imageView);
+        String path = product.imagePath;
+        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 
     private void setAddToCartButton(View view) {

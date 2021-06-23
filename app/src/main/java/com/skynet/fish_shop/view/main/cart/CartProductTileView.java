@@ -8,10 +8,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.CartProduct;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,7 +44,8 @@ public class CartProductTileView extends RecyclerView.ViewHolder {
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(R.id.product_image);
-        Glide.with(itemView.getContext()).load(cartProduct.imagePath).into(imageView);
+        String path = cartProduct.imagePath;
+        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 
     private void setPrice() {
