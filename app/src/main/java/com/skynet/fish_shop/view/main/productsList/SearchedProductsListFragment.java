@@ -16,10 +16,10 @@ import com.skynet.fish_shop.view.main.home.HomeFragment;
 
 public class SearchedProductsListFragment extends Fragment {
 
-    private String search;
+    private final String searchPhrase;
 
-    public SearchedProductsListFragment(String search) {
-        this.search = search;
+    public SearchedProductsListFragment(String searchPhrase) {
+        this.searchPhrase = searchPhrase;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SearchedProductsListFragment extends Fragment {
 
     private void setAdapter(View view) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        SearchedProductsAdapter adapter = new SearchedProductsAdapter(this, search);
+        SearchedProductsAdapter adapter = new SearchedProductsAdapter(this, searchPhrase);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
     }

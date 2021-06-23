@@ -12,6 +12,7 @@ import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.view.main.product.ProductForCategoryFragment;
+import com.squareup.picasso.Picasso;
 
 public class ProductForCategoryTileView {
     private final View itemView;
@@ -50,7 +51,9 @@ public class ProductForCategoryTileView {
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(resId).findViewById(R.id.product_image);
-        Glide.with(itemView.getContext()).load(product.imagePath).into(imageView);
+        String path = product.imagePath;
+        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
+//        Glide.with(itemView.getContext()).load(product.imagePath).into(imageView);
     }
 
     private void setProductName() {

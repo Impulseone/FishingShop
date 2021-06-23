@@ -16,6 +16,7 @@ import com.skynet.fish_shop.extension.CategoriesKeeper;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.CategoryIcon;
 import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragment;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +32,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         categoriesData = CategoriesKeeper.getInstance().getCategories();
     }
 
-    public void update(){
+    public void update() {
         categoriesData = CategoriesKeeper.getInstance().getCategories();
         notifyDataSetChanged();
     }
@@ -72,12 +73,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             });
         }
 
-        private void setCategoryIcon(String categoryName){
+        private void setCategoryIcon(String categoryName) {
             ImageView imageView = itemView.findViewById(R.id.category_icon);
-            Glide.with(itemView.getContext()).load(getImagePath(categoryName)).into(imageView);
+            String path = getImagePath(categoryName);
+            if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
         }
 
-        private String getImagePath(String categoryName){
+        private String getImagePath(String categoryName) {
             String imagePath = "";
             List<CategoryIcon> categoryIcons = CategoriesKeeper.getInstance().getCategoryIcons();
             for (CategoryIcon categoryIcon : categoryIcons) {

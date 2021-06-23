@@ -1,9 +1,5 @@
 package com.skynet.fish_shop.extension;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.CategoryIcon;
 
@@ -35,7 +31,6 @@ public class CategoriesKeeper {
         return categoryIcons;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }

@@ -235,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setCategoriesListener() {
         categoriesFromDbReference.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Category> categories = new ArrayList<>();
