@@ -40,9 +40,9 @@
                 android:background="@drawable/background_transparent"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                app:itemBackground="@drawable/bottom_icon_bg"
                 app:itemIconTint="@color/bottom_nav_colors"
                 app:itemTextColor="@color/bottom_nav_colors"
-                app:itemBackground="@drawable/bottom_icon_bg"
                 app:menu="@menu/menu_bottom_nav" />
 
         </RelativeLayout>
@@ -83,18 +83,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_icon_ionic_md_exit"/>
+                android:src="@drawable/ic_icon_ionic_md_exit" />
 
             <TextView
                 android:id="@android:id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:layout_gravity="center"
-                android:minHeight="?attr/listPreferredItemHeightSmall"
                 android:layout_marginLeft="16dp"
+                android:minHeight="?attr/listPreferredItemHeightSmall"
+                android:text="@string/logout"
                 android:textColor="#fff"
-                android:text="Выход"/>
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_next_light"
                 android:lineSpacingExtra="7sp"
-                android:text="интернет-магазин"
+                android:text="@string/internet_shop"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal" />
@@ -120,7 +120,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/avenir_next_bold"
                 android:lineSpacingExtra="7sp"
-                android:text="“Fishing Shop”"
+                android:text="@string/fishing_shop"
                 android:textColor="#ffffff"
                 android:textSize="19sp"
                 android:textStyle="bold" />

@@ -26,7 +26,7 @@
             android:textSize="18sp"
             android:textColor="#deda98"
             android:lineSpacingExtra="7sp"
-            android:text="Заполните ваши данные"
+            android:text="@string/write_your_data"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
             android:textSize="14sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="5sp"
-            android:text="ФИО, Телефон, Email…"
+            android:text="@string/fio_number_email"
             />
     </LinearLayout>
 
@@ -51,7 +51,7 @@
         android:textSize="12sp"
         android:textColor="#ffffff"
         android:lineSpacingExtra="4sp"
-        android:text="Перейти в профиль"
+        android:text="@string/back_to_profile"
         />
 
 </RelativeLayout>

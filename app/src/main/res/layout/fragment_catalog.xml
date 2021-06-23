@@ -17,7 +17,7 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="10sp"
         android:layout_marginBottom="10dp"
-        android:text="Каталог"
+        android:text="@string/catalog"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories_rv"

@@ -13,6 +13,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.view.main.MainActivity;
+import com.skynet.fish_shop.view.main.SubscriptionActivity;
 
 import java.util.Collections;
 
@@ -52,26 +53,26 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             findViewById(R.id.progress_indicator).setVisibility(View.VISIBLE);
             getCodeButton.setVisibility(View.GONE);
-            startMainActivity();
+            startSubscriptionActivity();
         } else {
             getCodeButton.setVisibility(View.VISIBLE);
             findViewById(R.id.progress_indicator).setVisibility(View.GONE);
         }
     }
 
-//    private void startSubscriptionActivity(){
-//        Intent intent = new Intent(this, SubscriptionActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
-//        finish();
-//    }
-
-    private void startMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    private void startSubscriptionActivity(){
+        Intent intent = new Intent(this, SubscriptionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
+
+//    private void startMainActivity(){
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
+//        finish();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -79,7 +80,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
-                startMainActivity();
+                startSubscriptionActivity();
                 finish();
             } else {
                 if (response == null) {

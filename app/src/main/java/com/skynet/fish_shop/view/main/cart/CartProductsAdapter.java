@@ -15,8 +15,8 @@ import java.util.List;
 
 public class CartProductsAdapter extends RecyclerView.Adapter<CartProductTileView> {
 
-    private List<CartProduct> products;
-    private CartFragment.ChangePrice changePrice;
+    private final List<CartProduct> products;
+    private final CartFragment.ChangePrice changePrice;
 
     public CartProductsAdapter(List<CartProduct> products, CartFragment.ChangePrice changePrice) {
         this.products = products;

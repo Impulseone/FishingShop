@@ -30,7 +30,7 @@
             android:textSize="14sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="5sp"
-            android:text="12.90 €"
+            android:text="@string/price_example"
             />
         <TextView
             android:id="@+id/product_name"
@@ -41,7 +41,7 @@
             android:textSize="12sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="4sp"
-            android:text="Леска цветная для карпа"
+            android:text="@string/product_name_example"
             />
         <TextView
             android:id="@+id/product_description"
@@ -52,7 +52,7 @@
             android:textSize="11sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="4sp"
-            android:text="Краткие характеристики"
+            android:text="@string/characteristics_example"
             />
     </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:textSize="14sp"
             android:textColor="#ffffff"
             android:backgroundTint="@color/brown"
-            android:text="2 шт"
+            android:text="@string/quantity_example"
             />
     </LinearLayout>
     <ImageView

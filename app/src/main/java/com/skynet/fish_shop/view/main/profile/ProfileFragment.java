@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
                 new WarningDialogView("Ошибка", "Заполните все поля").show(getActivity().getSupportFragmentManager(), "");
             } else {
                 User user = new User(1, firstName, lastName, thirdName, phoneNumber, email);
-                new SaveUserToDbTask(() -> openHomeFragment()).execute(user);
+                new SaveUserToDbTask(this::openHomeFragment).execute(user);
             }
         });
     }
@@ -98,7 +98,7 @@ public class ProfileFragment extends Fragment {
     private static class CheckUserData extends AsyncTask<Void, Void, Void> {
 
         private User user;
-        private View view;
+        private final View view;
 
         private CheckUserData(View view) {
             this.view = view;

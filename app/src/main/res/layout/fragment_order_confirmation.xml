@@ -24,7 +24,7 @@
             android:layout_marginBottom="1dp"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="8sp"
-            android:text="Корзина"
+            android:text="@string/cart"
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -41,7 +41,7 @@
         android:layout_marginStart="15dp"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="8sp"
-        android:text="Доставка"
+        android:text="@string/delivery"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -56,7 +56,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/edit_text_bg"
         android:backgroundTint="#209bd5c5"
-        android:hint="Регион/республика"
+        android:hint="@string/region"
         android:padding="5dp"
         android:textColorHint="@color/white_transparent" />
 
@@ -74,7 +74,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Индекс"
+            android:hint="@string/index"
             android:padding="5dp"
             android:inputType="number"
             android:textColorHint="@color/white_transparent" />
@@ -89,7 +89,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_bg"
             android:backgroundTint="#209bd5c5"
-            android:hint="Город, село"
+            android:hint="@string/city"
             android:padding="5dp"
             android:textColorHint="@color/white_transparent" />
     </LinearLayout>
@@ -103,7 +103,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_text_bg"
         android:backgroundTint="#209bd5c5"
-        android:hint="Улица, дом, квартира"
+        android:hint="@string/street_home"
         android:padding="5dp"
         android:textColorHint="@color/white_transparent" />
 
@@ -113,7 +113,7 @@
         android:layout_marginStart="15dp"
         android:fontFamily="@font/avenir_next_bold"
         android:lineSpacingExtra="8sp"
-        android:text="Самовывоз"
+        android:text="@string/no_delivery"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -137,7 +137,7 @@
             android:layout_marginStart="15dp"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="8sp"
-            android:text="Я заберу с магазина"
+            android:text="@string/get_from_shop"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -148,7 +148,7 @@
             android:layout_marginStart="15dp"
             android:fontFamily="@font/avenir_next_light"
             android:lineSpacingExtra="5sp"
-            android:text="Адрес(а) магазина(ов)"
+            android:text="@string/shop_adresses"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal" />
@@ -160,7 +160,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/avenir_next_light"
-        android:text="После оформления заказа, наш менеджер свяжется с вами в течение 60 минут, в рабочие часы."
+        android:text="@string/manager_call"
         android:textColor="#ffffff"
         android:textSize="12sp"
         android:textStyle="normal" />
@@ -181,7 +181,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="15dp"
             android:fontFamily="@font/avenir_next_bold"
-            android:text="Оформить заказ"
+            android:text="@string/purchase"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>

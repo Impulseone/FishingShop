@@ -29,7 +29,7 @@ import com.skynet.fish_shop.view.main.productsList.SearchedProductsListFragment;
 public class ProductFragment extends Fragment {
 
     private final Product product;
-    private String searchPhrase;
+    private final String searchPhrase;
     private final Category category;
 
     public ProductFragment(Product product, String searchPhrase, Category category) {

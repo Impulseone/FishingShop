@@ -30,7 +30,7 @@
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textColor="#ffffff"
-            android:text="Удилища"
+            android:text="@string/rods"
             />
         <TextView
             android:id="@+id/category_description"
@@ -41,7 +41,7 @@
             android:textSize="11sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="4sp"
-            android:text="Описание категории"
+            android:text="@string/category_description"
             />
     </LinearLayout>
 

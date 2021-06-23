@@ -41,7 +41,7 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="7sp"
-            android:text="Получить код"
+            android:text="@string/get_code"
             />
     </LinearLayout>
 

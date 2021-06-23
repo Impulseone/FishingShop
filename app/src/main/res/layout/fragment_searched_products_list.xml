@@ -29,7 +29,7 @@
             android:textSize="22sp"
             android:textColor="#ffffff"
             android:lineSpacingExtra="8sp"
-            android:text="Назад"
+            android:text="@string/back"
             />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

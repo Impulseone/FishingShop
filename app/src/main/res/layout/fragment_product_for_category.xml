@@ -79,7 +79,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="80dp"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="Цена:"
+                android:text="@string/price"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_next_bold"
                     android:lineSpacingExtra="7sp"
-                    android:text="В корзину"
+                    android:text="@string/to_cart"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 

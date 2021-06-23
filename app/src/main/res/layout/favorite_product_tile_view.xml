@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="5sp"
-            android:text="12.90 €"
+            android:text="@string/price_example"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="4sp"
-            android:text="Леска цветная для карпа"
+            android:text="@string/product_name_example"
             android:textColor="#ffffff"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_next_light"
             android:lineSpacingExtra="4sp"
-            android:text="Краткие характеристики"
+            android:text="@string/characteristics_example"
             android:textColor="#ffffff"
             android:textSize="11sp"
             android:textStyle="normal" />
@@ -70,11 +70,9 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/avenir_next_bold"
-                android:text="Добавить в корзину"
+                android:text="@string/add_to_cart"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>
