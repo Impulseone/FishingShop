@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
 import com.skynet.fish_shop.model.Category;
@@ -62,9 +61,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         }
 
         public void setView(Category category, Fragment fragment) {
-            setCategoryIcon(category.getCategoryName());
+            setCategoryIcon(category.getName());
             ((TextView) itemView.findViewById(R.id.products_count)).setText(category.getProductList().size() + " товаров");
-            ((TextView) itemView.findViewById(R.id.category_name)).setText(category.getCategoryName());
+            ((TextView) itemView.findViewById(R.id.category_name)).setText(category.getName());
             itemView.setOnClickListener(view1 -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
                 ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);

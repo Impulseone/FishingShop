@@ -40,7 +40,7 @@ public class ProductsListForCategoryFragment extends Fragment {
     }
 
     private void setCategoryName(View view) {
-        ((TextView) view.findViewById(R.id.category_name)).setText(category.getCategoryName());
+        ((TextView) view.findViewById(R.id.category_name)).setText(category.getName());
     }
 
     private void setAdapter(View view) {

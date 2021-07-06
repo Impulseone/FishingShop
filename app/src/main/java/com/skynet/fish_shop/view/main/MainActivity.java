@@ -48,6 +48,7 @@ import com.skynet.fish_shop.model.CategoryIcon;
 import com.skynet.fish_shop.model.DeliveryData;
 import com.skynet.fish_shop.model.OrderKeeper;
 import com.skynet.fish_shop.model.Product;
+import com.skynet.fish_shop.model.SubCategory;
 import com.skynet.fish_shop.view.authorization.SplashScreenActivity;
 import com.skynet.fish_shop.view.extension.LeftNavigationArrayAdapter;
 import com.skynet.fish_shop.view.main.cart.CartFragment;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     private DatabaseReference categoriesFromDbReference;
+    private DatabaseReference subCategoriesFromDbReference;
     private DatabaseReference categoriesIconsFromDbReference;
 
     private HomeFragment homeFragment;
@@ -88,12 +90,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         categoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Категории");
+        subCategoriesFromDbReference = FirebaseDatabase.getInstance().getReference("Подкатегории");
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
 
         homeFragment = new HomeFragment();
         catalogFragment = new CatalogFragment();
 
         setCategoriesListener();
+        setSubCategoriesListener();
         setCategoriesIconsListener();
         createToolbar();
         createLeftNavigationMenu();
@@ -246,6 +250,27 @@ public class MainActivity extends AppCompatActivity {
                     categories.add(new Category(Objects.requireNonNull(category.getKey()).substring(2), productList));
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
+                homeFragment.update();
+                catalogFragment.update();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error.getMessage());
+                System.out.println(error.getDetails());
+            }
+        });
+    }
+
+    private void setSubCategoriesListener() {
+        subCategoriesFromDbReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<SubCategory> categories = new ArrayList<>();
+                for (DataSnapshot category : dataSnapshot.getChildren()) {
+                    categories.add(new SubCategory(category.getKey(), (String) category.getValue()));
+                }
+                CategoriesKeeper.getInstance().setSubCategories(categories);
                 homeFragment.update();
                 catalogFragment.update();
             }
