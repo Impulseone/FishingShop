@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.model.Category;
-import com.skynet.fish_shop.view.main.catalog.CatalogFragment;
+import com.skynet.fish_shop.view.main.catalog.CategoriesFragment;
 
 public class ProductsListForCategoryFragment extends Fragment {
 
@@ -52,8 +52,8 @@ public class ProductsListForCategoryFragment extends Fragment {
 
     private void back() {
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        CatalogFragment catalogFragment = new CatalogFragment();
-        ft.replace(R.id.main_relative_layout, catalogFragment);
+        CategoriesFragment categoriesFragment = new CategoriesFragment();
+        ft.replace(R.id.main_relative_layout, categoriesFragment);
         ft.commit();
     }
 }

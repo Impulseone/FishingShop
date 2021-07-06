@@ -14,18 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fish_shop.R;
 
-public class CatalogFragment extends Fragment {
+public class CategoriesFragment extends Fragment {
 
     private final CategoriesAdapter categoriesAdapter;
 
-    public CatalogFragment() {
+    public CategoriesFragment() {
         categoriesAdapter = new CategoriesAdapter(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_catalog, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories, container, false);
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.categories_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

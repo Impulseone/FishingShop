@@ -8,6 +8,8 @@ public class Product {
     public String id;
     @PropertyName("Название")
     public String name;
+    @PropertyName("Подкатегория")
+    public String subCategory;
     @PropertyName("Описание")
     public String description;
     @PropertyName("Цена")
@@ -22,9 +24,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String name, String description, int price, int discount, String status, String imagePath) {
+    public Product(String id, String name, String subCategory, String description, int price, int discount, String status, String imagePath) {
         this.id = id;
         this.name = name;
+        this.subCategory = subCategory;
         this.description = description;
         this.price = price;
         this.status = status;

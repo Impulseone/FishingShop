@@ -3,7 +3,6 @@ package com.skynet.fish_shop.view.main;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,10 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,15 +20,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,32 +31,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
-import com.skynet.fish_shop.db.CartProduct;
-import com.skynet.fish_shop.db.User;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
-import com.skynet.fish_shop.extension.SubscriptionName;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.CategoryIcon;
-import com.skynet.fish_shop.model.DeliveryData;
-import com.skynet.fish_shop.model.OrderKeeper;
 import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.model.SubCategory;
 import com.skynet.fish_shop.view.authorization.SplashScreenActivity;
 import com.skynet.fish_shop.view.extension.LeftNavigationArrayAdapter;
 import com.skynet.fish_shop.view.main.cart.CartFragment;
-import com.skynet.fish_shop.view.main.catalog.CatalogFragment;
+import com.skynet.fish_shop.view.main.catalog.CategoriesFragment;
 import com.skynet.fish_shop.view.main.favorites.FavoritesFragment;
 import com.skynet.fish_shop.view.main.home.HomeFragment;
 import com.skynet.fish_shop.view.main.profile.ProfileFragment;
 import com.skynet.fish_shop.view.main.requisites.RequisitesFragment;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference categoriesIconsFromDbReference;
 
     private HomeFragment homeFragment;
-    private CatalogFragment catalogFragment;
+    private CategoriesFragment categoriesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         categoriesIconsFromDbReference = FirebaseDatabase.getInstance().getReference("Иконки категорий");
 
         homeFragment = new HomeFragment();
-        catalogFragment = new CatalogFragment();
+        categoriesFragment = new CategoriesFragment();
 
         setCategoriesListener();
         setSubCategoriesListener();
@@ -172,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createCatalogFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_relative_layout, catalogFragment);
+        ft.replace(R.id.main_relative_layout, categoriesFragment);
         ft.commit();
     }
 
@@ -251,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
                 homeFragment.update();
-                catalogFragment.update();
+                categoriesFragment.update();
             }
 
             @Override
@@ -272,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 CategoriesKeeper.getInstance().setSubCategories(categories);
                 homeFragment.update();
-                catalogFragment.update();
+                categoriesFragment.update();
             }
 
             @Override
