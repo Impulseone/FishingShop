@@ -26,7 +26,7 @@ public class CategoryTileView extends RecyclerView.ViewHolder {
     public void setView(Category category, Fragment fragment, boolean isSubCategories) {
         setCategoryIcon(category.getName());
         ((TextView) itemView.findViewById(R.id.products_count)).setText(category.getProductList().size() + " товаров");
-        ((TextView) itemView.findViewById(R.id.category_name)).setText(category.getName());
+        ((TextView) itemView.findViewById(R.id.category_name)).setText(setCategoryName(category.getName()));
         if (!isSubCategories) itemView.setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
             ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);
@@ -36,11 +36,20 @@ public class CategoryTileView extends RecyclerView.ViewHolder {
         else {
             itemView.setOnClickListener(view -> {
                 FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-                SubCategoriesFragment subCategoriesFragment = new SubCategoriesFragment(category.getProductList().get(0).subCategory.substring(0,1));
+                SubCategoriesFragment subCategoriesFragment = new SubCategoriesFragment(category);
                 ft.replace(R.id.main_relative_layout, subCategoriesFragment);
                 ft.commit();
             });
         }
+    }
+
+    private String setCategoryName(String categoryName){
+        StringBuilder resultName = new StringBuilder();
+        String[] split = categoryName.split(" ");
+        for (int i = 1; i < split.length; i++) {
+            resultName.append(split[i]+" ");
+        }
+        return resultName.toString();
     }
 
     private void setCategoryIcon(String categoryName) {

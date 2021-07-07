@@ -42,6 +42,10 @@ public class CategoriesKeeper {
         this.subCategories = subCategories;
     }
 
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
     public void setCategoryIcons(List<CategoryIcon> categoryIcons) {
         this.categoryIcons = categoryIcons;
     }

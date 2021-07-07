@@ -22,29 +22,35 @@ import java.util.List;
 public class SubCategoriesAdapter extends RecyclerView.Adapter<CategoryTileView> {
 
     private final Fragment fragment;
-    private final String subCategoryName;
+    private final Category category;
     private List<Category> categories;
 
-    public SubCategoriesAdapter(Fragment fragment, String subCategoryName) {
+    public SubCategoriesAdapter(Fragment fragment, Category category) {
         this.fragment = fragment;
-        this.subCategoryName = subCategoryName;
-        setCategories();
+        this.category = category;
+        setSubCategories();
+        notifyDataSetChanged();
     }
 
-    private void setCategories() {
-        List<Category> allCategories = CategoriesKeeper.getInstance().getCategories();
-        List<Category> filteredCategories = new ArrayList<>();
-        for (Category category : allCategories) {
-            List<Product> filteredProductList = new ArrayList<>();
-            List<Product> productsFromCategory = category.getProductList();
-            for (Product product : productsFromCategory) {
-                if (product.subCategory != null && product.subCategory.substring(0, 1).equals(subCategoryName)) {
-                    filteredProductList.add(product);
+    private void setSubCategories() {
+
+        List<SubCategory> subCategories = CategoriesKeeper.getInstance().getSubCategories();
+        List<Category> categoriesForSubCategoriesList = new ArrayList<>();
+        for (SubCategory subCategory : subCategories) {
+            if (subCategory.getId().substring(0, 1).equals(category.getName().substring(0, 1))) {
+                categoriesForSubCategoriesList.add(new Category(subCategory.getId()+" "+ subCategory.getName(), new ArrayList<>()));
+            }
+        }
+
+        for (Category categoryForSubCategoriesList : categoriesForSubCategoriesList) {
+            for (Product product : category.getProductList()) {
+                if (product.subCategory != null && product.subCategory.equals(categoryForSubCategoriesList.getName().split(" ")[0])) {
+                    categoryForSubCategoriesList.getProductList().add(product);
                 }
             }
-            filteredCategories.add(new Category(subCategoryName, filteredProductList));
+
         }
-        categories = filteredCategories;
+        categories = categoriesForSubCategoriesList;
     }
 
     @NonNull
@@ -63,6 +69,6 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<CategoryTileView>
 
     @Override
     public int getItemCount() {
-        return 0;
+        return categories.size();
     }
 }

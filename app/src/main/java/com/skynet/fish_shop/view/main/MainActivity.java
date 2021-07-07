@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     for (DataSnapshot product : category.getChildren()) {
                         productList.add(product.getValue(Product.class));
                     }
-                    categories.add(new Category(Objects.requireNonNull(category.getKey()).substring(2), productList));
+                    categories.add(new Category(Objects.requireNonNull(category.getKey()), productList));
                 }
                 CategoriesKeeper.getInstance().setCategories(categories);
                 homeFragment.update();

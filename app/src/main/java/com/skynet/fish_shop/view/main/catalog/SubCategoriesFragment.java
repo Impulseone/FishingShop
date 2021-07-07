@@ -14,13 +14,14 @@ import android.view.ViewGroup;
 
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
+import com.skynet.fish_shop.model.Category;
 
 public class SubCategoriesFragment extends Fragment {
 
-    SubCategoriesAdapter subCategoriesAdapter;
+    private final SubCategoriesAdapter subCategoriesAdapter;
 
-    public SubCategoriesFragment(String subCategoryName) {
-        subCategoriesAdapter = new SubCategoriesAdapter(this, subCategoryName);
+    public SubCategoriesFragment(Category category) {
+        subCategoriesAdapter = new SubCategoriesAdapter(this, category);
     }
 
     @Override
