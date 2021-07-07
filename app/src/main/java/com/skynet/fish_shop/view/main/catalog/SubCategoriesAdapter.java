@@ -22,7 +22,7 @@ import java.util.List;
 public class SubCategoriesAdapter extends RecyclerView.Adapter<CategoryTileView> {
 
     private final Fragment fragment;
-    private String subCategoryName;
+    private final String subCategoryName;
     private List<Category> categories;
 
     public SubCategoriesAdapter(Fragment fragment, String subCategoryName) {
@@ -38,7 +38,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<CategoryTileView>
             List<Product> filteredProductList = new ArrayList<>();
             List<Product> productsFromCategory = category.getProductList();
             for (Product product : productsFromCategory) {
-                if (product.subCategory!=null&&product.subCategory.substring(0,1).equals(subCategoryName)) {
+                if (product.subCategory != null && product.subCategory.substring(0, 1).equals(subCategoryName)) {
                     filteredProductList.add(product);
                 }
             }

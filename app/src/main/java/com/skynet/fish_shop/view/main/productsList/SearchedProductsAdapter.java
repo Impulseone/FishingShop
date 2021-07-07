@@ -34,13 +34,18 @@ public class SearchedProductsAdapter extends RecyclerView.Adapter<SearchedProduc
         List<Product> productsList = getAllProducts();
         List<Product> productListFiltered = new ArrayList<>();
         for (Product product : productsList) {
-            if (product.name.contains(searchPhrase) || product.name.toLowerCase().contains(searchPhrase))
-                productListFiltered.add(product);
+            try {
+                if (product.name != null && (product.name.contains(searchPhrase) || product.name.toLowerCase().contains(searchPhrase)))
+                    productListFiltered.add(product);
+            } catch (Exception e) {
+                System.out.println("PRODUCT ID: " + product.id);
+                e.printStackTrace();
+            }
         }
 
         for (int i = 0; i < productListFiltered.size(); i = i + 2) {
             if (i != productListFiltered.size() - 1)
-                data.add(new Pair<>(productListFiltered.get(i), productsList.get(i + 1)));
+                data.add(new Pair<>(productListFiltered.get(i), productListFiltered.get(i + 1)));
             else data.add(new Pair<>(productListFiltered.get(i), null));
         }
     }
