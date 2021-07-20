@@ -1,13 +1,18 @@
 package com.skynet.fish_shop.view.main.product;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.AppDatabase;
@@ -22,6 +28,7 @@ import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.FavoritesProduct;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
+import com.skynet.fish_shop.view.extension.ImageDialogView;
 import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragment;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +36,7 @@ public class ProductForCategoryFragment extends Fragment {
 
     private final Category category;
     private final Product product;
+    boolean isMove;
 
     public ProductForCategoryFragment(Category category, Product product) {
         this.category = category;
@@ -38,8 +46,8 @@ public class ProductForCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_product_for_category, container, false);
+        isMove = false;
         setBackButton(view);
         setBottomNavigationVisibility();
         setTitle(view);
@@ -76,6 +84,7 @@ public class ProductForCategoryFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.product_image);
         String path = product.imagePath;
         if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
+        imageView.setOnClickListener(view1 -> new ImageDialogView(path).show(getActivity().getSupportFragmentManager(), ""));
     }
 
     private void setAddToCartButton(View view) {
