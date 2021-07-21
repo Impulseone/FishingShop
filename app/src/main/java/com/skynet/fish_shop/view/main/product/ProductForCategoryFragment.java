@@ -33,11 +33,13 @@ public class ProductForCategoryFragment extends Fragment {
 
     private final Category category;
     private final Product product;
+    private final int scrollPosition;
     boolean isMove;
 
-    public ProductForCategoryFragment(Category category, Product product) {
+    public ProductForCategoryFragment(Category category, Product product, int scrollPosition) {
         this.category = category;
         this.product = product;
+        this.scrollPosition = scrollPosition;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class ProductForCategoryFragment extends Fragment {
     }
 
     private void createSearchedProductsListFragment(String search) {
-        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search);
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search, scrollPosition);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         ft.commit();
@@ -116,7 +118,7 @@ public class ProductForCategoryFragment extends Fragment {
     private void back() {
         this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);
+        ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category, scrollPosition);
         ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
         ft.commit();
     }

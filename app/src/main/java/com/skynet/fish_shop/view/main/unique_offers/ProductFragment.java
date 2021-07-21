@@ -37,11 +37,13 @@ public class ProductFragment extends Fragment {
     private final Product product;
     private final String searchPhrase;
     private final Category category;
+    private final int scrollPosition;
 
-    public ProductFragment(Product product, String searchPhrase, Category category) {
+    public ProductFragment(Product product, String searchPhrase, Category category, int scrollPosition) {
         this.product = product;
         this.searchPhrase = searchPhrase;
         this.category = category;
+        this.scrollPosition = scrollPosition;
     }
 
     @Override
@@ -72,7 +74,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void createSearchedProductsListFragment(String search) {
-        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search);
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search, scrollPosition);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         ft.commit();
@@ -124,10 +126,10 @@ public class ProductFragment extends Fragment {
             HomeFragment homeFragment = new HomeFragment();
             ft.replace(R.id.main_relative_layout, homeFragment);
         } else if (searchPhrase != null) {
-            SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(searchPhrase);
+            SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(searchPhrase,scrollPosition);
             ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         } else {
-            ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);
+            ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category, scrollPosition);
             ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
         }
         ft.commit();

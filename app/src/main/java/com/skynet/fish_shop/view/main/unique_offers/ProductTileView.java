@@ -59,7 +59,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, null);
+            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, null, itemView.getVerticalScrollbarPosition());
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });

@@ -29,7 +29,7 @@ public class CategoryTileView extends RecyclerView.ViewHolder {
         ((TextView) itemView.findViewById(R.id.category_name)).setText(setCategoryName(category.getName()));
         if (!isSubCategories) itemView.setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category);
+            ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category,0);
             ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
             ft.commit();
         });

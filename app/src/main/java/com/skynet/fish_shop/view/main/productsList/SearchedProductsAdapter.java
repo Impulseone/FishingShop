@@ -68,7 +68,7 @@ public class SearchedProductsAdapter extends RecyclerView.Adapter<SearchedProduc
 
     @Override
     public void onBindViewHolder(@NonNull ProductTilesRow holder, int position) {
-        holder.setView(data.get(position), fragment, searchPhrase);
+        holder.setView(data.get(position), fragment, searchPhrase, position);
     }
 
     @Override
@@ -82,18 +82,18 @@ public class SearchedProductsAdapter extends RecyclerView.Adapter<SearchedProduc
             super(itemView);
         }
 
-        public void setView(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            setFirstProduct(productPair, fragment, searchPhrase);
-            if (productPair.second != null) setSecondProduct(productPair, fragment, searchPhrase);
+        public void setView(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition) {
+            setFirstProduct(productPair, fragment, searchPhrase, scrollPosition);
+            if (productPair.second != null) setSecondProduct(productPair, fragment, searchPhrase, scrollPosition);
             else itemView.findViewById(R.id.second).setVisibility(View.GONE);
         }
 
-        private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            new ProductTileView(itemView, productPair.first, fragment, null, searchPhrase).setView(R.id.first);
+        private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition) {
+            new ProductTileView(itemView, productPair.first, fragment, null, searchPhrase, scrollPosition).setView(R.id.first);
         }
 
-        private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            new ProductTileView(itemView, productPair.second, fragment, null, searchPhrase).setView(R.id.second);
+        private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition) {
+            new ProductTileView(itemView, productPair.second, fragment, null, searchPhrase, scrollPosition).setView(R.id.second);
         }
     }
 }

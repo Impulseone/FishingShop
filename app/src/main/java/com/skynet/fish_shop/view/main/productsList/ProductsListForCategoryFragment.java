@@ -19,9 +19,11 @@ import com.skynet.fish_shop.view.main.catalog.CategoriesFragment;
 public class ProductsListForCategoryFragment extends Fragment {
 
     private final Category category;
+    private final int scrollPosition;
 
-    public ProductsListForCategoryFragment(Category category) {
+    public ProductsListForCategoryFragment(Category category, int scrollPosition) {
         this.category = category;
+        this.scrollPosition = scrollPosition;
     }
 
     @Override
@@ -52,6 +54,7 @@ public class ProductsListForCategoryFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
         ProductsListForCategoryAdapter adapter = new ProductsListForCategoryAdapter(category, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.getLayoutManager().scrollToPosition(scrollPosition);
         recyclerView.setAdapter(adapter);
     }
 

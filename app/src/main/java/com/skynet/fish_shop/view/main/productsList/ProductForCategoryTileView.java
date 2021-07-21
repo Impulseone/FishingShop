@@ -20,12 +20,14 @@ public class ProductForCategoryTileView {
     private final Fragment fragment;
     private final Category category;
     private int resId;
+    private final int scrollPosition;
 
-    public ProductForCategoryTileView(View itemView, Product product, Fragment fragment, Category category) {
+    public ProductForCategoryTileView(View itemView, Product product, Fragment fragment, Category category, int scrollPosition) {
         this.itemView = itemView;
         this.product = product;
         this.fragment = fragment;
         this.category = category;
+        this.scrollPosition = scrollPosition;
     }
 
     public void setView(int resId) {
@@ -62,7 +64,7 @@ public class ProductForCategoryTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductForCategoryFragment productForCategoryFragment = new ProductForCategoryFragment(category, product);
+            ProductForCategoryFragment productForCategoryFragment = new ProductForCategoryFragment(category, product, scrollPosition);
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });

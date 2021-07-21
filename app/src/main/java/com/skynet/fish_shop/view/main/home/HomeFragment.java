@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void createSearchProductFragment(String search) {
-        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search);
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search,0);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         ft.commit();

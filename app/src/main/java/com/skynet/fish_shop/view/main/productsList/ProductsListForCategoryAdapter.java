@@ -1,5 +1,7 @@
 package com.skynet.fish_shop.view.main.productsList;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skynet.fish_shop.R;
@@ -28,7 +31,7 @@ public class ProductsListForCategoryAdapter extends RecyclerView.Adapter<Product
         setData();
     }
 
-    private void setData(){
+    private void setData() {
         List<Product> productsList = category.getProductList();
         data = new ArrayList<>();
         for (int i = 0; i < productsList.size(); i = i + 2) {
@@ -47,7 +50,7 @@ public class ProductsListForCategoryAdapter extends RecyclerView.Adapter<Product
 
     @Override
     public void onBindViewHolder(@NonNull ProductTilesRow holder, int position) {
-        holder.setView(data.get(position), fragment, category);
+        holder.setView(data.get(position), fragment, category, position);
     }
 
     @Override
@@ -58,24 +61,26 @@ public class ProductsListForCategoryAdapter extends RecyclerView.Adapter<Product
     public static class ProductTilesRow extends RecyclerView.ViewHolder {
 
         private Category category;
+        private int position;
 
         public ProductTilesRow(@NonNull View itemView) {
             super(itemView);
         }
 
-        public void setView(Pair<Product, Product> productPair, Fragment fragment, Category category) {
+        public void setView(Pair<Product, Product> productPair, Fragment fragment, Category category, int position) {
             this.category = category;
+            this.position = position;
             setFirstProduct(productPair, fragment);
             if (productPair.second != null) setSecondProduct(productPair, fragment);
             else itemView.findViewById(R.id.second).setVisibility(View.GONE);
         }
 
         private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            new ProductForCategoryTileView(itemView, productPair.first, fragment, category).setView(R.id.first);
+            new ProductForCategoryTileView(itemView, productPair.first, fragment, category, position).setView(R.id.first);
         }
 
         private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment) {
-            new ProductForCategoryTileView(itemView, productPair.second, fragment, category).setView(R.id.second);
+            new ProductForCategoryTileView(itemView, productPair.second, fragment, category, position).setView(R.id.second);
         }
     }
 }

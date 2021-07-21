@@ -20,13 +20,15 @@ public class ProductTileView {
     private final Category category;
     private int resId;
     private final String searchPhrase;
+    private final int scrollPosition;
 
-    public ProductTileView(View itemView, Product product, Fragment fragment, Category category, String searchPhrase) {
+    public ProductTileView(View itemView, Product product, Fragment fragment, Category category, String searchPhrase, int scrollPosition) {
         this.itemView = itemView;
         this.product = product;
         this.fragment = fragment;
         this.category = category;
         this.searchPhrase = searchPhrase;
+        this.scrollPosition = scrollPosition;
     }
 
     public void setView(int resId) {
@@ -63,7 +65,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, category);
+            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, category, scrollPosition);
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });
