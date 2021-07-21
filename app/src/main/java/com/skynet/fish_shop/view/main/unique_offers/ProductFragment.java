@@ -30,20 +30,24 @@ import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragme
 import com.skynet.fish_shop.view.main.productsList.SearchedProductsListFragment;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import static com.skynet.fish_shop.view.main.home.HomeFragment.hideKeyboard;
 
 public class ProductFragment extends Fragment {
 
     private final Product product;
     private final String searchPhrase;
-    private final Category category;
+    private final String categoryName;
     private final int scrollPosition;
+    private final List<Product> allProducts;
 
-    public ProductFragment(Product product, String searchPhrase, Category category, int scrollPosition) {
+    public ProductFragment(Product product, String searchPhrase, int scrollPosition, List<Product> allProducts, String categoryName) {
         this.product = product;
         this.searchPhrase = searchPhrase;
-        this.category = category;
         this.scrollPosition = scrollPosition;
+        this.allProducts = allProducts;
+        this.categoryName = categoryName;
     }
 
     @Override
@@ -122,19 +126,14 @@ public class ProductFragment extends Fragment {
     private void back() {
         this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-        if (searchPhrase == null && category == null) {
-            HomeFragment homeFragment = new HomeFragment();
-            ft.replace(R.id.main_relative_layout, homeFragment);
-        } else if (searchPhrase != null) {
-            SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(searchPhrase,scrollPosition);
-            ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
+        if (searchPhrase == null) {
+            UniqueOfferFragment uniqueOfferFragment = new UniqueOfferFragment(allProducts, categoryName, scrollPosition);
+            ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
         } else {
-            ProductsListForCategoryFragment productsListForCategoryFragment = new ProductsListForCategoryFragment(category, scrollPosition);
-            ft.replace(R.id.main_relative_layout, productsListForCategoryFragment);
+            SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(searchPhrase, scrollPosition);
+            ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         }
         ft.commit();
-
-
     }
 
     static class AddProductToCartTask extends AsyncTask<Void, Void, Void> {

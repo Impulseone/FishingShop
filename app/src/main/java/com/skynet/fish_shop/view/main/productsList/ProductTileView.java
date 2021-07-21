@@ -13,6 +13,8 @@ import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.view.main.unique_offers.ProductFragment;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class ProductTileView {
     private final View itemView;
     private final Product product;
@@ -65,7 +67,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, category, scrollPosition);
+            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, scrollPosition, new ArrayList<>(), "");
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });

@@ -26,10 +26,12 @@ public class UniqueOfferFragment extends Fragment {
     private List<Product> products;
     private final String categoryName;
     private View view;
+    private final int scrollPosition;
 
-    public UniqueOfferFragment(List<Product> products, String categoryName) {
+    public UniqueOfferFragment(List<Product> products, String categoryName, int scrollPosition) {
         this.products = products;
         this.categoryName = categoryName;
+        this.scrollPosition = scrollPosition;
     }
 
     @Override
@@ -52,8 +54,9 @@ public class UniqueOfferFragment extends Fragment {
 
     private void setAdapter() {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.products_rv);
-        ProductsAdapter adapter = new ProductsAdapter(this, products, null);
+        ProductsAdapter adapter = new ProductsAdapter(this, products, null, categoryName);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.getLayoutManager().scrollToPosition(scrollPosition);
         recyclerView.setAdapter(adapter);
     }
 
@@ -70,7 +73,8 @@ public class UniqueOfferFragment extends Fragment {
         for (Category category : categories) {
             for (Product product :
                     category.getProductList()) {
-                if (product.status.equals(categoryName)) products.add(product);
+                if (product.status != null && product.status.equals(categoryName))
+                    products.add(product);
             }
         }
         setAdapter();

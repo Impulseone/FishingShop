@@ -20,11 +20,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     private List<Pair<Product, Product>> data;
     private final Fragment fragment;
     private final String searchPhrase;
+    private final String categoryName;
 
-    public ProductsAdapter(Fragment fragment, List<Product> allProducts, String searchPhrase) {
+    public ProductsAdapter(Fragment fragment, List<Product> allProducts, String searchPhrase, String categoryName) {
         this.fragment = fragment;
         this.allProducts = allProducts;
         this.searchPhrase = searchPhrase;
+        this.categoryName = categoryName;
         setData();
     }
 
@@ -46,7 +48,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapter.ProductTilesRow holder, int position) {
-        holder.setView(data.get(position), fragment, searchPhrase);
+        holder.setView(data.get(position), fragment, searchPhrase, position, categoryName, allProducts);
     }
 
     @Override
@@ -56,22 +58,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     public static class ProductTilesRow extends RecyclerView.ViewHolder {
 
+        private String categoryName;
+        private List<Product> products;
+
         public ProductTilesRow(@NonNull View itemView) {
             super(itemView);
         }
 
-        public void setView(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            setFirstProduct(productPair, fragment, searchPhrase);
-            if (productPair.second != null) setSecondProduct(productPair, fragment, searchPhrase);
+        public void setView(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition, String categoryName, List<Product> products) {
+            this.categoryName = categoryName;
+            this.products = products;
+            setFirstProduct(productPair, fragment, searchPhrase, scrollPosition);
+            if (productPair.second != null)
+                setSecondProduct(productPair, fragment, searchPhrase, scrollPosition);
             else itemView.findViewById(R.id.second).setVisibility(View.GONE);
         }
 
-        private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            new ProductTileView(itemView, productPair.first, fragment, searchPhrase).setView(R.id.first);
+        private void setFirstProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition) {
+            new ProductTileView(itemView, productPair.first, fragment, searchPhrase, scrollPosition, categoryName, products).setView(R.id.first);
         }
 
-        private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase) {
-            new ProductTileView(itemView, productPair.second, fragment, searchPhrase).setView(R.id.second);
+        private void setSecondProduct(Pair<Product, Product> productPair, Fragment fragment, String searchPhrase, int scrollPosition) {
+            new ProductTileView(itemView, productPair.second, fragment, searchPhrase, scrollPosition, categoryName, products).setView(R.id.second);
         }
     }
 }

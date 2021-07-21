@@ -11,18 +11,26 @@ import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.model.Product;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class ProductTileView {
     private final View itemView;
     private final Product product;
     private final Fragment fragment;
     private int resId;
+    private final int scrollPosition;
     private final String searchPhrase;
+    private final String categoryName;
+    private final List<Product> products;
 
-    public ProductTileView(View itemView, Product product, Fragment fragment, String searchPhrase) {
+    public ProductTileView(View itemView, Product product, Fragment fragment, String searchPhrase, int scrollPosition, String categoryName, List<Product> productList) {
         this.itemView = itemView;
         this.product = product;
         this.fragment = fragment;
         this.searchPhrase = searchPhrase;
+        this.scrollPosition = scrollPosition;
+        this.categoryName = categoryName;
+        this.products = productList;
     }
 
     public void setView(int resId) {
@@ -59,7 +67,7 @@ public class ProductTileView {
     private void setListener() {
         itemView.findViewById(resId).setOnClickListener(view1 -> {
             FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
-            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, null, itemView.getVerticalScrollbarPosition());
+            ProductFragment productForCategoryFragment = new ProductFragment(product, searchPhrase, scrollPosition,products,categoryName);
             ft.replace(R.id.main_relative_layout, productForCategoryFragment);
             ft.commit();
         });

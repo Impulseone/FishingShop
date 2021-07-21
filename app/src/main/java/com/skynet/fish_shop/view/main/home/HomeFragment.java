@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void createUniqueOfferFragment(List<Product> products, String categoryName) {
-        uniqueOfferFragment = new UniqueOfferFragment(products, categoryName);
+        uniqueOfferFragment = new UniqueOfferFragment(products, categoryName, 0);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
         ft.commit();
