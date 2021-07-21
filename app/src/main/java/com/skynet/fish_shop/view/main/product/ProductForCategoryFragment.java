@@ -57,9 +57,9 @@ public class ProductForCategoryFragment extends Fragment {
         return view;
     }
 
-    private void setSearchField(View view){
-        ((EditText)view.findViewById(R.id.search_product)).setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (i == EditorInfo.IME_ACTION_DONE) {
+    private void setSearchField(View view) {
+        ((EditText) view.findViewById(R.id.search_product)).setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE && !textView.getText().toString().isEmpty()) {
                 setBottomNavigationVisibility(View.VISIBLE);
                 createSearchedProductsListFragment(textView.getText().toString());
             }

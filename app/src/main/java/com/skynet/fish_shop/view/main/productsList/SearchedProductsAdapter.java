@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
 import com.skynet.fish_shop.model.Category;

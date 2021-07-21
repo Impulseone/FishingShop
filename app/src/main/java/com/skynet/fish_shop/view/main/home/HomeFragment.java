@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
 import com.skynet.fish_shop.model.Category;
@@ -46,8 +47,9 @@ public class HomeFragment extends Fragment {
     private void setSearchField() {
         searchField = view.findViewById(R.id.search_product);
         searchField.setOnEditorActionListener((v, actionId, event) -> {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE && !searchField.getText().toString().isEmpty()) {
                         createSearchProductFragment(searchField.getText().toString());
+                        ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
                     }
                     return true;
                 }

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.view.main.home.HomeFragment;
 
@@ -52,5 +54,6 @@ public class SearchedProductsListFragment extends Fragment {
         HomeFragment homeFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, homeFragment);
         ft.commit();
+        ((BottomNavigationView) this.getActivity().findViewById(R.id.bottom_navigation)).setSelectedItemId(R.id.action_main);
     }
 }
