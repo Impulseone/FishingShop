@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.extension.CategoriesKeeper;
 import com.skynet.fish_shop.model.Category;
@@ -65,6 +66,7 @@ public class UniqueOfferFragment extends Fragment {
         HomeFragment catalogFragment = new HomeFragment();
         ft.replace(R.id.main_relative_layout, catalogFragment);
         ft.commit();
+        ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).setSelectedItemId(R.id.action_main);
     }
 
     public void update() {

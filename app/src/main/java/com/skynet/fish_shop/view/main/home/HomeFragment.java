@@ -91,10 +91,11 @@ public class HomeFragment extends Fragment {
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
         ft.commit();
+        ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
     }
 
     private void createSearchProductFragment(String search) {
-        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search,0);
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search, 0);
         FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
         ft.commit();

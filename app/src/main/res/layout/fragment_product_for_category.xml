@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginStart="20dp"
     android:layout_marginTop="60dp"
-    android:layout_marginBottom="60dp"
+    android:layout_marginBottom="30dp"
     android:layout_marginEnd="20dp"
     android:orientation="vertical">
 
@@ -47,7 +47,7 @@
             android:fontFamily="@font/avenir_next_bold"
             android:lineSpacingExtra="3sp"
             android:textColor="#ffffff"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <ImageView

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="140dp"
     android:layout_marginBottom="10dp"
     android:background="@drawable/category_tile_view_bg"
     android:orientation="horizontal">
@@ -52,6 +52,7 @@
             android:text="@string/characteristics_example"
             android:textColor="#ffffff"
             android:textSize="11sp"
+            android:maxLines="2"
             android:textStyle="normal" />
         <LinearLayout
             android:id="@+id/add_to_cart_button"

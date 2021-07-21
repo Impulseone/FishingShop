@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.AppDatabase;
@@ -129,6 +130,7 @@ public class ProductFragment extends Fragment {
         if (searchPhrase == null) {
             UniqueOfferFragment uniqueOfferFragment = new UniqueOfferFragment(allProducts, categoryName, scrollPosition);
             ft.replace(R.id.main_relative_layout, uniqueOfferFragment);
+            ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
         } else {
             SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(searchPhrase, scrollPosition);
             ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
