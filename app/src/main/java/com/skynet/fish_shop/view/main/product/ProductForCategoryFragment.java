@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +24,10 @@ import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.view.extension.ImageDialogView;
 import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragment;
+import com.skynet.fish_shop.view.main.productsList.SearchedProductsListFragment;
 import com.squareup.picasso.Picasso;
+
+import static com.skynet.fish_shop.view.main.home.HomeFragment.hideKeyboard;
 
 public class ProductForCategoryFragment extends Fragment {
 
@@ -41,7 +46,8 @@ public class ProductForCategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_for_category, container, false);
         isMove = false;
         setBackButton(view);
-        setBottomNavigationVisibility();
+        setBottomNavigationVisibility(View.GONE);
+        setSearchField(view);
         setTitle(view);
         setProductDescription(view);
         setPrice(view);
@@ -49,6 +55,24 @@ public class ProductForCategoryFragment extends Fragment {
         setAddToCartButton(view);
         setAddToFavoritesButton(view);
         return view;
+    }
+
+    private void setSearchField(View view){
+        ((EditText)view.findViewById(R.id.search_product)).setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                setBottomNavigationVisibility(View.VISIBLE);
+                createSearchedProductsListFragment(textView.getText().toString());
+            }
+            return true;
+        });
+    }
+
+    private void createSearchedProductsListFragment(String search) {
+        SearchedProductsListFragment searchedProductsListFragment = new SearchedProductsListFragment(search);
+        FragmentTransaction ft = this.getParentFragmentManager().beginTransaction();
+        ft.replace(R.id.main_relative_layout, searchedProductsListFragment);
+        ft.commit();
+        hideKeyboard(getActivity());
     }
 
     private void setTitle(View view) {
@@ -64,8 +88,8 @@ public class ProductForCategoryFragment extends Fragment {
         backButton.setOnClickListener(view1 -> back());
     }
 
-    private void setBottomNavigationVisibility() {
-        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
+    private void setBottomNavigationVisibility(int visibility) {
+        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(visibility);
     }
 
     private void setPrice(View view) {
