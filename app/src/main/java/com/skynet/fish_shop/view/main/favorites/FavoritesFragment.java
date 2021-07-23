@@ -22,6 +22,7 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         new GetFavoritesProductsTask(view).execute();
         return view;
     }
