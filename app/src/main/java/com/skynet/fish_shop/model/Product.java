@@ -19,12 +19,12 @@ public class Product {
     @PropertyName("Статус")
     public String status;
     @PropertyName("Изображение")
-    public String imagePath;
+    public String imagesPaths;
 
     public Product() {
     }
 
-    public Product(String id, String name, String subCategory, String description, int price, int discount, String status, String imagePath) {
+    public Product(String id, String name, String subCategory, String description, int price, int discount, String status, String imagesPaths) {
         this.id = id;
         this.name = name;
         this.subCategory = subCategory;
@@ -32,6 +32,6 @@ public class Product {
         this.price = price;
         this.status = status;
         this.discount = discount;
-        this.imagePath = imagePath;
+        this.imagesPaths = imagesPaths;
     }
 }

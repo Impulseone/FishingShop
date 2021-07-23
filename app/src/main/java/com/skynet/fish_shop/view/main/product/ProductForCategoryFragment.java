@@ -109,7 +109,7 @@ public class ProductForCategoryFragment extends Fragment {
 
     private void setImages(View view) {
         LinearLayout imagesLinearLayout = view.findViewById(R.id.product_images_linear_layout);
-        String[] imagesPaths = product.imagePath.split("; ");
+        String[] imagesPaths = product.imagesPaths.split("; ");
         for (String path : imagesPaths) {
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(250, 250);

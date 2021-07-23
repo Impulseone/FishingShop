@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
@@ -53,7 +52,7 @@ public class ProductForCategoryTileView {
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(resId).findViewById(R.id.product_image);
-        String path = product.imagePath;
+        String path = product.imagesPaths.split("; ")[0];
         if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 

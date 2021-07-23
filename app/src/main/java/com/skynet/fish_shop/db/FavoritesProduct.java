@@ -27,6 +27,6 @@ public class FavoritesProduct {
         this.description = product.description;
         this.price = product.price;
         this.discount = product.discount;
-        this.imagePath = product.imagePath;
+        this.imagePath = product.imagesPaths.split("; ")[0];
     }
 }

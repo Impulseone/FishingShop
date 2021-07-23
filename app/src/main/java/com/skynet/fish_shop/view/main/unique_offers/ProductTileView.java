@@ -56,7 +56,7 @@ public class ProductTileView {
 
     private void setImage() {
         ImageView imageView = itemView.findViewById(resId).findViewById(R.id.product_image);
-        String path = product.imagePath;
+        String path = product.imagesPaths;
         if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
     }
 

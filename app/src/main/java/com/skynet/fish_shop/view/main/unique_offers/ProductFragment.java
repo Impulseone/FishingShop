@@ -16,18 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.AppDatabase;
 import com.skynet.fish_shop.db.CartProduct;
 import com.skynet.fish_shop.db.FavoritesProduct;
-import com.skynet.fish_shop.model.Category;
 import com.skynet.fish_shop.model.Product;
 import com.skynet.fish_shop.view.extension.ImageDialogView;
-import com.skynet.fish_shop.view.main.home.HomeFragment;
-import com.skynet.fish_shop.view.main.productsList.ProductsListForCategoryFragment;
 import com.skynet.fish_shop.view.main.productsList.SearchedProductsListFragment;
 import com.squareup.picasso.Picasso;
 
@@ -109,7 +105,7 @@ public class ProductFragment extends Fragment {
 
     private void setImage(View view) {
         ImageView imageView = view.findViewById(R.id.product_image);
-        String path = product.imagePath;
+        String path = product.imagesPaths;
         if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
         imageView.setOnClickListener(view1 -> new ImageDialogView(path).show(getActivity().getSupportFragmentManager(), ""));
     }
