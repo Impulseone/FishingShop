@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private CategoriesFragment categoriesFragment;
 
+    private final CategoriesKeeper categoriesKeeper = CategoriesKeeper.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,11 +229,12 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot category : dataSnapshot.getChildren()) {
                     List<Product> productList = new ArrayList<>();
                     for (DataSnapshot product : category.getChildren()) {
+                        Object obj = product.getValue();
                         productList.add(product.getValue(Product.class));
                     }
                     categories.add(new Category(Objects.requireNonNull(category.getKey()), productList));
                 }
-                CategoriesKeeper.getInstance().setCategories(categories);
+                categoriesKeeper.setCategories(categories);
                 homeFragment.update();
                 categoriesFragment.update();
             }
@@ -252,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot category : dataSnapshot.getChildren()) {
                     categories.add(new SubCategory(category.getKey(), (String) category.getValue()));
                 }
-                CategoriesKeeper.getInstance().setSubCategories(categories);
+                categoriesKeeper.setSubCategories(categories);
                 homeFragment.update();
                 categoriesFragment.update();
             }
@@ -273,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot categoryIcon : snapshot.getChildren()) {
                     categoryIcons.add(new CategoryIcon(categoryIcon.getKey(), (String) categoryIcon.getValue()));
                 }
-                CategoriesKeeper.getInstance().setCategoryIcons(categoryIcons);
+                categoriesKeeper.setCategoryIcons(categoryIcons);
             }
 
             @Override

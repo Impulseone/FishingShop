@@ -19,6 +19,15 @@
         android:layout_marginBottom="10dp"
         android:text="@string/catalog"
         />
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:progressTint="@color/brown_light"
+        android:theme="@style/Theme.FishingShop"
+        android:visibility="visible"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories_rv"
         android:layout_width="match_parent"

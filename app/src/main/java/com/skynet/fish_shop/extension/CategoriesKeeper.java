@@ -13,15 +13,15 @@ public class CategoriesKeeper {
     private List<SubCategory> subCategories;
     private List<CategoryIcon> categoryIcons;
 
-    private CategoriesKeeper(List<Category> categories, List<SubCategory> subCategories, List<CategoryIcon> categoryIcons) {
-        this.categories = categories;
-        this.subCategories = subCategories;
-        this.categoryIcons = categoryIcons;
+    private CategoriesKeeper() {
+        categories = new ArrayList<>();
+        subCategories = new ArrayList<>();
+        categoryIcons = new ArrayList<>();
     }
 
     public static CategoriesKeeper getInstance() {
         if (instance == null) {
-            instance = new CategoriesKeeper(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            instance = new CategoriesKeeper();
         }
         return instance;
     }
@@ -51,6 +51,8 @@ public class CategoriesKeeper {
     }
 
     public void clear() {
-        instance = new CategoriesKeeper(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        categories.clear();
+        subCategories.clear();
+        categoryIcons.clear();
     }
 }
