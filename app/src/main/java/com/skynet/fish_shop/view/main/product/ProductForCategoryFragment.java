@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skynet.fish_shop.App;
 import com.skynet.fish_shop.R;
 import com.skynet.fish_shop.db.AppDatabase;
@@ -60,12 +61,19 @@ public class ProductForCategoryFragment extends Fragment {
     }
 
     private void setSearchField(View view) {
-        ((EditText) view.findViewById(R.id.search_product)).setOnEditorActionListener((textView, i, keyEvent) -> {
+        EditText editText = (EditText) view.findViewById(R.id.search_product);
+        editText.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE && !textView.getText().toString().isEmpty()) {
                 setBottomNavigationVisibility(View.VISIBLE);
-                createSearchedProductsListFragment(textView.getText().toString());
+                createSearchedProductsListFragment(editText.getText().toString());
             }
             return true;
+        });
+        view.findViewById(R.id.search_button).setOnClickListener(view1 -> {
+            if (!editText.getText().toString().isEmpty()) {
+                createSearchedProductsListFragment(editText.getText().toString());
+                ((BottomNavigationView) ProductForCategoryFragment.this.getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
+            } else hideKeyboard(ProductForCategoryFragment.this.getActivity());
         });
     }
 

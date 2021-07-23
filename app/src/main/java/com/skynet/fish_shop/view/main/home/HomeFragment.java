@@ -51,9 +51,17 @@ public class HomeFragment extends Fragment {
                         createSearchProductFragment(searchField.getText().toString());
                         ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
                     }
+                    else hideKeyboard(getActivity());
                     return true;
                 }
         );
+        view.findViewById(R.id.search_button).setOnClickListener(view -> {
+            if (!searchField.getText().toString().isEmpty()) {
+                createSearchProductFragment(searchField.getText().toString());
+                ((BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation)).getMenu().setGroupCheckable(0, false, true);
+            }
+            else hideKeyboard(getActivity());
+        });
     }
 
     private void setUniqueOffersButtons() {
