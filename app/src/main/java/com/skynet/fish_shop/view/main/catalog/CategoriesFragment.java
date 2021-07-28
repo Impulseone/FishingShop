@@ -17,15 +17,12 @@ import com.skynet.fish_shop.extension.CategoriesKeeper;
 
 public class CategoriesFragment extends Fragment {
 
-    private final CategoriesAdapter categoriesAdapter;
-
-    public CategoriesFragment() {
-        categoriesAdapter = new CategoriesAdapter(this);
-    }
+    private CategoriesAdapter categoriesAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (categoriesAdapter == null) categoriesAdapter = new CategoriesAdapter(this);
         View view = inflater.inflate(R.layout.fragment_categories, container, false);
         Context context = view.getContext();
         if (CategoriesKeeper.getInstance().getCategories().size() != 0) {
@@ -46,6 +43,7 @@ public class CategoriesFragment extends Fragment {
                 view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
                 RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.categories_rv);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                if (categoriesAdapter == null) categoriesAdapter = new CategoriesAdapter(this);
                 recyclerView.setAdapter(categoriesAdapter);
                 categoriesAdapter.update();
             } else {
