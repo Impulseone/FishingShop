@@ -40,7 +40,8 @@
     <string name="get_code">Получить код</string>
     <string name="get_subscription_for_content">Оформите подписку на контент приложения</string>
     <string name="get_subscription">Оформить подписку</string>
-    <string name="price_example">12.90 €</string>
+    <string name="error">error</string>
+    <string name="price_example">999</string>
     <string name="product_name_example">Леска цветная для карпа</string>
     <string name="characteristics_example">Краткие характеристики</string>
     <string name="quantity_example">2 шт</string>
