@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +59,7 @@ public class ProductFragment extends Fragment {
         setTitle(view);
         setProductDescription(view);
         setPrice(view);
-        setImage(view);
+        setImages(view);
         setAddToCartButton(view);
         setAddToFavoritesButton(view);
         return view;
@@ -96,18 +97,25 @@ public class ProductFragment extends Fragment {
     }
 
     private void setBottomNavigationVisibility(int visibility) {
-        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(visibility);
+        this.requireActivity().findViewById(R.id.bottom_navigation).setVisibility(visibility);
     }
 
     private void setPrice(View view) {
         ((TextView) view.findViewById(R.id.price)).setText(product.price + " руб.");
     }
 
-    private void setImage(View view) {
-        ImageView imageView = view.findViewById(R.id.product_image);
-        String path = product.imagesPaths;
-        if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
-        imageView.setOnClickListener(view1 -> new ImageDialogView(path).show(getActivity().getSupportFragmentManager(), ""));
+    private void setImages(View view) {
+        LinearLayout imagesLinearLayout = view.findViewById(R.id.product_images_linear_layout);
+        String[] imagesPaths = product.imagesPaths.split("; ");
+        for (String path : imagesPaths) {
+            ImageView imageView = new ImageView(getContext());
+            LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(250, 250);
+            layoutParams.setMargins(10,0,10,0);
+            imageView.setLayoutParams(layoutParams);
+            imageView.setOnClickListener(view1 -> new ImageDialogView(path).show(getActivity().getSupportFragmentManager(), ""));
+            if (path != null && !path.isEmpty()) Picasso.get().load(path).into(imageView);
+            imagesLinearLayout.addView(imageView);
+        }
     }
 
     private void setAddToCartButton(View view) {
@@ -121,7 +129,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void back() {
-        this.getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
+        this.requireActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         FragmentTransaction ft = getParentFragmentManager().beginTransaction();
         if (searchPhrase == null) {
             UniqueOfferFragment uniqueOfferFragment = new UniqueOfferFragment(allProducts, categoryName, scrollPosition);
